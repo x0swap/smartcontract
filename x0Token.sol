@@ -1,5 +1,3 @@
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/utils/Address.sol
-
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.6.2;
@@ -142,8 +140,6 @@ library Address {
     }
 }
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/GSN/Context.sol
-
 pragma solidity ^0.6.0;
 
 /*
@@ -166,8 +162,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/token/ERC20/IERC20.sol
 
 pragma solidity ^0.6.0;
 
@@ -244,8 +238,6 @@ interface IERC20 {
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
-
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/token/ERC20/ERC20.sol
 
 pragma solidity ^0.6.0;
 
@@ -552,8 +544,6 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/access/Ownable.sol
-
 pragma solidity ^0.6.0;
 
 /**
@@ -619,8 +609,6 @@ contract Ownable is Context {
         _owner = newOwner;
     }
 }
-
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v3.1.0/contracts/math/SafeMath.sol
 
 pragma solidity ^0.6.0;
 
@@ -780,18 +768,10 @@ library SafeMath {
     }
 }
 
-// File: exosToken.sol
-
 pragma solidity 0.6.12;
 
-
-
-
-
-
-
-// ExosToken with Governance.
-contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
+// X0Token with Governance.
+contract X0Token is ERC20("X0swap Token", "X0"), Ownable {
 
     
     uint256 private _maxSupply;
@@ -809,8 +789,8 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
     }
     
     function mint(address _to, uint256 _amount) public onlyOwner {
-        require(_maxSupply > 0, "ExosToken: Max Supply hasn't been set");        
-        require(totalSupply() <= _maxSupply.sub(_amount), "ExosToken: Max Supply has been reached");
+        require(_maxSupply > 0, "X0Token: Max Supply hasn't been set");        
+        require(totalSupply() <= _maxSupply.sub(_amount), "X0Token: Max Supply has been reached");
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
@@ -918,9 +898,9 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "Exos::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "Exos::delegateBySig: invalid nonce");
-        require(now <= expiry, "Exos::delegateBySig: signature expired");
+        require(signatory != address(0), "X0::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "X0::delegateBySig: invalid nonce");
+        require(now <= expiry, "X0::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -950,7 +930,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "Exos::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "X0::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -987,7 +967,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying Exoss (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying X0 (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -1023,7 +1003,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "Exos::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "X0::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;

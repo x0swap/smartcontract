@@ -1,5 +1,3 @@
-// File: @openzeppelin/contracts/token/ERC20/IERC20.sol
-
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.6.0;
@@ -78,10 +76,6 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// File: @openzeppelin/contracts/GSN/Context.sol
-
-
-
 pragma solidity ^0.6.0;
 
 /*
@@ -104,10 +98,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-// File: @openzeppelin/contracts/math/SafeMath.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -267,10 +257,6 @@ library SafeMath {
     }
 }
 
-// File: @openzeppelin/contracts/utils/Address.sol
-
-
-
 pragma solidity ^0.6.2;
 
 /**
@@ -410,10 +396,6 @@ library Address {
         }
     }
 }
-
-// File: @openzeppelin/contracts/token/ERC20/ERC20.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -720,36 +702,34 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: contracts/SushiBar.sol
-
 pragma solidity 0.6.12;
 
-contract SushiBar is ERC20("SushiBar", "xSUSHI"){
+contract X0Bar is ERC20("X0Bar", "xX0"){
     using SafeMath for uint256;
-    IERC20 public sushi;
+    IERC20 public x0;
 
-    constructor(IERC20 _sushi) public {
-        sushi = _sushi;
+    constructor(IERC20 _x0) public {
+        x0 = _x0;
     }
 
-    // Enter the bar. Pay some SUSHIs. Earn some shares.
+    // Enter the bar. Pay some X0. Earn some shares.
     function enter(uint256 _amount) public {
-        uint256 totalSushi = sushi.balanceOf(address(this));
+        uint256 totalX0 = x0.balanceOf(address(this));
         uint256 totalShares = totalSupply();
-        if (totalShares == 0 || totalSushi == 0) {
+        if (totalShares == 0 || totalX0 == 0) {
             _mint(msg.sender, _amount);
         } else {
-            uint256 what = _amount.mul(totalShares).div(totalSushi);
+            uint256 what = _amount.mul(totalShares).div(totalX0);
             _mint(msg.sender, what);
         }
-        sushi.transferFrom(msg.sender, address(this), _amount);
+        x0.transferFrom(msg.sender, address(this), _amount);
     }
 
-    // Leave the bar. Claim back your SUSHIs.
+    // Leave the bar. Claim back your X0.
     function leave(uint256 _share) public {
         uint256 totalShares = totalSupply();
-        uint256 what = _share.mul(sushi.balanceOf(address(this))).div(totalShares);
+        uint256 what = _share.mul(x0.balanceOf(address(this))).div(totalShares);
         _burn(msg.sender, _share);
-        sushi.transfer(msg.sender, what);
+        x0.transfer(msg.sender, what);
     }
 }

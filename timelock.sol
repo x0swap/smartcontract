@@ -1,4 +1,4 @@
-// File: @openzeppelin/contracts/math/SafeMath.sol
+// SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.6.0;
 
@@ -157,8 +157,6 @@ library SafeMath {
         return a % b;
     }
 }
-
-// File: contracts/Timelock.sol
 
 // COPIED FROM https://github.com/compound-finance/compound-protocol/blob/master/contracts/Governance/GovernorAlpha.sol
 // Copyright 2020 Compound Labs, Inc.

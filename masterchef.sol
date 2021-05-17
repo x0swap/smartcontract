@@ -1,5 +1,3 @@
-// File: @openzeppelin/contracts/token/ERC20/IERC20.sol
-
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity ^0.6.0;
@@ -77,10 +75,6 @@ interface IERC20 {
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
-
-// File: @openzeppelin/contracts/math/SafeMath.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -240,10 +234,6 @@ library SafeMath {
     }
 }
 
-// File: @openzeppelin/contracts/utils/Address.sol
-
-
-
 pragma solidity ^0.6.2;
 
 /**
@@ -384,10 +374,6 @@ library Address {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC20/SafeERC20.sol
-
-
-
 pragma solidity ^0.6.0;
 
 
@@ -460,10 +446,6 @@ library SafeERC20 {
         }
     }
 }
-
-// File: @openzeppelin/contracts/utils/EnumerableSet.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -707,10 +689,6 @@ library EnumerableSet {
     }
 }
 
-// File: @openzeppelin/contracts/GSN/Context.sol
-
-
-
 pragma solidity ^0.6.0;
 
 /*
@@ -733,10 +711,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-// File: @openzeppelin/contracts/access/Ownable.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -803,10 +777,6 @@ contract Ownable is Context {
         _owner = newOwner;
     }
 }
-
-// File: @openzeppelin/contracts/token/ERC20/ERC20.sol
-
-
 
 pragma solidity ^0.6.0;
 
@@ -1113,12 +1083,7 @@ contract ERC20 is Context, IERC20 {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: contracts/SushiToken.sol
-
 pragma solidity 0.6.12;
-
-
-
 
 // SushiToken with Governance.
 contract SushiToken is ERC20("SushiToken", "SUSHI"), Ownable {
@@ -1358,8 +1323,6 @@ contract SushiToken is ERC20("SushiToken", "SUSHI"), Ownable {
         return chainId;
     }
 }
-
-// File: contracts/MasterChef.sol
 
 pragma solidity 0.6.12;
 

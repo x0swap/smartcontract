@@ -1,5 +1,3 @@
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IWETH.sol
-
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.5.0;
@@ -9,7 +7,6 @@ interface IWETH {
     function transfer(address to, uint value) external returns (bool);
     function withdraw(uint) external;
 }
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IERC20.sol
 
 pragma solidity >=0.5.0;
 
@@ -28,8 +25,6 @@ interface IERC20Uniswap {
     function transfer(address to, uint value) external returns (bool);
     function transferFrom(address from, address to, uint value) external returns (bool);
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Factory.sol
 
 pragma solidity >=0.5.0;
 
@@ -50,8 +45,6 @@ interface IUniswapV2Factory {
     function setFeeToSetter(address) external;
     function setMigrator(address) external;
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Router01.sol
 
 pragma solidity >=0.6.2;
 
@@ -148,7 +141,6 @@ interface IUniswapV2Router01 {
     function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
     function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
 }
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Router02.sol
 
 pragma solidity >=0.6.2;
 
@@ -193,7 +185,6 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
         uint deadline
     ) external;
 }
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/TransferHelper.sol
 
 pragma solidity >=0.6.0;
 
@@ -222,8 +213,6 @@ library TransferHelper {
         require(success, 'TransferHelper: ETH_TRANSFER_FAILED');
     }
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/SafeMath.sol
 
 pragma solidity =0.6.12;
 
@@ -254,8 +243,6 @@ library SafeMath {
         return c;
     }
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Pair.sol
 
 pragma solidity >=0.5.0;
 
@@ -309,7 +296,6 @@ interface IUniswapV2Pair {
 
     function initialize(address, address) external;
 }
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/UniswapV2Library.sol
 
 pragma solidity >=0.5.0;
 
@@ -442,8 +428,6 @@ library Babylonian {
     }
 }
 
-// File: contracts/Initializable.sol
-
 pragma solidity >=0.4.24 <0.7.0;
 
 /**
@@ -506,8 +490,6 @@ contract Initializable {
   uint256[50] private ______gap;
 }
 
-// File: contracts/ContextUpgradeSafe.sol
-
 pragma solidity ^0.6.0;
 
 /*
@@ -545,9 +527,6 @@ contract ContextUpgradeSafe is Initializable {
 
     uint256[50] private __gap;
 }
-
-
-// File: contracts/OwnableUpgradeSafe.sol
 
 pragma solidity ^0.6.0;
 
@@ -626,9 +605,6 @@ contract OwnableUpgradeSafe is Initializable, ContextUpgradeSafe {
 
     uint256[49] private __gap;
 }
-
-
-// File: contracts/router.sol
 
 pragma solidity =0.6.12;
 
@@ -727,7 +703,7 @@ contract UniswapV2Router02 is Initializable, ContextUpgradeSafe, OwnableUpgradeS
         if (msg.value > amountETH) TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
     }
     
-    function babylonian(uint reserve, uint amount) internal returns (uint){
+    function babylonian(uint reserve, uint amount) internal pure returns (uint){
         return Babylonian.sqrt(reserve.mul(amount.mul(3988000).add(reserve.mul(3988009)))).sub(reserve.mul(1997)) / 1994;
     }
     

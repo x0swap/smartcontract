@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: MIT
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/Context.sol
-
 pragma solidity ^0.8.0;
 
 /*
@@ -24,8 +22,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/access/Ownable.sol
 
 pragma solidity ^0.8.0;
 
@@ -92,8 +88,6 @@ contract Ownable is Context {
         _owner = newOwner;
     }
 }
-
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/utils/math/SafeMath.sol
 
 pragma solidity ^0.8.0;
 
@@ -312,8 +306,6 @@ library SafeMath {
     }
 }
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/IERC20.sol
-
 pragma solidity ^0.8.0;
 
 /**
@@ -390,8 +382,6 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/extensions/IERC20Metadata.sol
-
 pragma solidity ^0.8.0;
 
 
@@ -417,12 +407,7 @@ interface IERC20Metadata is IERC20 {
     function decimals() external view returns (uint8);
 }
 
-// File: https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol
-
 pragma solidity ^0.8.0;
-
-
-
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -721,14 +706,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal virtual { }
 }
 
-// File: farming.sol
-
 pragma solidity 0.8.3;
-
-
-
-
-
 
 /**
  * @dev Collection of functions related to the address type
@@ -787,7 +765,6 @@ library Address {
     }
 }
 
-// File: @openzeppelin\contracts-ethereum-package\contracts\token\ERC20\SafeERC20.sol
 /**
  * @title SafeERC20
  * @dev Wrappers around ERC20 operations that throw on failure (when the token
@@ -859,8 +836,6 @@ library SafeERC20 {
     }
 }
 
-// File: node_modules\@openzeppelin\contracts-ethereum-package\contracts\Initializable.sol
-
 /**
  * @title Initializable
  *
@@ -921,8 +896,6 @@ contract Initializable {
   uint256[50] private __gap;
 }
 
-// File: node_modules\@openzeppelin\contracts-ethereum-package\contracts\GSN\Context.sol
-
 /*
  * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
@@ -957,8 +930,6 @@ contract ContextUpgradeSafe is Initializable {
 
     uint256[50] private __gap;
 }
-
-// File: @openzeppelin\contracts-ethereum-package\contracts\access\Ownable.sol
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -1036,9 +1007,6 @@ contract OwnableUpgradeSafe is Initializable, ContextUpgradeSafe {
     uint256[49] private __gap;
 }
 
-
-// File: contracts\interfaces\IUniswapV2Pair.sol
-
 interface IUniswapV2Pair {
     event Approval(address indexed owner, address indexed spender, uint value);
     event Transfer(address indexed from, address indexed to, uint value);
@@ -1090,9 +1058,8 @@ interface IUniswapV2Pair {
     function initialize(address, address) external;
 }
 
-// ExosToken with Governance.
-contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
-
+// X0Token with Governance.
+contract X0Token is ERC20("X0Token", "X0"), Ownable {
     
     uint256 private _maxSupply;
     
@@ -1109,8 +1076,8 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
     }
     
     function mint(address _to, uint256 _amount) public onlyOwner {
-        require(_maxSupply > 0, "ExosToken: Max Supply hasn't been set");        
-        require(totalSupply() <= _maxSupply - _amount, "ExosToken: Max Supply has been reached");
+        require(_maxSupply > 0, "X0Token: Max Supply hasn't been set");        
+        require(totalSupply() <= _maxSupply - _amount, "X0Token: Max Supply has been reached");
         _mint(_to, _amount);
         _moveDelegates(address(0), _delegates[_to], _amount);
     }
@@ -1218,9 +1185,9 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         );
 
         address signatory = ecrecover(digest, v, r, s);
-        require(signatory != address(0), "Exos::delegateBySig: invalid signature");
-        require(nonce == nonces[signatory]++, "Exos::delegateBySig: invalid nonce");
-        require(block.timestamp <= expiry, "Exos::delegateBySig: signature expired");
+        require(signatory != address(0), "X0::delegateBySig: invalid signature");
+        require(nonce == nonces[signatory]++, "X0::delegateBySig: invalid nonce");
+        require(block.timestamp <= expiry, "X0::delegateBySig: signature expired");
         return _delegate(signatory, delegatee);
     }
 
@@ -1250,7 +1217,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         view
         returns (uint256)
     {
-        require(blockNumber < block.number, "Exos::getPriorVotes: not yet determined");
+        require(blockNumber < block.number, "X0::getPriorVotes: not yet determined");
 
         uint32 nCheckpoints = numCheckpoints[account];
         if (nCheckpoints == 0) {
@@ -1287,7 +1254,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
         internal
     {
         address currentDelegate = _delegates[delegator];
-        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying Exoss (not scaled);
+        uint256 delegatorBalance = balanceOf(delegator); // balance of underlying X0 (not scaled);
         _delegates[delegator] = delegatee;
 
         emit DelegateChanged(delegator, currentDelegate, delegatee);
@@ -1323,7 +1290,7 @@ contract ExosToken is ERC20("Exoswap Token", "EXOS"), Ownable {
     )
         internal
     {
-        uint32 blockNumber = safe32(block.number, "Exos::_writeCheckpoint: block number exceeds 32 bits");
+        uint32 blockNumber = safe32(block.number, "X0::_writeCheckpoint: block number exceeds 32 bits");
 
         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;
@@ -1360,13 +1327,13 @@ contract Farming is Ownable {
         uint256 depositBlock;
         uint256 withdrawBlock;
         //
-        // We do some fancy math here. Basically, any point in time, the amount of EXOs
+        // We do some fancy math here. Basically, any point in time, the amount of X0
         // entitled to a user but is pending to be distributed is:
         //
-        //   pending reward = (user.amount * pool.accExosPerShare) - user.rewardDebt
+        //   pending reward = (user.amount * pool.accX0PerShare) - user.rewardDebt
         //
         // Whenever a user deposits or withdraws LP tokens to a pool. Here's what happens:
-        //   1. The pool's `accExosPerShare` (and `lastRewardBlock`) gets updated.
+        //   1. The pool's `accX0PerShare` (and `lastRewardBlock`) gets updated.
         //   2. User receives the pending reward sent to his/her address.
         //   3. User's `amount` gets updated.
         //   4. User's `rewardDebt` gets updated.
@@ -1378,8 +1345,8 @@ contract Farming is Ownable {
     struct FarmPeriod {
         IERC20 lpToken;           // Address of LP token contract.
         uint256 allocPoint;
-        uint256 lastRewardBlock;  // Last block number that EXOs distribution occurs.
-        uint256 accExosPerShare; // Accumulated EXOs per share, times 1e12. See below.
+        uint256 lastRewardBlock;  // Last block number that X0 distribution occurs.
+        uint256 accX0PerShare; // Accumulated X0 per share, times 1e12. See below.
         uint256 allocPointShare;
     }
     
@@ -1394,17 +1361,17 @@ contract Farming is Ownable {
     // Info of each pool.
     PoolInfo[] public poolInfo;
 
-    // The EXOS TOKEN!
-    ExosToken public exos;
+    // The X0 TOKEN!
+    X0Token public x0;
     // Dev address.
     address public devaddr;
-    // Block number when bonus EXOS period ends.
+    // Block number when bonus X0 period ends.
     // Dev fund (10%, initially)
     uint256 public devFundDivRate = 10;
     uint256 public bonusEndBlock;
-    // EXO tokens created per block.
-    uint256 public exosPerBlock;
-    // Bonus muliplier for early exos makers.
+    // X0 tokens created per block.
+    uint256 public x0PerBlock;
+    // Bonus muliplier for early x0 makers.
     uint256 public bonusMultiplier;
     uint256 public dayInBlocks;
     uint256[4] public periodInDays;
@@ -1424,18 +1391,18 @@ contract Farming is Ownable {
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 indexed mid, uint256 amount);
 
     // function __Farming_init(
-    //     ExosToken _exos,
+    //     X0Token _x0,
     //     address _devaddr,
-    //     uint256 _exosPerBlock,
+    //     uint256 _x0PerBlock,
     //     uint256 _startBlock,
     //     uint256 _bonusMultiplier,
     //     uint256 _bonusEndBlock,
     //     uint256 _dayinBlocks
     // ) public initializer {
     //     __HomeMinter_init_unchained(
-	   //     _exos,
+	   //     _x0,
 	   //     _devaddr,
-    //         _exosPerBlock,
+    //         _x0PerBlock,
     //         _startBlock,
     //         _bonusMultiplier,
     //         _bonusEndBlock,
@@ -1443,18 +1410,18 @@ contract Farming is Ownable {
     // }
 
     // function __Farming_init_unchained(
-    //     ExosToken _exos,
+    //     X0Token _x0,
     //     address _devaddr,
-    //     uint256 _exosPerBlock,
+    //     uint256 _x0PerBlock,
     //     uint256 _startBlock,
     //     uint256 _bonusMultiplier,
     //     uint256 _bonusEndBlock,
     //     uint256 _dayinBlocks
     // ) internal initializer {
     //     __Ownable_init_unchained();
-    //     exos = _exos;
+    //     x0 = _x0;
     //     devaddr = _devaddr;
-    //     exosPerBlock = _exosPerBlock;
+    //     x0PerBlock = _x0PerBlock;
     //     startBlock = _startBlock;
     //     bonusEndBlock = _bonusEndBlock;
     //     totalAllocPoint = 0;
@@ -1463,9 +1430,9 @@ contract Farming is Ownable {
     // }
 
     constructor(
-        ExosToken _exos,
+        X0Token _x0,
         address _devaddr,
-        uint256 _exosPerBlock,
+        uint256 _x0PerBlock,
         uint256 _startBlock,
         uint256 _bonusMultiplier,
         uint256 _bonusEndBlock,
@@ -1473,9 +1440,9 @@ contract Farming is Ownable {
         uint256[4] memory _periodInDays,
         uint256[4] memory _periodShares
     ) public {
-        exos = _exos;
+        x0 = _x0;
         devaddr = _devaddr;
-        exosPerBlock = _exosPerBlock;
+        x0PerBlock = _x0PerBlock;
         startBlock = _startBlock;
         bonusEndBlock = _bonusEndBlock;
         totalAllocPoint = 0;
@@ -1510,7 +1477,7 @@ contract Farming is Ownable {
                 lpToken: _lpToken,
                 allocPoint: _allocPoint*periodShares[periodId]/100,
                 lastRewardBlock: lastRewardBlock,
-                accExosPerShare: 0,
+                accX0PerShare: 0,
                 allocPointShare: periodShares[periodId]
             });
             fps[periodId]=fp;
@@ -1520,7 +1487,7 @@ contract Farming is Ownable {
     }
     
 
-    // Update the given pool's EXOS allocation point. Can only be called by the owner.
+    // Update the given pool's X0 allocation point. Can only be called by the owner.
     function set(uint256 _pid, uint256 _allocPoint, bool _withUpdate) public onlyOwner {
         if (_withUpdate) {
             massUpdatePools();
@@ -1568,19 +1535,19 @@ contract Farming is Ownable {
         }
     }
 
-    // View function to see pending EXOs on frontend.
-    function pendingExos(uint256 _pid, uint256 _fpid,  address _user) external view returns (uint256) {
+    // View function to see pending X0 on frontend.
+    function pendingX0(uint256 _pid, uint256 _fpid,  address _user) external view returns (uint256) {
 
         FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
         UserInfo storage user = userInfo[_pid][_user];
-        uint256 accExosPerShare = farmPeriod.accExosPerShare;
+        uint256 accX0PerShare = farmPeriod.accX0PerShare;
         uint256 lpSupply = farmPeriod.lpToken.balanceOf(address(this));
         if (block.number > farmPeriod.lastRewardBlock && lpSupply != 0) {
             uint256 multiplier = getMultiplier(farmPeriod.lastRewardBlock, block.number);
-            uint256 exosReward = multiplier *  exosPerBlock * farmPeriod.allocPoint / totalAllocPoint;
-            accExosPerShare = accExosPerShare + ( exosReward *  1e12 / lpSupply );
+            uint256 x0Reward = multiplier *  x0PerBlock * farmPeriod.allocPoint / totalAllocPoint;
+            accX0PerShare = accX0PerShare + ( x0Reward *  1e12 / lpSupply );
         }
-        return user.userPeriod[_fpid].amount * accExosPerShare / 1e12 - user.userPeriod[_fpid].rewardDebt;
+        return user.userPeriod[_fpid].amount * accX0PerShare / 1e12 - user.userPeriod[_fpid].rewardDebt;
     }
 
     // Update reward vairables for all pools. Be careful of gas spending!
@@ -1608,14 +1575,14 @@ contract Farming is Ownable {
             return;
         }
         uint256 multiplier = getMultiplier(farmPeriod.lastRewardBlock, block.number);
-        uint256 exosReward = multiplier *  exosPerBlock * farmPeriod.allocPoint / totalAllocPoint;
-        exos.mint(devaddr, exosReward / devFundDivRate);
-        exos.mint(address(this), exosReward);
-        farmPeriod.accExosPerShare = farmPeriod.accExosPerShare + (exosReward *  1e12 / lpSupply);
+        uint256 x0Reward = multiplier *  x0PerBlock * farmPeriod.allocPoint / totalAllocPoint;
+        x0.mint(devaddr, x0Reward / devFundDivRate);
+        x0.mint(address(this), x0Reward);
+        farmPeriod.accX0PerShare = farmPeriod.accX0PerShare + (x0Reward *  1e12 / lpSupply);
         farmPeriod.lastRewardBlock = block.number;
     }
 
-    // Deposit LP tokens to MC for EXOS allocation.
+    // Deposit LP tokens to MC for X0 allocation.
     function deposit(uint256 _pid, uint256 _fpid, uint256 _amount) public {
 
         FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
@@ -1627,10 +1594,10 @@ contract Farming is Ownable {
         if (upLength > 0)
         {
             upi = user.userPeriod[_fpid];
-            uint256 pending = upi.amount *  farmPeriod.accExosPerShare / 1e12 - upi.rewardDebt;
-            safeExosTransfer(msg.sender, pending);
+            uint256 pending = upi.amount *  farmPeriod.accX0PerShare / 1e12 - upi.rewardDebt;
+            safeX0Transfer(msg.sender, pending);
             upi.amount = upi.amount + _amount;
-            upi.rewardDebt = upi.amount * farmPeriod.accExosPerShare / 1e12;
+            upi.rewardDebt = upi.amount * farmPeriod.accX0PerShare / 1e12;
             user.userPeriod[_fpid] = upi;
         }
         else
@@ -1640,7 +1607,7 @@ contract Farming is Ownable {
                 user.userPeriod[fpid].rewardDebt = 0;
             }
             user.userPeriod[_fpid].amount = _amount;
-            user.userPeriod[_fpid].rewardDebt = _amount * farmPeriod.accExosPerShare / 1e12;
+            user.userPeriod[_fpid].rewardDebt = _amount * farmPeriod.accX0PerShare / 1e12;
         }
 
         farmPeriod.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
@@ -1658,10 +1625,10 @@ contract Farming is Ownable {
         require(block.number > user.userPeriod[_fpid].withdrawBlock, "withdraw: still in lock period");
         require(user.userPeriod[_fpid].amount >= _amount, "withdraw: insufficient balance");
         updatePool(_pid,_fpid);
-        uint256 pending = user.userPeriod[_fpid].amount *  farmPeriod.accExosPerShare / 1e12 - user.userPeriod[_fpid].rewardDebt;
-        safeExosTransfer(msg.sender, pending);
+        uint256 pending = user.userPeriod[_fpid].amount *  farmPeriod.accX0PerShare / 1e12 - user.userPeriod[_fpid].rewardDebt;
+        safeX0Transfer(msg.sender, pending);
         user.userPeriod[_fpid].amount = user.userPeriod[_fpid].amount - _amount;
-        user.userPeriod[_fpid].rewardDebt = user.userPeriod[_fpid].amount * farmPeriod.accExosPerShare / 1e12;
+        user.userPeriod[_fpid].rewardDebt = user.userPeriod[_fpid].amount * farmPeriod.accX0PerShare / 1e12;
         farmPeriod.lpToken.safeTransfer(address(msg.sender), _amount);
         emit Withdraw(msg.sender, _pid, _fpid, _amount);
     }
@@ -1677,13 +1644,13 @@ contract Farming is Ownable {
         user.userPeriod[_fpid].rewardDebt = 0;
     }
 
-    // Safe exos transfer function, just in case if rounding error causes pool to not have enough EXOSs.
-    function safeExosTransfer(address _to, uint256 _amount) internal {
-        uint256 exosBal = exos.balanceOf(address(this));
-        if (_amount > exosBal) {
-            exos.transfer(_to, exosBal);
+    // Safe x0 transfer function, just in case if rounding error causes pool to not have enough X0.
+    function safeX0Transfer(address _to, uint256 _amount) internal {
+        uint256 x0Bal = x0.balanceOf(address(this));
+        if (_amount > x0Bal) {
+            x0.transfer(_to, x0Bal);
         } else {
-            exos.transfer(_to, _amount);
+            x0.transfer(_to, _amount);
         }
     }
     
@@ -1693,11 +1660,11 @@ contract Farming is Ownable {
     }
     
     // * Additional functions separate from the original MC contract *
-    function config(uint256 _exosPerBlock, uint256 _bonusMultiplier, uint256 _bonusEndBlock, uint256 _dayInBlocks, uint256[4] memory _periodInDays,  uint256[4] memory _periodShares) public onlyOwner {
-        require(_exosPerBlock > 0, "!exosPerBlock-0");
+    function config(uint256 _x0PerBlock, uint256 _bonusMultiplier, uint256 _bonusEndBlock, uint256 _dayInBlocks, uint256[4] memory _periodInDays,  uint256[4] memory _periodShares) public onlyOwner {
+        require(_x0PerBlock > 0, "!x0PerBlock-0");
         require(_bonusEndBlock >= bonusEndBlock, "Bonus will not start");
         massUpdatePools();
-        exosPerBlock = _exosPerBlock;
+        x0PerBlock = _x0PerBlock;
         bonusMultiplier = _bonusMultiplier;
         bonusEndBlock = _bonusEndBlock;
         dayInBlocks = _dayInBlocks;

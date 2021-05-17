@@ -1,5 +1,3 @@
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Callee.sol
-
 // SPDX-License-Identifier: GPL-3.0
 
 pragma solidity >=0.5.0;
@@ -7,8 +5,6 @@ pragma solidity >=0.5.0;
 interface IUniswapV2Callee {
     function uniswapV2Call(address sender, uint amount0, uint amount1, bytes calldata data) external;
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IERC20.sol
 
 pragma solidity >=0.5.0;
 
@@ -27,8 +23,6 @@ interface IERC20Uniswap {
     function transfer(address to, uint value) external returns (bool);
     function transferFrom(address from, address to, uint value) external returns (bool);
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/UQ112x112.sol
 
 pragma solidity =0.6.12;
 
@@ -50,8 +44,6 @@ library UQ112x112 {
         z = x / uint224(y);
     }
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/Math.sol
 
 pragma solidity =0.6.12;
 
@@ -77,8 +69,6 @@ library Math {
     }
 }
 
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/libraries/SafeMath.sol
-
 pragma solidity =0.6.12;
 
 // a library for performing overflow-safe math, courtesy of DappHub (https://github.com/dapphub/ds-math)
@@ -97,16 +87,14 @@ library SafeMathUniswap {
     }
 }
 
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/UniswapV2ERC20.sol
-
 pragma solidity =0.6.12;
 
 
 contract UniswapV2ERC20 {
     using SafeMathUniswap for uint;
 
-    string public constant name = 'SushiSwap LP Token';
-    string public constant symbol = 'SLP';
+    string public constant name = 'X0Swap LP Token';
+    string public constant symbol = 'XLP';
     uint8 public constant decimals = 18;
     uint  public totalSupply;
     mapping(address => uint) public balanceOf;
@@ -191,8 +179,6 @@ contract UniswapV2ERC20 {
         _approve(owner, spender, value);
     }
 }
-
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/UniswapV2Pair.sol
 
 pragma solidity =0.6.12;
 
@@ -400,8 +386,6 @@ contract UniswapV2Pair is UniswapV2ERC20 {
     }
 }
 
-// File: https://github.com/sushiswap/sushiswap/blob/master/contracts/uniswapv2/interfaces/IUniswapV2Factory.sol
-
 pragma solidity >=0.5.0;
 
 interface IUniswapV2Factory {
@@ -421,8 +405,6 @@ interface IUniswapV2Factory {
     function setFeeToSetter(address) external;
     function setMigrator(address) external;
 }
-
-// File: contracts/factory.sol
 
 pragma solidity =0.6.12;
 
