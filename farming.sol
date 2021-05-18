@@ -1314,8 +1314,6 @@ contract X0Token is ERC20("X0Token", "X0"), Ownable {
     }
 }
 
-
-//contract Farming is Initializable, ContextUpgradeSafe, OwnableUpgradeSafe {
 contract Farming is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
@@ -1389,45 +1387,6 @@ contract Farming is Ownable {
     event Deposit(address indexed user, uint256 indexed pid, uint256 indexed mid, uint256 amount, uint256 depositBlock, uint256 withdrawBlock);
     event Withdraw(address indexed user, uint256 indexed pid, uint256 indexed mid, uint256 amount);
     event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 indexed mid, uint256 amount);
-
-    // function __Farming_init(
-    //     X0Token _x0,
-    //     address _devaddr,
-    //     uint256 _x0PerBlock,
-    //     uint256 _startBlock,
-    //     uint256 _bonusMultiplier,
-    //     uint256 _bonusEndBlock,
-    //     uint256 _dayinBlocks
-    // ) public initializer {
-    //     __HomeMinter_init_unchained(
-	   //     _x0,
-	   //     _devaddr,
-    //         _x0PerBlock,
-    //         _startBlock,
-    //         _bonusMultiplier,
-    //         _bonusEndBlock,
-    //         _dayInBlocks);
-    // }
-
-    // function __Farming_init_unchained(
-    //     X0Token _x0,
-    //     address _devaddr,
-    //     uint256 _x0PerBlock,
-    //     uint256 _startBlock,
-    //     uint256 _bonusMultiplier,
-    //     uint256 _bonusEndBlock,
-    //     uint256 _dayinBlocks
-    // ) internal initializer {
-    //     __Ownable_init_unchained();
-    //     x0 = _x0;
-    //     devaddr = _devaddr;
-    //     x0PerBlock = _x0PerBlock;
-    //     startBlock = _startBlock;
-    //     bonusEndBlock = _bonusEndBlock;
-    //     totalAllocPoint = 0;
-    //     bonusMultiplier = _bonusMultiplier;
-    //     dayInBlocks = _dayinBlocks;
-    // }
 
     constructor(
         X0Token _x0,
@@ -1617,7 +1576,7 @@ contract Farming is Ownable {
         emit Deposit(msg.sender, _pid, _fpid, _amount, user.userPeriod[_fpid].depositBlock, user.userPeriod[_fpid].withdrawBlock );
     }
 
-    // Withdraw LP tokens from MC.
+    // Withdraw LP tokens from Farming.
     function withdraw(uint256 _pid, uint256 _fpid, uint256 _amount) public {
 
         FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
@@ -1679,6 +1638,4 @@ contract Farming is Ownable {
         require(_devFundDivRate > 0, "!devFundDivRate-0");
         devFundDivRate = _devFundDivRate;
     }
-    
-    //uint256[49] private __gap;
 }
