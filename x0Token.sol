@@ -772,13 +772,7 @@ pragma solidity 0.6.12;
 
 // X0Token with Governance.
 contract X0Token is ERC20("X0swap Token", "X0"), Ownable {
-
-    
-    uint256 private _maxSupply;
-    
-    function setMaxSupply(uint256 maxSupply_) public onlyOwner {
-        _maxSupply = maxSupply_;
-    }
+    uint256 private _maxSupply = 153000000000000000000000000;
     
     function getCurrentMaxSupply()
         external
