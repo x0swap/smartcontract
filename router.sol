@@ -316,7 +316,7 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'5161e040be939db3e7e665bb0313c3379f091323ede766de30afd1c41f97d88e' // init code hash
+                hex'a772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0' // init code hash
             ))));
     }
 
@@ -703,9 +703,9 @@ contract UniswapV2Router02 is Initializable, ContextUpgradeSafe, OwnableUpgradeS
         if (msg.value > amountETH) TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
     }
     
-    function babylonian(uint reserve, uint amount) internal pure returns (uint){
-        return Babylonian.sqrt(reserve.mul(amount.mul(3988000).add(reserve.mul(3988009)))).sub(reserve.mul(1997)) / 1994;
-    }
+    // function babylonian(uint reserve, uint amount) internal pure returns (uint){
+        // return Babylonian.sqrt(reserve.mul(amount.mul(3988000).add(reserve.mul(3988009)))).sub(reserve.mul(1997)) / 1994;
+    // }
     
     function addLiquiditySingleToken(address pair, address tokenA, uint amountTokenDesired, address to, uint deadline) external virtual payable ensure(deadline) returns (uint amountA, uint amountB, uint liquidity)
 	{
