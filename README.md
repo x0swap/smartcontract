@@ -4,6 +4,7 @@
 
 | Contract | Address |
 | ------ | ------ |
+| PairCodeHash | 0xa772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0 |
 | WETH | [0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1][weth-xdai]  |
 | x0Token | [0xb742490dfc2dd548D1fb629e08aD1993a1A51817][x0Token-xdai] |
 | Factory | [0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c][factory-xdai] |
