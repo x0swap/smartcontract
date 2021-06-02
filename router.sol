@@ -703,34 +703,28 @@ contract UniswapV2Router02 is Initializable, ContextUpgradeSafe, OwnableUpgradeS
         if (msg.value > amountETH) TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
     }
     
-    // function babylonian(uint reserve, uint amount) internal pure returns (uint){
-        // return Babylonian.sqrt(reserve.mul(amount.mul(3988000).add(reserve.mul(3988009)))).sub(reserve.mul(1997)) / 1994;
-    // }
-    
-    function addLiquiditySingleToken(address pair, address tokenA, uint amountTokenDesired, address to, uint deadline) external virtual payable ensure(deadline) returns (uint amountA, uint amountB, uint liquidity)
+    function addLiquiditySingleToken(address tokenA, address tokenB, uint amountTokenADesired, address to, uint deadline) external virtual payable ensure(deadline) returns (uint amountA, uint amountB, uint liquidity)
 	{
 	    uint amountEthDesired;
-	    if(tokenA == address(0)) {
+	    if(tokenA == WETH) {
+	        amountTokenADesired = 0;
 	        amountEthDesired = msg.value;
 	        IWETH(WETH).deposit{value: amountEthDesired}();
-	        tokenA = WETH;
 	    }else{
-	        TransferHelper.safeTransferFrom(tokenA, msg.sender, address(this), amountTokenDesired);
+	        TransferHelper.safeTransferFrom(tokenA, msg.sender, address(this), amountTokenADesired);
 	    }
+	    uint swapAmount;
+	    {
+	    address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
 	    address token0 = IUniswapV2Pair(pair).token0();
 	    address token1 = IUniswapV2Pair(pair).token1();
 	    require(tokenA == token0 || tokenA == token1, "invalid token");
-		address tokenB = tokenA == token0 ? token1 : token0;
-// 		(uint reserve0, uint reserve1,) = IUniswapV2Pair(pair).getReserves();
-// 		uint reserveAmount = tokenA == token0 ? reserve0 : reserve1;
-//     	uint swapAmount = babylonian(reserveAmount, amountTokenDesired);
-// 		if(swapAmount == 0) swapAmount = amountTokenDesired.div(2);
-        uint swapAmount = amountTokenDesired > 0 ? amountTokenDesired.div(2) : amountEthDesired.div(2);
-        
+        swapAmount = amountTokenADesired > 0 ? amountTokenADesired.div(2) : amountEthDesired.div(2);
+	    }
 		uint leftAmount;
 		uint rightAmount;
 		{
-	    leftAmount = amountTokenDesired > 0 ? amountTokenDesired.sub(swapAmount) : amountEthDesired.sub(swapAmount);
+	    leftAmount = amountTokenADesired > 0 ? amountTokenADesired.sub(swapAmount) : amountEthDesired.sub(swapAmount);
     	address[] memory _path = new address[](2);
     	_path[0] = tokenA;
     	_path[1] = tokenB;
