@@ -8,7 +8,8 @@
 | WETH | [0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1][weth-xdai]  |
 | x0Token | [0xb742490dfc2dd548D1fb629e08aD1993a1A51817][x0Token-xdai] |
 | Factory | [0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c][factory-xdai] |
-| Router Proxy | [0x442e3F2b5cD636BbE085B04A688E529183fad353][router-xdai] |
+| Router Upgradeable | [0x442e3F2b5cD636BbE085B04A688E529183fad353][routerUpgradeable-xdai] |
+| Router | [0x42c5E014610f3e62843204BF38D226a7D7D25c29][router-xdai] |
 | Farming | [0xdce458170679d18039360c2b14eb700ea5fb26fe][farming-xdai] |
 | Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
 | Proxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][proxy-xdai] |
@@ -22,7 +23,7 @@
 | WETH | [0xc778417E063141139Fce010982780140Aa0cD5Ab][weth-ropsten]  |
 | x0Token | [0xEba9C4f00EE160543Df929F4DB4fC005B12e40D5][x0Token-ropsten] |
 | Factory | [0x55DFBC1cdDaC5A5483b6bb9025B04212CEf4a92d][factory-ropsten] |
-| Router Proxy | [0x07E37267cE9112269090c098d9B32c7fb4853f92][router-ropsten] |
+| Router Upgradeable | [0x07E37267cE9112269090c098d9B32c7fb4853f92][routerUpgradeable-ropsten] |
 | Masterchef | [0x4202AA59BA29D8636C5dFB8047d90fbff4981dc0][masterchef-ropsten] |
 | Farming | [0x8091D19733C74C129F3115D892cd875281267f26 ][farming-ropsten] |
 | x0Bar | [0xeAfD2d0Ad7F93dAeF3E6Be34390030B39db7cCa3][x0bar-ropsten] |
@@ -42,7 +43,8 @@
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0xb742490dfc2dd548D1fb629e08aD1993a1A51817>
    [weth-xdai]: <https://blockscout.com/xdai/mainnet/address/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1>
    [factory-xdai]: <https://blockscout.com/xdai/mainnet/address/0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c>
-   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x442e3F2b5cD636BbE085B04A688E529183fad353>
+   [routerUpgradeable-xdai]: <https://blockscout.com/xdai/mainnet/address/0x442e3F2b5cD636BbE085B04A688E529183fad353>
+   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x42c5E014610f3e62843204BF38D226a7D7D25c29>
    [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0xdce458170679d18039360c2b14eb700ea5fb26fe>
    [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x2220aee6beb00eb42411247075919a9b00286b9b>
    [proxy-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
@@ -52,7 +54,7 @@
    [x0Token-ropsten]: <https://ropsten.etherscan.io/address/0xEba9C4f00EE160543Df929F4DB4fC005B12e40D5>
    [weth-ropsten]: <https://ropsten.etherscan.io/address/0xc778417E063141139Fce010982780140Aa0cD5Ab>
    [factory-ropsten]: <https://ropsten.etherscan.io/address/0x55DFBC1cdDaC5A5483b6bb9025B04212CEf4a92d>
-   [router-ropsten]: <https://ropsten.etherscan.io/address/0x07E37267cE9112269090c098d9B32c7fb4853f92>
+   [routerUpgradeable-ropsten]: <https://ropsten.etherscan.io/address/0x07E37267cE9112269090c098d9B32c7fb4853f92>
    [masterchef-ropsten]: <https://ropsten.etherscan.io/address/0x4202AA59BA29D8636C5dFB8047d90fbff4981dc0>
    [farming-ropsten]: <https://ropsten.etherscan.io/address/0x8091D19733C74C129F3115D892cd875281267f26>
    [x0bar-ropsten]: <https://ropsten.etherscan.io/address/0xeAfD2d0Ad7F93dAeF3E6Be34390030B39db7cCa3>
