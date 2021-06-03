@@ -13,8 +13,8 @@
 | Farming | [0xdce458170679d18039360c2b14eb700ea5fb26fe][farming-xdai] |
 | Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
 | Proxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][proxy-xdai] |
-| x0Maker | [0x0a9f47ec282c1cfda322f0fedcd4138d5b5ab75c][x0maker-xdai] |
-| x0Bar | [0xf6f43bdbbac6432f18634c46d6047f019f8ef97d][x0bar-xdai] |
+| x0Maker | [0x7eFa2446C464F7B11309472448b47D919878e383][x0maker-xdai] |
+| x0Bar | [0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7][x0bar-xdai] |
 
 ## Ropsten Addresses
 
@@ -48,8 +48,8 @@
    [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0xdce458170679d18039360c2b14eb700ea5fb26fe>
    [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x2220aee6beb00eb42411247075919a9b00286b9b>
    [proxy-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
-   [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0xf6f43bdbbac6432f18634c46d6047f019f8ef97d>
-   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0a9f47ec282c1cfda322f0fedcd4138d5b5ab75c>
+   [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7>
+   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x7eFa2446C464F7B11309472448b47D919878e383>
 
    [x0Token-ropsten]: <https://ropsten.etherscan.io/address/0xEba9C4f00EE160543Df929F4DB4fC005B12e40D5>
    [weth-ropsten]: <https://ropsten.etherscan.io/address/0xc778417E063141139Fce010982780140Aa0cD5Ab>
