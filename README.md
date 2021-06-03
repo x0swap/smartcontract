@@ -1,5 +1,16 @@
 # Smartcontract
 
+## MATIC/Polygon Addresses
+
+| Contract | Address |
+| ------ | ------ |
+| PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
+| WETH | [0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619][weth-matic]  |
+| Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
+| Router | [0x2602D0A53618Eb510EE9533D2a01973274fE46af][router-matic] |
+| x0Maker | [0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535][x0maker-matic] |
+| x0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
+
 ## xDai Addresses
 
 | Contract | Address |
@@ -12,7 +23,7 @@
 | Router | [0x42c5E014610f3e62843204BF38D226a7D7D25c29][router-xdai] |
 | Farming | [0xdce458170679d18039360c2b14eb700ea5fb26fe][farming-xdai] |
 | Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
-| Proxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][proxy-xdai] |
+| GnosisSafeProxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][gnosis-xdai] |
 | x0Maker | [0x7eFa2446C464F7B11309472448b47D919878e383][x0maker-xdai] |
 | x0Bar | [0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7][x0bar-xdai] |
 
@@ -38,7 +49,13 @@
 | Router | [0x982E0A1367864B7C32906501dB9cce6cAdFB0E1a][router-rinkeby] |
 | Farming | [0xf5613Ef9BE7C2237EA475809bbE57484D2A71D16][farming-rinkeby] |
 | Timelock | [0xC526DeE492968b7c20E913f1e73e1cA71915BC00][timelock-rinkeby] |
-| Proxy | [0x27f92b4e70B5Fa4b2A55Db804456a2b5ca1B459C][proxy-rinkeby] |
+| GnosisSafeProxy | [0x27f92b4e70B5Fa4b2A55Db804456a2b5ca1B459C][gnosis-rinkeby] |
+
+   [weth-matic]: <https://explorer-mainnet.maticvigil.com/address/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619>
+   [factory-matic]: <https://explorer-mainnet.maticvigil.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
+   [router-matic]: <https://explorer-mainnet.maticvigil.com/address/0x2602D0A53618Eb510EE9533D2a01973274fE46af>
+   [x0bar-matic]: <https://explorer-mainnet.maticvigil.com/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
+   [x0maker-matic]: <https://explorer-mainnet.maticvigil.com/address/0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535>
 
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0xb742490dfc2dd548D1fb629e08aD1993a1A51817>
    [weth-xdai]: <https://blockscout.com/xdai/mainnet/address/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1>
@@ -47,7 +64,7 @@
    [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x42c5E014610f3e62843204BF38D226a7D7D25c29>
    [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0xdce458170679d18039360c2b14eb700ea5fb26fe>
    [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x2220aee6beb00eb42411247075919a9b00286b9b>
-   [proxy-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
+   [gnosis-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
    [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7>
    [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x7eFa2446C464F7B11309472448b47D919878e383>
 
@@ -65,5 +82,5 @@
    [router-rinkeby]: <https://rinkeby.etherscan.io/address/0x982E0A1367864B7C32906501dB9cce6cAdFB0E1a>
    [farming-rinkeby]: <https://rinkeby.etherscan.io/address/0xf5613Ef9BE7C2237EA475809bbE57484D2A71D16>
    [timelock-rinkeby]: <https://rinkeby.etherscan.io/address/0xC526DeE492968b7c20E913f1e73e1cA71915BC00>
-   [proxy-rinkeby]: <https://rinkeby.etherscan.io/address/0x27f92b4e70B5Fa4b2A55Db804456a2b5ca1B459C>
+   [gnosis-rinkeby]: <https://rinkeby.etherscan.io/address/0x27f92b4e70B5Fa4b2A55Db804456a2b5ca1B459C>
    
