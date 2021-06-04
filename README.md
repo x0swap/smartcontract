@@ -20,7 +20,7 @@
 | x0Token | [0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8][x0Token-mumbai] |
 | Factory | [0x7236991AA03274FC2A74335A1989C884Ca4274dd][factory-mumbai] |
 | Router | [0x7adff301C91635fc90d5997D10D68ddFAA59F740][router-mumbai] |
-| Minichef | |
+| Minichef | [0x2453A4910519e324A605C82Cae47631A540a0d25][minichef-mumbai] |
 | x0Maker | [0x2d3B3a2e3821CE37F94931BA74701E0dE68f458c][x0maker-mumbai] |
 | x0Bar | [0x6D98F2fcCCc49a9A94c46a01050624Eb300978B7][x0bar-mumbai] |
 
@@ -74,7 +74,7 @@
    [x0token-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8>
    [factory-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x7236991AA03274FC2A74335A1989C884Ca4274dd>
    [router-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x7adff301C91635fc90d5997D10D68ddFAA59F740>
-   [minichef-mumbai]: <https://explorer-mumbai.maticvigil.com/address/>
+   [minichef-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x2453A4910519e324A605C82Cae47631A540a0d25>
    [x0bar-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x6D98F2fcCCc49a9A94c46a01050624Eb300978B7>
    [x0maker-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x2d3B3a2e3821CE37F94931BA74701E0dE68f458c>
 
