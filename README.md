@@ -1,15 +1,28 @@
 # Smartcontract
 
-## MATIC/Polygon Addresses
+## MATIC/Polygon Mainnet Addresses
 
 | Contract | Address |
 | ------ | ------ |
 | PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
-| WETH | [0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619][weth-matic]  |
+| WMATIC | [0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270][weth-matic]  |
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
 | Router | [0x2602D0A53618Eb510EE9533D2a01973274fE46af][router-matic] |
 | x0Maker | [0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535][x0maker-matic] |
 | x0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
+
+## Mumbai Addresses
+
+| Contract | Address |
+| ------ | ------ |
+| PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
+| WMATIC | [0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889][weth-mumbai]  |
+| x0Token | [0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8][x0Token-mumbai] |
+| Factory | [0x7236991AA03274FC2A74335A1989C884Ca4274dd][factory-mumbai] |
+| Router | [0x7adff301C91635fc90d5997D10D68ddFAA59F740][router-mumbai] |
+| Minichef | |
+| x0Maker | [0x2d3B3a2e3821CE37F94931BA74701E0dE68f458c][x0maker-mumbai] |
+| x0Bar | [0x6D98F2fcCCc49a9A94c46a01050624Eb300978B7][x0bar-mumbai] |
 
 ## xDai Addresses
 
@@ -51,11 +64,19 @@
 | Timelock | [0xC526DeE492968b7c20E913f1e73e1cA71915BC00][timelock-rinkeby] |
 | GnosisSafeProxy | [0x27f92b4e70B5Fa4b2A55Db804456a2b5ca1B459C][gnosis-rinkeby] |
 
-   [weth-matic]: <https://explorer-mainnet.maticvigil.com/address/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619>
+   [weth-matic]: <https://explorer-mainnet.maticvigil.com/address/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270>
    [factory-matic]: <https://explorer-mainnet.maticvigil.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
    [router-matic]: <https://explorer-mainnet.maticvigil.com/address/0x2602D0A53618Eb510EE9533D2a01973274fE46af>
    [x0bar-matic]: <https://explorer-mainnet.maticvigil.com/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
    [x0maker-matic]: <https://explorer-mainnet.maticvigil.com/address/0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535>
+
+   [weth-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889>
+   [x0token-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8>
+   [factory-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x7236991AA03274FC2A74335A1989C884Ca4274dd>
+   [router-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x7adff301C91635fc90d5997D10D68ddFAA59F740>
+   [minichef-mumbai]: <https://explorer-mumbai.maticvigil.com/address/>
+   [x0bar-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x6D98F2fcCCc49a9A94c46a01050624Eb300978B7>
+   [x0maker-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x2d3B3a2e3821CE37F94931BA74701E0dE68f458c>
 
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0xb742490dfc2dd548D1fb629e08aD1993a1A51817>
    [weth-xdai]: <https://blockscout.com/xdai/mainnet/address/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1>
