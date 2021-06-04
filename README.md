@@ -7,8 +7,8 @@
 | PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
 | WMATIC | [0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270][weth-matic]  |
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
-| Router | [0x2602D0A53618Eb510EE9533D2a01973274fE46af][router-matic] |
-| x0Maker | [0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535][x0maker-matic] |
+| Router | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][router-matic] |
+| x0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | x0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
 
 ## Mumbai Addresses
@@ -66,9 +66,9 @@
 
    [weth-matic]: <https://explorer-mainnet.maticvigil.com/address/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270>
    [factory-matic]: <https://explorer-mainnet.maticvigil.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
-   [router-matic]: <https://explorer-mainnet.maticvigil.com/address/0x2602D0A53618Eb510EE9533D2a01973274fE46af>
+   [router-matic]: <https://explorer-mainnet.maticvigil.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
    [x0bar-matic]: <https://explorer-mainnet.maticvigil.com/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
-   [x0maker-matic]: <https://explorer-mainnet.maticvigil.com/address/0xD8d38c1a5A6862c6Fcb9fAA9a2f46adD26718535>
+   [x0maker-matic]: <https://explorer-mainnet.maticvigil.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
 
    [weth-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889>
    [x0token-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8>
