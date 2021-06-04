@@ -29,15 +29,15 @@
 | Contract | Address |
 | ------ | ------ |
 | PairCodeHash | 0xa772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0 |
-| WETH | [0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1][weth-xdai]  |
+| WXDAI | [0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d][weth-xdai]  |
 | x0Token | [0xb742490dfc2dd548D1fb629e08aD1993a1A51817][x0Token-xdai] |
 | Factory | [0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c][factory-xdai] |
 | Router Upgradeable | [0x442e3F2b5cD636BbE085B04A688E529183fad353][routerUpgradeable-xdai] |
-| Router | [0x42c5E014610f3e62843204BF38D226a7D7D25c29][router-xdai] |
+| Router | [0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f][router-xdai] |
 | Farming | [0xdce458170679d18039360c2b14eb700ea5fb26fe][farming-xdai] |
 | Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
 | GnosisSafeProxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][gnosis-xdai] |
-| x0Maker | [0x7eFa2446C464F7B11309472448b47D919878e383][x0maker-xdai] |
+| x0Maker | [0xad96f1C0a0Cf0D19A732E0ab17D2d7010f6ddA81][x0maker-xdai] |
 | x0Bar | [0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7][x0bar-xdai] |
 
 ## Ropsten Addresses
@@ -79,15 +79,15 @@
    [x0maker-mumbai]: <https://explorer-mumbai.maticvigil.com/address/0x2d3B3a2e3821CE37F94931BA74701E0dE68f458c>
 
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0xb742490dfc2dd548D1fb629e08aD1993a1A51817>
-   [weth-xdai]: <https://blockscout.com/xdai/mainnet/address/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1>
+   [weth-xdai]: <https://blockscout.com/xdai/mainnet/address/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d>
    [factory-xdai]: <https://blockscout.com/xdai/mainnet/address/0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c>
    [routerUpgradeable-xdai]: <https://blockscout.com/xdai/mainnet/address/0x442e3F2b5cD636BbE085B04A688E529183fad353>
-   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x42c5E014610f3e62843204BF38D226a7D7D25c29>
+   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f>
    [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0xdce458170679d18039360c2b14eb700ea5fb26fe>
    [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x2220aee6beb00eb42411247075919a9b00286b9b>
    [gnosis-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
    [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7>
-   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x7eFa2446C464F7B11309472448b47D919878e383>
+   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0xad96f1C0a0Cf0D19A732E0ab17D2d7010f6ddA81>
 
    [x0Token-ropsten]: <https://ropsten.etherscan.io/address/0xEba9C4f00EE160543Df929F4DB4fC005B12e40D5>
    [weth-ropsten]: <https://ropsten.etherscan.io/address/0xc778417E063141139Fce010982780140Aa0cD5Ab>
