@@ -17,7 +17,7 @@
 | ------ | ------ |
 | PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
 | WMATIC | [0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889][weth-mumbai]  |
-| x0Token | [0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8][x0Token-mumbai] |
+| x0Token (bridged) | [0x0C4D30C94d1F6287cF78bE3BA674F025eaBD4Dc8][x0Token-mumbai] |
 | Factory | [0x7236991AA03274FC2A74335A1989C884Ca4274dd][factory-mumbai] |
 | Router | [0x7adff301C91635fc90d5997D10D68ddFAA59F740][router-mumbai] |
 | Minichef | [0x2453A4910519e324A605C82Cae47631A540a0d25][minichef-mumbai] |
