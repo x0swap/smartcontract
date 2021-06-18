@@ -33,6 +33,20 @@
 | X0Bar | [0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7][x0bar-xdai] |
 | X0Token(bridged) | [0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19][x0Token-xdai] |
 
+## BSC Addresses
+
+| Contract | Address |
+| ------ | ------ |
+| PairCodeHash |
+| Factory |
+| Router |
+| MiniChef |
+| Timelock |
+| GnosisSafeProxy |
+| X0Maker |
+| X0Bar |
+| X0Token(bridged) | [0x98DD8638E7AD820f5d9e702cE0caC2961eEa96fb][x0Token-bsc] |
+
 
    [x0Token-mainnet]: <https://etherscan.io/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
 
@@ -49,3 +63,5 @@
    [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0x63D9655639630d4cd8aD0B83fBA4e4577170B8a7>
    [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0xad96f1C0a0Cf0D19A732E0ab17D2d7010f6ddA81>
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19>
+   
+   [x0Token-bsc]: <https://bscscan.com/address/0x98DD8638E7AD820f5d9e702cE0caC2961eEa96fb>
