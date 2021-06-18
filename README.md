@@ -14,8 +14,7 @@
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
 | Router | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][router-matic] |
 | MiniChef |
-| Timelock | 
-| GnosisSafeProxy |
+| DevFundLock |
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | X0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
