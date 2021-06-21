@@ -14,7 +14,7 @@
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
 | Router | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][router-matic] |
 | MiniChef |
-| DevFundLock |
+| DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic]
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | X0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
@@ -55,6 +55,7 @@
    [x0bar-matic]: <https://polygonscan.com/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
    [x0maker-matic]: <https://polygonscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
+   [devfundlock-matic]: <https://polygonscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
    
    [factory-xdai]: <https://blockscout.com/xdai/mainnet/address/0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c>
    [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f>
