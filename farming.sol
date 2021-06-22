@@ -577,47 +577,6 @@ contract MiniFarm is BoringOwnable, BoringBatchable {
 
         emit Deposit(msg.sender, _pid, _fpid, _amount, user.userPeriod[_fpid].depositTime, user.userPeriod[_fpid].withdrawTime);
     }
-
-    // /// @notice Withdraw LP tokens from MCV2.
-    // /// @param _pid The index of the pool.
-    // /// @param _fpid The index of the farming pool.
-    // /// @param _amount LP token amount to withdraw.
-    // function withdraw(uint256 _pid, uint256 _fpid, uint256 _amount) public {
-    //     FarmPeriod memory farmPeriod = updatePool(_pid, _fpid);
-    //     UserInfo storage user = userInfo[_pid][msg.sender];
-
-    //     require(block.timestamp > user.userPeriod[_fpid].withdrawTime, "withdraw: still in lock period");
-    //     require(user.userPeriod[_fpid].amount >= _amount, "withdraw: insufficient balance");
-
-    //     // Effects
-    //     user.userPeriod[_fpid].amount = user.userPeriod[_fpid].amount.sub(_amount);
-    //     user.userPeriod[_fpid].rewardDebt = user.userPeriod[_fpid].rewardDebt.sub(int256(_amount.mul(farmPeriod.accX0PerShare) / ACC_X0_PRECISION));
-        
-    //     farmPeriod.lpToken.safeTransfer(msg.sender, _amount);
-
-    //     emit Withdraw(msg.sender, _pid, _fpid, _amount);
-    // }
-
-    // /// @notice Harvest proceeds for transaction sender to `to`.
-    // /// @param _pid The index of the pool.
-    // /// @param _fpid The index of the farming pool.
-    // function harvest(uint256 _pid, uint256 _fpid) public {
-    //     FarmPeriod memory farmPeriod = updatePool(_pid, _fpid);
-    //     UserInfo storage user = userInfo[_pid][msg.sender];
-
-    //     int256 accumulatedX0 = int256(user.userPeriod[_fpid].amount.mul(farmPeriod.accX0PerShare) / ACC_X0_PRECISION);
-    //     uint256 _pendingX0 = accumulatedX0.sub(user.userPeriod[_fpid].rewardDebt).toUInt256();
-
-    //     // Effects
-    //     user.userPeriod[_fpid].rewardDebt = accumulatedX0;
-
-    //     // Interactions
-    //     if (_pendingX0 != 0) {
-    //         x0.safeTransfer(msg.sender, _pendingX0);
-    //     }
-
-    //     emit Harvest(msg.sender, _pid, _fpid, _pendingX0);
-    // }
     
     /// @notice Withdraw LP tokens from MCV2 and harvest proceeds for transaction sender to `to`.
     /// @param _pid The index of the pool.
