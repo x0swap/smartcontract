@@ -13,8 +13,8 @@
 | PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
 | Router | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][router-matic] |
-| MiniChef |
-| DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic]
+| Farming | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][farming-matic] |
+| DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic] |
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | X0Bar | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0bar-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
@@ -26,7 +26,7 @@
 | PairCodeHash | 0xa772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0 |
 | Factory | [0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c][factory-xdai] |
 | Router | [0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f][router-xdai] |
-| MiniChef |
+| Farming |
 | Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
 | GnosisSafeProxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][gnosis-xdai] |
 | X0Maker | [0xad96f1C0a0Cf0D19A732E0ab17D2d7010f6ddA81][x0maker-xdai] |
@@ -40,7 +40,7 @@
 | PairCodeHash |
 | Factory |
 | Router |
-| MiniChef |
+| Farming |
 | Timelock |
 | GnosisSafeProxy |
 | X0Maker |
@@ -52,6 +52,7 @@
 
    [factory-matic]: <https://polygonscan.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
    [router-matic]: <https://polygonscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
+   [farming-matic]: <https://polygonscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
    [x0bar-matic]: <https://polygonscan.com/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
    [x0maker-matic]: <https://polygonscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
