@@ -217,7 +217,7 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-contract Xx0TokenStorage {
+contract XusdTokenStorage {
 
     using SafeMath for uint256;
 
@@ -258,18 +258,13 @@ contract Xx0TokenStorage {
      */
     address public rebaser;
 
-    // /**
-    //  * @notice Approved migrator for this contract
-    //  */
-    // address public migrator;
-
     /**
-     * @notice Incentivizer address of Xx0 protocol
+     * @notice Incentivizer address of Xusd protocol
      */
     address public incentivizer;
 
     /**
-     * @notice Total supply of Xx0s
+     * @notice Total supply of Xusds
      */
     uint256 public totalSupply;
 
@@ -286,9 +281,9 @@ contract Xx0TokenStorage {
     /**
      * @notice Scaling factor that adjusts everyone's balances
      */
-    uint256 public xx0ScalingFactor;
+    uint256 public xusdScalingFactor;
 
-    mapping (address => uint256) internal _xx0Balances;
+    mapping (address => uint256) internal _xusdBalances;
 
     mapping (address => mapping (address => uint256)) internal _allowedFragments;
 
@@ -300,8 +295,6 @@ contract Xx0TokenStorage {
 
     uint256 public initSupply;
 
-
-    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
     bytes32 public DOMAIN_SEPARATOR;
 }
@@ -318,46 +311,11 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-
-// contract Xx0GovernanceStorage {
-//     /// @notice A record of each accounts delegate
-//     mapping (address => address) internal _delegates;
-
-//     /// @notice A checkpoint for marking number of votes from a given block
-//     struct Checkpoint {
-//         uint32 fromBlock;
-//         uint256 votes;
-//     }
-
-//     /// @notice A record of votes checkpoints for each account, by index
-//     mapping (address => mapping (uint32 => Checkpoint)) public checkpoints;
-
-//     /// @notice The number of checkpoints for each account
-//     mapping (address => uint32) public numCheckpoints;
-
-//     /// @notice The EIP-712 typehash for the contract's domain
-//     bytes32 public constant DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,uint256 chainId,address verifyingContract)");
-
-//     /// @notice The EIP-712 typehash for the delegation struct used by the contract
-//     bytes32 public constant DELEGATION_TYPEHASH = keccak256("Delegation(address delegatee,uint256 nonce,uint256 expiry)");
-
-//     /// @notice A record of states for signing / validating signatures
-//     mapping (address => uint) public nonces;
-// }
-
-
-contract Xx0TokenInterface is Xx0TokenStorage {
-
-    // /// @notice An event thats emitted when an account changes its delegate
-    // event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
-
-    // /// @notice An event thats emitted when a delegate account's vote balance changes
-    // event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
-
+contract XusdTokenInterface is XusdTokenStorage {
     /**
      * @notice Event emitted when tokens are rebased
      */
-    event Rebase(uint256 epoch, uint256 prevXx0ScalingFactor, uint256 newXx0ScalingFactor);
+    event Rebase(uint256 epoch, uint256 prevXusdScalingFactor, uint256 newXusdScalingFactor);
 
     /*** Gov Events ***/
 
@@ -375,11 +333,6 @@ contract Xx0TokenInterface is Xx0TokenStorage {
      * @notice Sets the rebaser contract
      */
     event NewRebaser(address oldRebaser, address newRebaser);
-
-    // /**
-    //  * @notice Sets the migrator contract
-    //  */
-    // event NewMigrator(address oldMigrator, address newMigrator);
 
     /**
      * @notice Sets the incentivizer contract
@@ -419,15 +372,8 @@ contract Xx0TokenInterface is Xx0TokenStorage {
     function increaseAllowance(address spender, uint256 addedValue) external returns (bool);
     function decreaseAllowance(address spender, uint256 subtractedValue) external returns (bool);
     function maxScalingFactor() external view returns (uint256);
-    function xx0ToFragment(uint256 xx0) external view returns (uint256);
-    function fragmentToXx0(uint256 value) external view returns (uint256);
-
-    /* - Governance Functions - */
-    // function getPriorVotes(address account, uint blockNumber) external view returns (uint256);
-    // function delegateBySig(address delegatee, uint nonce, uint expiry, uint8 v, bytes32 r, bytes32 s) external;
-    // function delegate(address delegatee) external;
-    // function delegates(address delegator) external view returns (address);
-    // function getCurrentVotes(address account) external view returns (uint256);
+    function xusdToFragment(uint256 xusd) external view returns (uint256);
+    function fragmentToXusd(uint256 value) external view returns (uint256);
 
     /* - Permissioned/Governance functions - */
     function mint(address to, uint256 amount) external returns (bool);
@@ -435,21 +381,21 @@ contract Xx0TokenInterface is Xx0TokenStorage {
     function enter(uint256 amount) external;
     function leave(uint256 share) external;
     function rebase(uint256 epoch, uint256 indexDelta, bool positive) external returns (uint256);
+    function _setX0(IERC20 x0_) external;
     function _setRebaser(address rebaser_) external;
-    function _setX0(address x0_) external;
     function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
     function _acceptGov() external;
 }
 
-contract Xx0DelegationStorage {
+contract XusdDelegationStorage {
     /**
      * @notice Implementation address for this contract
      */
     address public implementation;
 }
 
-contract Xx0DelegatorInterface is Xx0DelegationStorage {
+contract XusdDelegatorInterface is XusdDelegationStorage {
     /**
      * @notice Emitted when implementation is changed
      */
@@ -465,9 +411,9 @@ contract Xx0DelegatorInterface is Xx0DelegationStorage {
 }
 
 
-contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
+contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
     /**
-     * @notice Construct a new Xx0
+     * @notice Construct a new Xusd
      * @param name_ ERC-20 name of this token
      * @param symbol_ ERC-20 symbol of this token
      * @param decimals_ ERC-20 decimal precision of this token
@@ -517,7 +463,7 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
      * @param becomeImplementationData The encoded bytes data to be passed to _becomeImplementation
      */
     function _setImplementation(address implementation_, bool allowResign, bytes memory becomeImplementationData) public {
-        require(msg.sender == gov, "Xx0Delegator::_setImplementation: Caller must be gov");
+        require(msg.sender == gov, "XusdDelegator::_setImplementation: Caller must be gov");
 
         if (allowResign) {
             delegateToImplementation(abi.encodeWithSignature("_resignImplementation()"));
@@ -732,22 +678,6 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
         delegateAndReturn();
     }
 
-    // /**
-    //  * @notice Get the current allowance from `owner` for `spender`
-    //  * @param delegator The address of the account which has designated a delegate
-    //  * @return Address of delegatee
-    //  */
-    // function delegates(
-    //     address delegator
-    // )
-    //     external
-    //     view
-    //     returns (address)
-    // {
-    //     delegator; // Shh
-    //     delegateToViewAndReturn();
-    // }
-
     /**
      * @notice Get the token balance of the `owner`
      * @param owner The address of the account to query
@@ -790,6 +720,11 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
         delegateAndReturn();
     }
 
+    function _setX0(IERC20 x0_) external {
+        x0_;
+        delegateAndReturn();
+    }
+
     function _setRebaser(address rebaser_)
         external
     {
@@ -804,13 +739,6 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
         delegateAndReturn();
     }
 
-    // function _setMigrator(address migrator_)
-    //     external
-    // {
-    //     migrator_; // Shh
-    //     delegateAndReturn();
-    // }
-
     /**
       * @notice Accepts transfer of gov rights. msg.sender must be pendingGov
       * @dev Gov function for pending gov to accept role and update gov
@@ -822,57 +750,16 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
         delegateAndReturn();
     }
 
-
-    // function getPriorVotes(address account, uint blockNumber)
-    //     external
-    //     view
-    //     returns (uint256)
-    // {
-    //     account; blockNumber;
-    //     delegateToViewAndReturn();
-    // }
-
-    // function delegateBySig(
-    //     address delegatee,
-    //     uint nonce,
-    //     uint expiry,
-    //     uint8 v,
-    //     bytes32 r,
-    //     bytes32 s
-    // )
-    //     external
-    // {
-    //     delegatee; nonce; expiry; v; r; s;
-    //     delegateAndReturn();
-    // }
-
-    // function delegate(address delegatee)
-    //     external
-    // {
-    //     delegatee;
-    //     delegateAndReturn();
-    // }
-
-    // function getCurrentVotes(address account)
-    //     external
-    //     view
-    //     returns (uint256)
-    // {
-    //     account;
-    //     delegateToViewAndReturn();
-    // }
-
-
-    function xx0ToFragment(uint256 xx0)
+    function xusdToFragment(uint256 xusd)
         external
         view
         returns (uint256)
     {
-        xx0;
+        xusd;
         delegateToViewAndReturn();
     }
 
-    function fragmentToXx0(uint256 value)
+    function fragmentToXusd(uint256 value)
         external
         view
         returns (uint256)
@@ -956,7 +843,7 @@ contract X0Bar is Xx0TokenInterface, Xx0DelegatorInterface {
      * @dev It returns to the external caller whatever the implementation returns or forwards reverts
      */
     function() external payable {
-        require(msg.value == 0,"Xx0Delegator:fallback: cannot send value to fallback");
+        require(msg.value == 0,"XusdDelegator:fallback: cannot send value to fallback");
 
         // delegate all other functions to current implementation
         delegateAndReturn();

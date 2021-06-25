@@ -12,33 +12,6 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-
-// contract Xx0GovernanceStorage {
-//     /// @notice A record of each accounts delegate
-//     mapping (address => address) internal _delegates;
-
-//     /// @notice A checkpoint for marking number of votes from a given block
-//     struct Checkpoint {
-//         uint32 fromBlock;
-//         uint256 votes;
-//     }
-
-//     /// @notice A record of votes checkpoints for each account, by index
-//     mapping (address => mapping (uint32 => Checkpoint)) public checkpoints;
-
-//     /// @notice The number of checkpoints for each account
-//     mapping (address => uint32) public numCheckpoints;
-
-//     /// @notice The EIP-712 typehash for the contract's domain
-//     bytes32 public constant DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,uint256 chainId,address verifyingContract)");
-
-//     /// @notice The EIP-712 typehash for the delegation struct used by the contract
-//     bytes32 public constant DELEGATION_TYPEHASH = keccak256("Delegation(address delegatee,uint256 nonce,uint256 expiry)");
-
-//     /// @notice A record of states for signing / validating signatures
-//     mapping (address => uint) public nonces;
-// }
-
 /**
  * @dev Wrappers over Solidity's arithmetic operations with added overflow
  * checks.
@@ -270,8 +243,8 @@ interface IERC20 {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 }
 
-// Storage for a Xx0 token
-contract Xx0TokenStorage {
+// Storage for a Xusd token
+contract XusdTokenStorage {
 
     using SafeMath for uint256;
 
@@ -312,18 +285,13 @@ contract Xx0TokenStorage {
      */
     address public rebaser;
 
-    // /**
-    //  * @notice Approved migrator for this contract
-    //  */
-    // address public migrator;
-
     /**
-     * @notice Incentivizer address of Xx0 protocol
+     * @notice Incentivizer address of Xusd protocol
      */
     address public incentivizer;
 
     /**
-     * @notice Total supply of Xx0s
+     * @notice Total supply of Xusds
      */
     uint256 public totalSupply;
 
@@ -340,9 +308,9 @@ contract Xx0TokenStorage {
     /**
      * @notice Scaling factor that adjusts everyone's balances
      */
-    uint256 public xx0ScalingFactor;
+    uint256 public xusdScalingFactor;
 
-    mapping (address => uint256) internal _xx0Balances;
+    mapping (address => uint256) internal _xusdBalances;
 
     mapping (address => mapping (address => uint256)) internal _allowedFragments;
 
@@ -354,24 +322,15 @@ contract Xx0TokenStorage {
 
     uint256 public initSupply;
 
-
-    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
     bytes32 public DOMAIN_SEPARATOR;
 }
 
-contract Xx0TokenInterface is Xx0TokenStorage {
-
-    // /// @notice An event thats emitted when an account changes its delegate
-    // event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
-
-    // /// @notice An event thats emitted when a delegate account's vote balance changes
-    // event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
-
+contract XusdTokenInterface is XusdTokenStorage {
     /**
      * @notice Event emitted when tokens are rebased
      */
-    event Rebase(uint256 epoch, uint256 prevXx0ScalingFactor, uint256 newXx0ScalingFactor);
+    event Rebase(uint256 epoch, uint256 prevXusdScalingFactor, uint256 newXusdScalingFactor);
 
     /*** Gov Events ***/
 
@@ -389,11 +348,6 @@ contract Xx0TokenInterface is Xx0TokenStorage {
      * @notice Sets the rebaser contract
      */
     event NewRebaser(address oldRebaser, address newRebaser);
-
-    // /**
-    //  * @notice Sets the migrator contract
-    //  */
-    // event NewMigrator(address oldMigrator, address newMigrator);
 
     /**
      * @notice Sets the incentivizer contract
@@ -434,15 +388,8 @@ contract Xx0TokenInterface is Xx0TokenStorage {
     function increaseAllowance(address spender, uint256 addedValue) external returns (bool);
     function decreaseAllowance(address spender, uint256 subtractedValue) external returns (bool);
     function maxScalingFactor() external view returns (uint256);
-    function xx0ToFragment(uint256 xx0) external view returns (uint256);
-    function fragmentToXx0(uint256 value) external view returns (uint256);
-
-    /* - Governance Functions - */
-    // function getPriorVotes(address account, uint blockNumber) external view returns (uint256);
-    // function delegateBySig(address delegatee, uint nonce, uint expiry, uint8 v, bytes32 r, bytes32 s) external;
-    // function delegate(address delegatee) external;
-    // function delegates(address delegator) external view returns (address);
-    // function getCurrentVotes(address account) external view returns (uint256);
+    function xusdToFragment(uint256 xusd) external view returns (uint256);
+    function fragmentToXusd(uint256 value) external view returns (uint256);
 
     /* - Permissioned/Governance functions - */
     function mint(address to, uint256 amount) external returns (bool);
@@ -450,7 +397,7 @@ contract Xx0TokenInterface is Xx0TokenStorage {
     function enter(uint256 amount) external;
     function leave(uint256 share) external;
     function rebase(uint256 epoch, uint256 indexDelta, bool positive) external returns (uint256);
-    function _setX0(address x0_) external;
+    function _setX0(IERC20 x0_) external;
     function _setRebaser(address rebaser_) external;
     function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
@@ -468,202 +415,6 @@ Redistribution and use in source and binary forms, with or without modification,
 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
-
-
-
-// contract Xx0GovernanceToken is Xx0TokenInterface {
-
-//       /// @notice An event thats emitted when an account changes its delegate
-//     event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
-
-//     /// @notice An event thats emitted when a delegate account's vote balance changes
-//     event DelegateVotesChanged(address indexed delegate, uint previousBalance, uint newBalance);
-
-//     /**
-//      * @notice Get delegatee for an address delegating
-//      * @param delegator The address to get delegatee for
-//      */
-//     function delegates(address delegator)
-//         external
-//         view
-//         returns (address)
-//     {
-//         return _delegates[delegator];
-//     }
-
-//    /**
-//     * @notice Delegate votes from `msg.sender` to `delegatee`
-//     * @param delegatee The address to delegate votes to
-//     */
-//     function delegate(address delegatee) external {
-//         return _delegate(msg.sender, delegatee);
-//     }
-
-//     /**
-//      * @notice Delegates votes from signatory to `delegatee`
-//      * @param delegatee The address to delegate votes to
-//      * @param nonce The contract state required to match the signature
-//      * @param expiry The time at which to expire the signature
-//      * @param v The recovery byte of the signature
-//      * @param r Half of the ECDSA signature pair
-//      * @param s Half of the ECDSA signature pair
-//      */
-//     function delegateBySig(
-//         address delegatee,
-//         uint nonce,
-//         uint expiry,
-//         uint8 v,
-//         bytes32 r,
-//         bytes32 s
-//     )
-//         external
-//     {
-//         bytes32 structHash = keccak256(
-//             abi.encode(
-//                 DELEGATION_TYPEHASH,
-//                 delegatee,
-//                 nonce,
-//                 expiry
-//             )
-//         );
-
-//         bytes32 digest = keccak256(
-//             abi.encodePacked(
-//                 "\x19\x01",
-//                 DOMAIN_SEPARATOR,
-//                 structHash
-//             )
-//         );
-
-//         address signatory = ecrecover(digest, v, r, s);
-//         require(signatory != address(0), "Xx0::delegateBySig: invalid signature");
-//         require(nonce == nonces[signatory]++, "Xx0::delegateBySig: invalid nonce");
-//         require(now <= expiry, "Xx0::delegateBySig: signature expired");
-//         return _delegate(signatory, delegatee);
-//     }
-
-//     /**
-//      * @notice Gets the current votes balance for `account`
-//      * @param account The address to get votes balance
-//      * @return The number of current votes for `account`
-//      */
-//     function getCurrentVotes(address account)
-//         external
-//         view
-//         returns (uint256)
-//     {
-//         uint32 nCheckpoints = numCheckpoints[account];
-//         return nCheckpoints > 0 ? checkpoints[account][nCheckpoints - 1].votes : 0;
-//     }
-
-//     /**
-//      * @notice Determine the prior number of votes for an account as of a block number
-//      * @dev Block number must be a finalized block or else this function will revert to prevent misinformation.
-//      * @param account The address of the account to check
-//      * @param blockNumber The block number to get the vote balance at
-//      * @return The number of votes the account had as of the given block
-//      */
-//     function getPriorVotes(address account, uint blockNumber)
-//         external
-//         view
-//         returns (uint256)
-//     {
-//         require(blockNumber < block.number, "Xx0::getPriorVotes: not yet determined");
-
-//         uint32 nCheckpoints = numCheckpoints[account];
-//         if (nCheckpoints == 0) {
-//             return 0;
-//         }
-
-//         // First check most recent balance
-//         if (checkpoints[account][nCheckpoints - 1].fromBlock <= blockNumber) {
-//             return checkpoints[account][nCheckpoints - 1].votes;
-//         }
-
-//         // Next check implicit zero balance
-//         if (checkpoints[account][0].fromBlock > blockNumber) {
-//             return 0;
-//         }
-
-//         uint32 lower = 0;
-//         uint32 upper = nCheckpoints - 1;
-//         while (upper > lower) {
-//             uint32 center = upper - (upper - lower) / 2; // ceil, avoiding overflow
-//             Checkpoint memory cp = checkpoints[account][center];
-//             if (cp.fromBlock == blockNumber) {
-//                 return cp.votes;
-//             } else if (cp.fromBlock < blockNumber) {
-//                 lower = center;
-//             } else {
-//                 upper = center - 1;
-//             }
-//         }
-//         return checkpoints[account][lower].votes;
-//     }
-
-//     function _delegate(address delegator, address delegatee)
-//         internal
-//     {
-//         address currentDelegate = _delegates[delegator];
-//         uint256 delegatorBalance = _xx0Balances[delegator]; // balance of underlying Xx0s (not scaled);
-//         _delegates[delegator] = delegatee;
-
-//         emit DelegateChanged(delegator, currentDelegate, delegatee);
-
-//         _moveDelegates(currentDelegate, delegatee, delegatorBalance);
-//     }
-
-//     function _moveDelegates(address srcRep, address dstRep, uint256 amount) internal {
-//         if (srcRep != dstRep && amount > 0) {
-//             if (srcRep != address(0)) {
-//                 // decrease old representative
-//                 uint32 srcRepNum = numCheckpoints[srcRep];
-//                 uint256 srcRepOld = srcRepNum > 0 ? checkpoints[srcRep][srcRepNum - 1].votes : 0;
-//                 uint256 srcRepNew = srcRepOld.sub(amount);
-//                 _writeCheckpoint(srcRep, srcRepNum, srcRepOld, srcRepNew);
-//             }
-
-//             if (dstRep != address(0)) {
-//                 // increase new representative
-//                 uint32 dstRepNum = numCheckpoints[dstRep];
-//                 uint256 dstRepOld = dstRepNum > 0 ? checkpoints[dstRep][dstRepNum - 1].votes : 0;
-//                 uint256 dstRepNew = dstRepOld.add(amount);
-//                 _writeCheckpoint(dstRep, dstRepNum, dstRepOld, dstRepNew);
-//             }
-//         }
-//     }
-
-//     function _writeCheckpoint(
-//         address delegatee,
-//         uint32 nCheckpoints,
-//         uint256 oldVotes,
-//         uint256 newVotes
-//     )
-//         internal
-//     {
-//         uint32 blockNumber = safe32(block.number, "Xx0::_writeCheckpoint: block number exceeds 32 bits");
-
-//         if (nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber) {
-//             checkpoints[delegatee][nCheckpoints - 1].votes = newVotes;
-//         } else {
-//             checkpoints[delegatee][nCheckpoints] = Checkpoint(blockNumber, newVotes);
-//             numCheckpoints[delegatee] = nCheckpoints + 1;
-//         }
-
-//         emit DelegateVotesChanged(delegatee, oldVotes, newVotes);
-//     }
-
-//     function safe32(uint n, string memory errorMessage) internal pure returns (uint32) {
-//         require(n < 2**32, errorMessage);
-//         return uint32(n);
-//     }
-
-//     function getChainId() internal pure returns (uint) {
-//         uint256 chainId;
-//         assembly { chainId := chainid() }
-//         return chainId;
-//     }
-// }
 
 /**
  * @dev Collection of functions related to the address type
@@ -871,7 +622,7 @@ library SafeERC20 {
     }
 }
 
-contract Xx0Token is Xx0TokenInterface {
+contract XusdToken is XusdTokenInterface {
     // Modifiers
     modifier onlyGov() {
         require(msg.sender == gov);
@@ -907,7 +658,7 @@ contract Xx0Token is Xx0TokenInterface {
     )
         public
     {
-        require(xx0ScalingFactor == 0, "already initialized");
+        require(xusdScalingFactor == 0, "already initialized");
         name = name_;
         symbol = symbol_;
         decimals = decimals_;
@@ -935,8 +686,8 @@ contract Xx0Token is Xx0TokenInterface {
         view
         returns (uint256)
     {
-        // scaling factor can only go up to 2**256-1 = initSupply * xx0ScalingFactor
-        // this is used to check if xx0ScalingFactor will be too high to compute balances when rebasing.
+        // scaling factor can only go up to 2**256-1 = initSupply * xusdScalingFactor
+        // this is used to check if xusdScalingFactor will be too high to compute balances when rebasing.
         return uint256(-1) / initSupply;
     }
 
@@ -956,25 +707,25 @@ contract Xx0Token is Xx0TokenInterface {
     function _burn(address to, uint256 amount)
         internal
     {
-      // decrease initSupply
-        initSupply = initSupply.sub(amount);
-
-        // get external value
-        uint256 scaledAmount = _xx0ToFragment(amount);
-
         // decrease totalSupply
-        totalSupply = totalSupply.sub(scaledAmount);
+        totalSupply = totalSupply.sub(amount);
 
-        // make sure the burn didnt push maxScalingFactor too low
-        require(xx0ScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
+        // get underlying value
+        uint256 xusdValue = _fragmentToXusd(amount);
+
+        // decrease initSupply
+        initSupply = initSupply.sub(xusdValue);
+
+        // make sure the mint didnt push maxScalingFactor too low
+        require(xusdScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
 
         // subtract balance
-        _xx0Balances[to] = _xx0Balances[to].sub(amount);
+        _xusdBalances[to] = _xusdBalances[to].sub(xusdValue);
 
         // add delegates to the minter
-        // _moveDelegates(address(0), _delegates[to], amount);
-        emit Burn(to, scaledAmount);
-        emit Transfer(to, address(0), scaledAmount);
+        // _moveDelegates(address(0), _delegates[to], xusdValue);
+        emit Burn(to, amount);
+        emit Transfer(to, address(0), amount);
     }
 
     /**
@@ -993,49 +744,24 @@ contract Xx0Token is Xx0TokenInterface {
     function _mint(address to, uint256 amount)
         internal
     {
-    //   if (msg.sender == migrator) {
-        // migrator directly uses v2 balance for the amount
+        // increase totalSupply
+        totalSupply = totalSupply.add(amount);
+
+        // get underlying value
+        uint256 xusdValue = _fragmentToXusd(amount);
 
         // increase initSupply
-        initSupply = initSupply.add(amount);
-
-        // get external value
-        uint256 scaledAmount = _xx0ToFragment(amount);
-
-        // increase totalSupply
-        totalSupply = totalSupply.add(scaledAmount);
+        initSupply = initSupply.add(xusdValue);
 
         // make sure the mint didnt push maxScalingFactor too low
-        require(xx0ScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
+        require(xusdScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
 
         // add balance
-        _xx0Balances[to] = _xx0Balances[to].add(amount);
+        _xusdBalances[to] = _xusdBalances[to].add(xusdValue);
 
         // add delegates to the minter
-        // _moveDelegates(address(0), _delegates[to], amount);
-        emit Mint(to, scaledAmount);
-        emit Transfer(address(0), to, scaledAmount);
-    //   } else {
-    //     // increase totalSupply
-    //     totalSupply = totalSupply.add(amount);
-
-    //     // get underlying value
-    //     uint256 xx0Value = _fragmentToXx0(amount);
-
-    //     // increase initSupply
-    //     initSupply = initSupply.add(xx0Value);
-
-    //     // make sure the mint didnt push maxScalingFactor too low
-    //     require(xx0ScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
-
-    //     // add balance
-    //     _xx0Balances[to] = _xx0Balances[to].add(xx0Value);
-
-    //     // add delegates to the minter
-    //     // _moveDelegates(address(0), _delegates[to], xx0Value);
-    //     emit Mint(to, amount);
-    //     emit Transfer(address(0), to, amount);
-    //   }
+        emit Mint(to, amount);
+        emit Transfer(address(0), to, amount);
     }
 
     /**
@@ -1059,16 +785,16 @@ contract Xx0Token is Xx0TokenInterface {
         initSupply = initSupply.add(amount);
 
         // get external value
-        uint256 scaledAmount = _xx0ToFragment(amount);
+        uint256 scaledAmount = _xusdToFragment(amount);
 
         // increase totalSupply
         totalSupply = totalSupply.add(scaledAmount);
 
         // make sure the mint didnt push maxScalingFactor too low
-        require(xx0ScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
+        require(xusdScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
 
         // add balance
-        _xx0Balances[to] = _xx0Balances[to].add(amount);
+        _xusdBalances[to] = _xusdBalances[to].add(amount);
 
         // add delegates to the minter
         // _moveDelegates(address(0), _delegates[to], amount);
@@ -1089,11 +815,11 @@ contract Xx0Token is Xx0TokenInterface {
         returns (bool)
     {
         // sub from balance of sender
-        _xx0Balances[msg.sender] = _xx0Balances[msg.sender].sub(value);
+        _xusdBalances[msg.sender] = _xusdBalances[msg.sender].sub(value);
 
         // add to balance of receiver
-        _xx0Balances[to] = _xx0Balances[to].add(value);
-        emit Transfer(msg.sender, to, _xx0ToFragment(value));
+        _xusdBalances[to] = _xusdBalances[to].add(value);
+        emit Transfer(msg.sender, to, _xusdToFragment(value));
 
         // _moveDelegates(_delegates[msg.sender], _delegates[to], value);
         return true;
@@ -1112,22 +838,22 @@ contract Xx0Token is Xx0TokenInterface {
         validRecipient(to)
         returns (bool)
     {
-        // underlying balance is stored in xx0s, so divide by current scaling factor
+        // underlying balance is stored in xusds, so divide by current scaling factor
 
         // note, this means as scaling factor grows, dust will be untransferrable.
-        // minimum transfer value == xx0ScalingFactor / 1e24;
+        // minimum transfer value == xusdScalingFactor / 1e24;
 
         // get amount in underlying
-        uint256 xx0Value = _fragmentToXx0(value);
+        uint256 xusdValue = _fragmentToXusd(value);
 
         // sub from balance of sender
-        _xx0Balances[msg.sender] = _xx0Balances[msg.sender].sub(xx0Value);
+        _xusdBalances[msg.sender] = _xusdBalances[msg.sender].sub(xusdValue);
 
         // add to balance of receiver
-        _xx0Balances[to] = _xx0Balances[to].add(xx0Value);
+        _xusdBalances[to] = _xusdBalances[to].add(xusdValue);
         emit Transfer(msg.sender, to, value);
 
-        // _moveDelegates(_delegates[msg.sender], _delegates[to], xx0Value);
+        // _moveDelegates(_delegates[msg.sender], _delegates[to], xusdValue);
         return true;
     }
 
@@ -1145,15 +871,15 @@ contract Xx0Token is Xx0TokenInterface {
         // decrease allowance
         _allowedFragments[from][msg.sender] = _allowedFragments[from][msg.sender].sub(value);
 
-        // get value in xx0s
-        uint256 xx0Value = _fragmentToXx0(value);
+        // get value in xusds
+        uint256 xusdValue = _fragmentToXusd(value);
 
         // sub from from
-        _xx0Balances[from] = _xx0Balances[from].sub(xx0Value);
-        _xx0Balances[to] = _xx0Balances[to].add(xx0Value);
+        _xusdBalances[from] = _xusdBalances[from].sub(xusdValue);
+        _xusdBalances[to] = _xusdBalances[to].add(xusdValue);
         emit Transfer(from, to, value);
 
-        // _moveDelegates(_delegates[from], _delegates[to], xx0Value);
+        // _moveDelegates(_delegates[from], _delegates[to], xusdValue);
         return true;
     }
 
@@ -1166,7 +892,7 @@ contract Xx0Token is Xx0TokenInterface {
       view
       returns (uint256)
     {
-      return _xx0ToFragment(_xx0Balances[who]);
+      return _xusdToFragment(_xusdBalances[who]);
     }
 
     /** @notice Currently returns the internal storage amount
@@ -1178,7 +904,7 @@ contract Xx0Token is Xx0TokenInterface {
       view
       returns (uint256)
     {
-      return _xx0Balances[who];
+      return _xusdBalances[who];
     }
 
     /**
@@ -1265,7 +991,7 @@ contract Xx0Token is Xx0TokenInterface {
     )
         external
     {
-        require(now <= deadline, "Xx0/permit-expired");
+        require(now <= deadline, "Xusd/permit-expired");
 
         bytes32 digest =
             keccak256(
@@ -1285,13 +1011,17 @@ contract Xx0Token is Xx0TokenInterface {
                 )
             );
 
-        require(owner != address(0), "Xx0/invalid-address-0");
-        require(owner == ecrecover(digest, v, r, s), "Xx0/invalid-permit");
+        require(owner != address(0), "Xusd/invalid-address-0");
+        require(owner == ecrecover(digest, v, r, s), "Xusd/invalid-permit");
         _allowedFragments[owner][spender] = value;
         emit Approval(owner, spender, value);
     }
 
     /* - Governance Functions - */
+
+    function _setX0(IERC20 x0_) external onlyGov{
+        x0 = x0_;
+    }
 
     /** @notice sets the rebaser
      * @param rebaser_ The address of the rebaser contract to use for authentication.
@@ -1304,18 +1034,6 @@ contract Xx0Token is Xx0TokenInterface {
         rebaser = rebaser_;
         emit NewRebaser(oldRebaser, rebaser_);
     }
-
-    // /** @notice sets the migrator
-    //  * @param migrator_ The address of the migrator contract to use for authentication.
-    //  */
-    // function _setMigrator(address migrator_)
-    //     external
-    //     onlyGov
-    // {
-    //     address oldMigrator = migrator_;
-    //     migrator = migrator_;
-    //     emit NewMigrator(oldMigrator, migrator_);
-    // }
 
     /** @notice sets the incentivizer
      * @param incentivizer_ The address of the rebaser contract to use for authentication.
@@ -1353,16 +1071,6 @@ contract Xx0Token is Xx0TokenInterface {
         pendingGov = address(0);
         emit NewGov(oldGov, gov);
     }
-
-    // function assignSelfDelegate(address nonvotingContract)
-    //     external
-    //     onlyGov
-    // {
-    //     address delegate = _delegates[nonvotingContract];
-    //     require( delegate == address(0), "!address(0)" );
-    //     // assigns delegate to self only
-    //     _delegate(nonvotingContract, nonvotingContract);
-    // }
 
     /* - Extras - */
 
@@ -1405,64 +1113,64 @@ contract Xx0Token is Xx0TokenInterface {
     {
         // no change
         if (indexDelta == 0) {
-          emit Rebase(epoch, xx0ScalingFactor, xx0ScalingFactor);
+          emit Rebase(epoch, xusdScalingFactor, xusdScalingFactor);
           return totalSupply;
         }
 
         // for events
-        uint256 prevXx0ScalingFactor = xx0ScalingFactor;
+        uint256 prevXusdScalingFactor = xusdScalingFactor;
 
 
         if (!positive) {
             // negative rebase, decrease scaling factor
-            xx0ScalingFactor = xx0ScalingFactor.mul(BASE.sub(indexDelta)).div(BASE);
+            xusdScalingFactor = xusdScalingFactor.mul(BASE.sub(indexDelta)).div(BASE);
         } else {
             // positive reabse, increase scaling factor
-            uint256 newScalingFactor = xx0ScalingFactor.mul(BASE.add(indexDelta)).div(BASE);
+            uint256 newScalingFactor = xusdScalingFactor.mul(BASE.add(indexDelta)).div(BASE);
             if (newScalingFactor < _maxScalingFactor()) {
-                xx0ScalingFactor = newScalingFactor;
+                xusdScalingFactor = newScalingFactor;
             } else {
-                xx0ScalingFactor = _maxScalingFactor();
+                xusdScalingFactor = _maxScalingFactor();
             }
         }
 
         // update total supply, correctly
-        totalSupply = _xx0ToFragment(initSupply);
+        totalSupply = _xusdToFragment(initSupply);
 
-        emit Rebase(epoch, prevXx0ScalingFactor, xx0ScalingFactor);
+        emit Rebase(epoch, prevXusdScalingFactor, xusdScalingFactor);
         return totalSupply;
     }
 
-    function xx0ToFragment(uint256 xx0)
+    function xusdToFragment(uint256 xusd)
         external
         view
         returns (uint256)
     {
-        return _xx0ToFragment(xx0);
+        return _xusdToFragment(xusd);
     }
 
-    function fragmentToXx0(uint256 value)
+    function fragmentToXusd(uint256 value)
         external
         view
         returns (uint256)
     {
-        return _fragmentToXx0(value);
+        return _fragmentToXusd(value);
     }
 
-    function _xx0ToFragment(uint256 xx0)
+    function _xusdToFragment(uint256 xusd)
         internal
         view
         returns (uint256)
     {
-        return xx0.mul(xx0ScalingFactor).div(internalDecimals);
+        return xusd.mul(xusdScalingFactor).div(internalDecimals);
     }
 
-    function _fragmentToXx0(uint256 value)
+    function _fragmentToXusd(uint256 value)
         internal
         view
         returns (uint256)
     {
-        return value.mul(internalDecimals).div(xx0ScalingFactor);
+        return value.mul(internalDecimals).div(xusdScalingFactor);
     }
 
     // Rescue tokens
@@ -1481,7 +1189,7 @@ contract Xx0Token is Xx0TokenInterface {
     }
 }
 
-contract Xx0Logic3 is Xx0Token {
+contract XusdLogic3 is XusdToken {
     /**
      * @notice Initialize the new money market
      * @param name_ ERC-20 name of this token
@@ -1500,11 +1208,11 @@ contract Xx0Logic3 is Xx0Token {
     {
         super.initialize(name_, symbol_, decimals_);
 
-        xx0ScalingFactor = BASE;
-        initSupply = _fragmentToXx0(initTotalSupply_);
+        xusdScalingFactor = BASE;
+        initSupply = _fragmentToXusd(initTotalSupply_);
         totalSupply = initTotalSupply_;
         x0 = x0_;
-        _xx0Balances[initial_owner] = initSupply;
+        _xusdBalances[initial_owner] = initSupply;
 
         DOMAIN_SEPARATOR = keccak256(
             abi.encode(
@@ -1530,14 +1238,14 @@ Redistribution and use in source and binary forms, with or without modification,
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
 
-contract Xx0DelegationStorage {
+contract XusdDelegationStorage {
     /**
      * @notice Implementation address for this contract
      */
     address public implementation;
 }
 
-contract Xx0DelegatorInterface is Xx0DelegationStorage {
+contract XusdDelegatorInterface is XusdDelegationStorage {
     /**
      * @notice Emitted when implementation is changed
      */
@@ -1552,7 +1260,7 @@ contract Xx0DelegatorInterface is Xx0DelegationStorage {
     function _setImplementation(address implementation_, bool allowResign, bytes memory becomeImplementationData) public;
 }
 
-contract Xx0DelegateInterface is Xx0DelegationStorage {
+contract XusdDelegateInterface is XusdDelegationStorage {
     /**
      * @notice Called by the delegator on a delegate to initialize it for duty
      * @dev Should revert if any issues arise which make it unfit for delegation
@@ -1567,7 +1275,7 @@ contract Xx0DelegateInterface is Xx0DelegationStorage {
 }
 
 
-contract Xx0Delegate3 is Xx0Logic3, Xx0DelegateInterface {
+contract XusdDelegate3 is XusdLogic3, XusdDelegateInterface {
     /**
      * @notice Construct an empty delegate
      */

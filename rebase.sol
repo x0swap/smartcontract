@@ -608,8 +608,8 @@ library UniswapV2OracleLibrary {
     }
 }
 
-// Storage for a Xx0 token
-contract Xx0TokenStorage {
+// Storage for a xUSD token
+contract XusdTokenStorage {
 
     using SafeMath for uint256;
 
@@ -651,12 +651,12 @@ contract Xx0TokenStorage {
     address public rebaser;
 
     /**
-     * @notice Incentivizer address of Xx0 protocol
+     * @notice Incentivizer address of xUSD protocol
      */
     address public incentivizer;
 
     /**
-     * @notice Total supply of Xx0s
+     * @notice Total supply of xUSDs
      */
     uint256 public totalSupply;
 
@@ -673,9 +673,9 @@ contract Xx0TokenStorage {
     /**
      * @notice Scaling factor that adjusts everyone's balances
      */
-    uint256 public xx0ScalingFactor;
+    uint256 public xusdScalingFactor;
 
-    mapping (address => uint256) internal _xx0Balances;
+    mapping (address => uint256) internal _xusdBalances;
 
     mapping (address => mapping (address => uint256)) internal _allowedFragments;
 
@@ -687,8 +687,6 @@ contract Xx0TokenStorage {
     
     uint256 public initSupply;
 
-
-    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
     bytes32 public DOMAIN_SEPARATOR;
 }
@@ -705,11 +703,11 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-contract Xx0TokenInterface is Xx0TokenStorage {
+contract XusdTokenInterface is XusdTokenStorage {
     /**
      * @notice Event emitted when tokens are rebased
      */
-    event Rebase(uint256 epoch, uint256 prevXx0ScalingFactor, uint256 newXx0ScalingFactor);
+    event Rebase(uint256 epoch, uint256 prevXusdScalingFactor, uint256 newXusdScalingFactor);
 
     /*** Gov Events ***/
 
@@ -766,8 +764,8 @@ contract Xx0TokenInterface is Xx0TokenStorage {
     function increaseAllowance(address spender, uint256 addedValue) external returns (bool);
     function decreaseAllowance(address spender, uint256 subtractedValue) external returns (bool);
     function maxScalingFactor() external view returns (uint256);
-    function xx0ToFragment(uint256 xx0) external view returns (uint256);
-    function fragmentToXx0(uint256 value) external view returns (uint256);
+    function xusdToFragment(uint256 xusd) external view returns (uint256);
+    function fragmentToXusd(uint256 value) external view returns (uint256);
 
     /* - Permissioned/Governance functions - */
     function mint(address to, uint256 amount) external returns (bool);
@@ -816,7 +814,7 @@ interface AggregatorV3Interface {
 
 }
 
-contract Xx0Rebaser2 {
+contract XusdRebaser2 {
 
     using SafeMath for uint256;
 
@@ -832,7 +830,7 @@ contract Xx0Rebaser2 {
     }
 
     struct UniVars {
-      uint256 xx0ToUni;
+      uint256 xusdToUni;
       uint256 amountFromReserves;
       uint256 mintToReserves;
     }
@@ -863,7 +861,7 @@ contract Xx0Rebaser2 {
     /**
      * @notice Sets the reserve contract
      */
-    event TreasuryIncreased(uint256 reservesAdded, uint256 xx0Sold, uint256 xx0FromReserves, uint256 xx0ToReserves);
+    event TreasuryIncreased(uint256 reservesAdded, uint256 xusdSold, uint256 xusdFromReserves, uint256 xusdToReserves);
 
 
     /**
@@ -887,9 +885,6 @@ contract Xx0Rebaser2 {
 
     /// @notice Peg target
     uint256 public targetRate;
-
-    /// @notice Percent of rebase that goes to minting for treasury building
-    uint256 public rebaseMintPerc;
 
     // If the current exchange rate is within this fractional distance from the target, no supply
     // update is performed. Fixed point number--same format as the rate.
@@ -923,13 +918,13 @@ contract Xx0Rebaser2 {
     /// @notice Time of TWAP initialization
     uint256 public timeOfTWAPInit;
 
-    /// @notice Xx0 token address
-    address public xx0Address;
+    /// @notice Xusd token address
+    address public xusdAddress;
 
     /// @notice reserve token
     address public reserveToken;
 
-    /// @notice pair for reserveToken <> Xx0
+    /// @notice pair for reserveToken <> Xusd
     address public trade_pair;
 
     /// @notice list of uniswap pairs to sync
@@ -942,7 +937,7 @@ contract Xx0Rebaser2 {
     uint32 public blockTimestampLast;
 
     /// @notice last TWAP cumulative price;
-    uint256 public priceCumulativeLastXx0ETH;
+    uint256 public priceCumulativeLastXusdETH;
 
     // Max slippage factor when buying reserve token. Magic number based on
     // the fact that uniswap is a constant product. Therefore,
@@ -951,7 +946,7 @@ contract Xx0Rebaser2 {
     /// @notice the maximum slippage factor when buying reserve token
     uint256 public maxSlippageFactor;
 
-    /// @notice Whether or not this token is first in uniswap Xx0<>Reserve pair
+    /// @notice Whether or not this token is first in uniswap Xusd<>Reserve pair
     bool public isToken0;
 
     uint256 public constant BASE = 10**18;
@@ -963,7 +958,7 @@ contract Xx0Rebaser2 {
     AggregatorV3Interface public priceFeed;
 
     constructor(
-        address xx0Address_,
+        address xusdAddress_,
         address reserveToken_,
         address factory,
         AggregatorV3Interface priceFeed_
@@ -973,16 +968,16 @@ contract Xx0Rebaser2 {
           minRebaseTimeIntervalSec = 12 hours;
           rebaseWindowOffsetSec = 28800; // 8am/8pm UTC rebases
 
-          (address token0, address token1) = sortTokens(xx0Address_, reserveToken_);
+          (address token0, address token1) = sortTokens(xusdAddress_, reserveToken_);
 
           // used for interacting with uniswap
-          if (token0 == xx0Address_) {
+          if (token0 == xusdAddress_) {
               isToken0 = true;
           } else {
               isToken0 = false;
           }
 
-          // uniswap Xx0<>Reserve pair
+          // uniswap Xusd<>Reserve pair
           trade_pair = pairForSushi(factory, token0, token1);
 
           // MATIC/USD chainlink PriceFeed
@@ -991,17 +986,14 @@ contract Xx0Rebaser2 {
           // Reserve token is not mutable. Must deploy a new rebaser to update it
           reserveToken = reserveToken_;
 
-          xx0Address = xx0Address_;
+          xusdAddress = xusdAddress_;
 
           // target 5% slippage
           // ~2.6%
           maxSlippageFactor = 2597836 * 10**10; //5409258 * 10**10;
 
-          // 1 cent =  $0.001
-          targetRate = BASE.div(100);
-
-          // 10%
-          rebaseMintPerc = 10**17;
+          // $1
+          targetRate = BASE;
 
           // 5%
           deviationThreshold = 5 * 10**16;
@@ -1013,7 +1005,6 @@ contract Xx0Rebaser2 {
           gov = msg.sender;
 
     }
-
 
     function removeUniPair(uint256 index) public onlyGov {
         if (index >= uniSyncPairs.length) return;
@@ -1096,21 +1087,6 @@ contract Xx0Rebaser2 {
         emit NewMaxSlippageFactor(oldSlippageFactor, maxSlippageFactor_);
     }
 
-    /**
-    @notice Updates rebase mint percentage
-    @param rebaseMintPerc_ the new rebase mint percentage
-    *
-    */
-    function setRebaseMintPerc(uint256 rebaseMintPerc_)
-        public
-        onlyGov
-    {
-        require(rebaseMintPerc_ < MAX_MINT_PERC_PARAM);
-        uint256 oldPerc = rebaseMintPerc;
-        rebaseMintPerc = rebaseMintPerc_;
-        emit NewRebaseMintPercent(oldPerc, rebaseMintPerc_);
-    }
-
     /** @notice sets the pendingGov
      * @param pendingGov_ The address of the rebaser contract to use for authentication.
      */
@@ -1148,7 +1124,7 @@ contract Xx0Rebaser2 {
 
         require(blockTimestamp > 0, "no trades");
         blockTimestampLast = blockTimestamp;
-        priceCumulativeLastXx0ETH = priceCumulative;
+        priceCumulativeLastXusdETH = priceCumulative;
         timeOfTWAPInit = blockTimestamp;
     }
 
@@ -1198,17 +1174,17 @@ contract Xx0Rebaser2 {
 
         uint256 indexDelta = offPegPerc;
     
-        Xx0TokenInterface xx0 = Xx0TokenInterface(xx0Address);
+        XusdTokenInterface xusd = XusdTokenInterface(xusdAddress);
 
         if (positive) {
-            require(xx0.xx0ScalingFactor().mul(BASE.add(indexDelta)).div(BASE) < xx0.maxScalingFactor(), "new scaling factor will be too big");
+            require(xusd.xusdScalingFactor().mul(BASE.add(indexDelta)).div(BASE) < xusd.maxScalingFactor(), "new scaling factor will be too big");
         }
 
         uint256 mintAmount;
         
         // rebase
         // ignore returned var
-        xx0.rebase(epoch, indexDelta, positive);
+        xusd.rebase(epoch, indexDelta, positive);
 
         // perform actions after rebase
         emit MintAmount(mintAmount);
@@ -1251,7 +1227,7 @@ contract Xx0Rebaser2 {
 
         // update balancer pairs
         for (uint256 i = 0; i < balGulpPairs.length; i++) {
-            BAL(balGulpPairs[i]).gulp(xx0Address);
+            BAL(balGulpPairs[i]).gulp(xusdAddress);
         }
 
         // call any extra functions
@@ -1282,6 +1258,40 @@ contract Xx0Rebaser2 {
         return uint256(price);
     }
 
+    function getCurrentPrice()
+        public view
+        returns (uint256)
+    {
+        (uint priceCumulative, uint32 blockTimestamp) =
+           UniswapV2OracleLibrary.currentCumulativePrices(trade_pair, isToken0);
+
+        uint32 timeElapsed = blockTimestamp - blockTimestampLast; // overflow is desired
+
+       // no period check as is done in isRebaseWindow
+
+       uint256 priceAverageXusdETH = uint256(uint224((priceCumulative - priceCumulativeLastXusdETH) / timeElapsed));
+
+       // BASE is on order of 1e18, which takes 2^60 bits
+       // multiplication will revert if priceAverage > 2^196
+       // (which it can because it overflows intentially)
+       uint256 XusdETHprice;
+       uint256 ETHprice;
+       if (priceAverageXusdETH > uint192(-1)) {
+          // eat loss of precision
+          // effectively: (x / 2**112) * 1e18
+          XusdETHprice = (priceAverageXusdETH >> 112) * BASE;
+       } else {
+         // cant overflow
+         // effectively: (x * 1e18 / 2**112)
+         XusdETHprice = (priceAverageXusdETH * BASE) >> 112;
+       }
+
+       ETHprice = getLatestPrice().div(10**8);
+       ETHprice = 1 / ETHprice;
+
+       return XusdETHprice.mul(ETHprice);
+    }
+
     function getPrice()
         internal
         returns (uint256)
@@ -1294,30 +1304,31 @@ contract Xx0Rebaser2 {
         // no period check as is done in isRebaseWindow
 
         // overflow is desired
-        uint256 priceAverageXx0ETH = uint256(uint224((priceCumulative - priceCumulativeLastXx0ETH) / timeElapsed));
+        uint256 priceAverageXusdETH = uint256(uint224((priceCumulative - priceCumulativeLastXusdETH) / timeElapsed));
 
-        priceCumulativeLastXx0ETH = priceCumulative;
+        priceCumulativeLastXusdETH = priceCumulative;
 
         blockTimestampLast = blockTimestamp;
 
         // BASE is on order of 1e18, which takes 2^60 bits
         // multiplication will revert if priceAverage > 2^196
         // (which it can because it overflows intentially)
-        uint256 Xx0ETHprice;
+        uint256 XusdETHprice;
         uint256 ETHprice;
-        if (priceAverageXx0ETH > uint192(-1)) {
+        if (priceAverageXusdETH > uint192(-1)) {
            // eat loss of precision
            // effectively: (x / 2**112) * 1e18
-           Xx0ETHprice = (priceAverageXx0ETH >> 112) * BASE;
+           XusdETHprice = (priceAverageXusdETH >> 112) * BASE;
         } else {
             // cant overflow
             // effectively: (x * 1e18 / 2**112)
-            Xx0ETHprice = (priceAverageXx0ETH * BASE) >> 112;
+            XusdETHprice = (priceAverageXusdETH * BASE) >> 112;
         }
 
-        ETHprice = 1 / getPrice();
+        ETHprice = getLatestPrice().div(10**8);
+        ETHprice = 1 / ETHprice;
 
-        return Xx0ETHprice.mul(ETHprice).div(10**8);
+        return XusdETHprice.mul(ETHprice);
     }
 
     /**
