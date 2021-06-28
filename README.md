@@ -16,7 +16,7 @@
 | Farming | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][farming-matic] |
 | DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic] |
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
-| X0Bar | [0x512807096Dbd897c930D570472C517097d59a383][x0bar-matic] |
+| X0Bar (proxy to delegate.sol) | [0x512807096Dbd897c930D570472C517097d59a383][x0bar-matic] |
 | Rebaser | [0xA5D040C1C06FE0706D2b7e3ca1653c509F72B8e0][rebaser-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
 
