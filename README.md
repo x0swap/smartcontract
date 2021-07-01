@@ -17,6 +17,7 @@
 | DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic] |
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | X0Bar (proxy to delegate.sol) | [0x512807096Dbd897c930D570472C517097d59a383][x0bar-matic] |
+| Delegate | [0xeA00ffCC7736524cc3412B7f210bed544E7c3C91][delegate-matic] |
 | Rebaser | [0xA5D040C1C06FE0706D2b7e3ca1653c509F72B8e0][rebaser-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
 
@@ -55,6 +56,7 @@
    [router-matic]: <https://polygonscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
    [farming-matic]: <https://polygonscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
    [x0bar-matic]: <https://polygonscan.com/address/0x512807096Dbd897c930D570472C517097d59a383>
+   [delegate-matic]: <https://polygonscan.com/address/0xeA00ffCC7736524cc3412B7f210bed544E7c3C91>
    [rebaser-matic]: <https://polygonscan.com/address/0xA5D040C1C06FE0706D2b7e3ca1653c509F72B8e0>
    [x0maker-matic]: <https://polygonscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
