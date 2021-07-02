@@ -1287,7 +1287,6 @@ contract XusdRebaser2 {
        }
 
        ETHprice = getLatestPrice().div(10**8);
-       ETHprice = 1 / ETHprice;
 
        return XusdETHprice.mul(ETHprice);
     }
@@ -1326,7 +1325,6 @@ contract XusdRebaser2 {
         }
 
         ETHprice = getLatestPrice().div(10**8);
-        ETHprice = 1 / ETHprice;
 
         return XusdETHprice.mul(ETHprice);
     }
