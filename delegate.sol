@@ -716,9 +716,6 @@ contract XusdToken is XusdTokenInterface {
         // decrease initSupply
         initSupply = initSupply.sub(xusdValue);
 
-        // make sure the mint didnt push maxScalingFactor too low
-        require(xusdScalingFactor <= _maxScalingFactor(), "max scaling factor too low");
-
         // subtract balance
         _xusdBalances[to] = _xusdBalances[to].sub(xusdValue);
 
