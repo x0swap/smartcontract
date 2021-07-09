@@ -18,7 +18,7 @@
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
 | X0Bar (proxy to delegate.sol) | [0x36d932350ae22f26C5BB83aD9EeFed019b546122][x0bar-matic] |
 | Delegate | [0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299][delegate-matic] |
-| Rebaser | [0x2CA355169C7e81d7D1A1560dc236E9B9EDe7F651][rebaser-matic] |
+| Rebaser | [0xf809b4A510558e4219FD318f1eC9CF520fd79bec][rebaser-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
 
 ## xDai Addresses
@@ -57,7 +57,7 @@
    [farming-matic]: <https://polygonscan.com/address/0xCfd49c64f4BeC6FB76C0298265610d8f0B2eF460>
    [x0bar-matic]: <https://polygonscan.com/address/0x36d932350ae22f26C5BB83aD9EeFed019b546122>
    [delegate-matic]: <https://polygonscan.com/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
-   [rebaser-matic]: <https://polygonscan.com/address/0x2CA355169C7e81d7D1A1560dc236E9B9EDe7F651>
+   [rebaser-matic]: <https://polygonscan.com/address/0xf809b4A510558e4219FD318f1eC9CF520fd79bec>
    [x0maker-matic]: <https://polygonscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
    [devfundlock-matic]: <https://polygonscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
