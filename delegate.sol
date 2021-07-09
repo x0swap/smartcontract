@@ -1205,6 +1205,7 @@ contract XusdLogic3 is XusdToken {
         string memory symbol_,
         uint8 decimals_,
         IERC20 x0_,
+        address farming_,
         address initial_owner,
         uint256 initTotalSupply_
     )
@@ -1216,6 +1217,7 @@ contract XusdLogic3 is XusdToken {
         initSupply = _fragmentToXusd(initTotalSupply_);
         totalSupply = initTotalSupply_;
         x0 = x0_;
+        farming = farming_;
         _xusdBalances[initial_owner] = initSupply;
 
         DOMAIN_SEPARATOR = keccak256(

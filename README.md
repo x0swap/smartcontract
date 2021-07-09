@@ -13,11 +13,11 @@
 | PairCodeHash | 0xbe5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64 |
 | Factory | [0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c][factory-matic] |
 | Router | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][router-matic] |
-| Farming | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][farming-matic] |
+| Farming | [0xCfd49c64f4BeC6FB76C0298265610d8f0B2eF460][farming-matic] |
 | DevFundLock | [0x988Ca1508277a1b092F8D815652723EE486eb07a][devfundlock-matic] |
 | X0Maker | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][x0maker-matic] |
-| X0Bar (proxy to delegate.sol) | [0x512807096Dbd897c930D570472C517097d59a383][x0bar-matic] |
-| Delegate | [0xeA00ffCC7736524cc3412B7f210bed544E7c3C91][delegate-matic] |
+| X0Bar (proxy to delegate.sol) | [0x36d932350ae22f26C5BB83aD9EeFed019b546122][x0bar-matic] |
+| Delegate | [0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299][delegate-matic] |
 | Rebaser | [0x2CA355169C7e81d7D1A1560dc236E9B9EDe7F651][rebaser-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
 
@@ -54,9 +54,9 @@
 
    [factory-matic]: <https://polygonscan.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
    [router-matic]: <https://polygonscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
-   [farming-matic]: <https://polygonscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
-   [x0bar-matic]: <https://polygonscan.com/address/0x512807096Dbd897c930D570472C517097d59a383>
-   [delegate-matic]: <https://polygonscan.com/address/0xeA00ffCC7736524cc3412B7f210bed544E7c3C91>
+   [farming-matic]: <https://polygonscan.com/address/0xCfd49c64f4BeC6FB76C0298265610d8f0B2eF460>
+   [x0bar-matic]: <https://polygonscan.com/address/0x36d932350ae22f26C5BB83aD9EeFed019b546122>
+   [delegate-matic]: <https://polygonscan.com/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
    [rebaser-matic]: <https://polygonscan.com/address/0x2CA355169C7e81d7D1A1560dc236E9B9EDe7F651>
    [x0maker-matic]: <https://polygonscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
