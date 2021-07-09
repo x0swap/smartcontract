@@ -228,6 +228,8 @@ contract XusdTokenStorage {
 
     IERC20 public x0;
 
+    address public farming;
+
     /**
      * @notice EIP-20 token name for this token
      */
@@ -382,6 +384,7 @@ contract XusdTokenInterface is XusdTokenStorage {
     function leave(uint256 share) external;
     function rebase(uint256 epoch, uint256 indexDelta, bool positive) external returns (uint256);
     function _setX0(IERC20 x0_) external;
+    function _setFarming(address farming_) external;
     function _setRebaser(address rebaser_) external;
     function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
@@ -426,6 +429,7 @@ contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
         string memory symbol_,
         uint8 decimals_,
         IERC20 x0_,
+        address farming_,
         uint256 initTotalSupply_,
         address implementation_,
         bytes memory becomeImplementationData
@@ -441,11 +445,12 @@ contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
         delegateTo(
             implementation_,
             abi.encodeWithSignature(
-                "initialize(string,string,uint8,address,address,uint256)",
+                "initialize(string,string,uint8,address,address,address,uint256)",
                 name_,
                 symbol_,
                 decimals_,
                 x0_,
+                farming_,
                 msg.sender,
                 initTotalSupply_
             )
@@ -722,6 +727,11 @@ contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
 
     function _setX0(IERC20 x0_) external {
         x0_;
+        delegateAndReturn();
+    }
+
+    function _setFarming(address farming_) external {
+        farming_;
         delegateAndReturn();
     }
 

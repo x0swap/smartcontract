@@ -255,6 +255,8 @@ contract XusdTokenStorage {
 
     IERC20 public x0;
 
+    address public farming;
+
     /**
      * @notice EIP-20 token name for this token
      */
@@ -398,6 +400,7 @@ contract XusdTokenInterface is XusdTokenStorage {
     function leave(uint256 share) external;
     function rebase(uint256 epoch, uint256 indexDelta, bool positive) external returns (uint256);
     function _setX0(IERC20 x0_) external;
+    function _setFarming(address farming_) external;
     function _setRebaser(address rebaser_) external;
     function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
@@ -638,8 +641,8 @@ contract XusdToken is XusdTokenInterface {
         require(
             msg.sender == rebaser
             || msg.sender == gov
-            || msg.sender == incentivizer,
-            // || msg.sender == migrator,
+            || msg.sender == incentivizer
+            || msg.sender == farming,
             "not minter"
         );
         _;
@@ -1018,6 +1021,10 @@ contract XusdToken is XusdTokenInterface {
 
     function _setX0(IERC20 x0_) external onlyGov{
         x0 = x0_;
+    }
+
+    function _setFarming(address farming_) external onlyGov{
+        farming = farming_;
     }
 
     /** @notice sets the rebaser

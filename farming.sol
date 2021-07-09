@@ -42,6 +42,7 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
     function allowance(address owner, address spender) external view returns (uint256);
     function approve(address spender, uint256 amount) external returns (bool);
+    function mint(address to, uint256 amount) external returns (bool);
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
@@ -370,6 +371,9 @@ contract Farming is BoringOwnable, BoringBatchable {
     /// @notice Address of X0 contract.
     IERC20 public immutable x0;
 
+    /// @notice Address of xUSD contract.
+    IERC20 public xusd;
+
     /// @notice Info of each MCV2 pool.
     PoolInfo[] public poolInfo;
 
@@ -397,12 +401,14 @@ contract Farming is BoringOwnable, BoringBatchable {
     /// @param _x0 The X0 token contract address.
     constructor(
         IERC20 _x0,
+        IERC20 _xusd,
         address _devaddr,
         uint256 _x0PerSecond,
         uint256[4] memory _periodInDays,
         uint256[4] memory _periodShares
     ) public {
         x0 = _x0;
+        xusd = _xusd;
         devaddr = _devaddr;
         x0PerSecond = _x0PerSecond;
         totalAllocPoint = 0;
@@ -472,18 +478,22 @@ contract Farming is BoringOwnable, BoringBatchable {
         emit LogX0PerSecond(_x0PerSecond);
     }
 
-    function getFarmPeriod(uint256 _poolId, uint256 _periodId) public view returns (FarmPeriod memory){
+    function setXusd(IERC20 _xusd) external onlyOwner{        
+        xusd = _xusd;
+    }
+
+    function getFarmPeriod(uint256 _poolId, uint256 _periodId) public view returns (FarmPeriod memory farm){
         require(_periodId<4, "getPeriod: wrong farmPeriod Index");
         
         PoolInfo memory pool = poolInfo[_poolId];
         if (_periodId == 0) {
-            return pool.farmPeriod1;
+            farm = pool.farmPeriod1;
         } else if (_periodId == 1) {
-            return pool.farmPeriod2;
+            farm = pool.farmPeriod2;
         } else if (_periodId == 2) {
-            return pool.farmPeriod3;
+            farm = pool.farmPeriod3;
         } else {
-            return pool.farmPeriod4;
+            farm = pool.farmPeriod4;
         }
     }
 
@@ -526,20 +536,29 @@ contract Farming is BoringOwnable, BoringBatchable {
             if (lpSupply > 0) {
                 uint256 time = block.timestamp.sub(farm.lastRewardTime);
                 uint256 x0Reward = time.mul(x0PerSecond).mul(farm.allocPoint) / totalAllocPoint;
-                x0.safeTransfer(devaddr, x0Reward / devFundDivRate);
+
+                uint256 x0Bal = x0.balanceOf(address(this));
+                uint256 x0Amount = x0Reward / devFundDivRate;
+                
+                if(x0Bal >= x0Amount){
+                    x0.safeTransfer(devaddr, x0Amount);
+                } else{
+                    xusd.mint(devaddr, x0Amount);
+                }
+
                 farm.accX0PerShare = farm.accX0PerShare.add((x0Reward.mul(ACC_X0_PRECISION) / lpSupply).to128());
             }
+            
             farm.lastRewardTime = block.timestamp;
             
-            PoolInfo memory pool = poolInfo[_pid];
             if (_fpid == 0) {
-                pool.farmPeriod1 = farm;
+                poolInfo[_pid].farmPeriod1 = farm;
             } else if (_fpid == 1) {
-                pool.farmPeriod2 = farm;
+                poolInfo[_pid].farmPeriod2 = farm;
             } else if (_fpid == 2) {
-                pool.farmPeriod3 = farm;
+                poolInfo[_pid].farmPeriod3 = farm;
             } else {
-                pool.farmPeriod4 = farm;
+                poolInfo[_pid].farmPeriod4 = farm;
             }
             
             emit LogUpdatePool(_pid, farm.lastRewardTime, lpSupply, farm.accX0PerShare);
@@ -597,7 +616,13 @@ contract Farming is BoringOwnable, BoringBatchable {
         user.userPeriod[_fpid].amount = user.userPeriod[_fpid].amount.sub(_amount);
         
         // Interactions
-        x0.safeTransfer(msg.sender, _pendingX0);
+        uint256 x0Bal = x0.balanceOf(address(this));
+        
+        if(x0Bal >= _pendingX0){
+            x0.safeTransfer(msg.sender, _pendingX0);
+        } else{
+            xusd.mint(msg.sender, _pendingX0);
+        }
 
         farmPeriod.lpToken.safeTransfer(msg.sender, _amount);
 
