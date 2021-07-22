@@ -281,14 +281,6 @@ library SignedSafeMath {
     }
 }
 
-// pragma solidity 0.6.12;
-
-// interface IRewarder {
-//     using BoringERC20 for IERC20;
-//     function onX0Reward(uint256 pid, address user, address recipient, uint256 x0Amount, uint256 newLpAmount) external;
-//     function pendingTokens(uint256 pid, address user, uint256 x0Amount) external view returns (IERC20[] memory, uint256[] memory);
-// }
-
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
 
@@ -543,7 +535,14 @@ contract Farming is BoringOwnable, BoringBatchable {
                 if(x0Bal >= x0Amount){
                     x0.safeTransfer(devaddr, x0Amount);
                 } else{
-                    xusd.mint(devaddr, x0Amount);
+                    uint256 totalX0 = x0.balanceOf(address(xusd));
+                    uint256 totalShares = xusd.totalSupply();
+                    if (totalShares == 0 || totalX0 == 0) {
+                        xusd.mint(msg.sender, x0Amount);
+                    } else {
+                        uint256 what = x0Amount.mul(totalShares) / totalX0;
+                        xusd.mint(msg.sender, what);
+                    }
                 }
 
                 farm.accX0PerShare = farm.accX0PerShare.add((x0Reward.mul(ACC_X0_PRECISION) / lpSupply).to128());
@@ -597,9 +596,43 @@ contract Farming is BoringOwnable, BoringBatchable {
         emit Deposit(msg.sender, _pid, _fpid, _amount, user.userPeriod[_fpid].depositTime, user.userPeriod[_fpid].withdrawTime);
     }
     
-    /// @notice Withdraw LP tokens from MCV2 and harvest proceeds for transaction sender to `to`.
+    /// @notice Harvest proceeds for transaction sender to sender.
+    /// @param _pid The index of the pool. See `poolInfo`.
+    /// @param _fpid The index of the farming pool.
+    function harvest(uint256 _pid, uint256 _fpid) public {
+        FarmPeriod memory farmPeriod = updatePool(_pid, _fpid);
+        UserInfo storage user = userInfo[_pid][msg.sender];
+        
+        int256 accumulatedX0 = int256(user.userPeriod[_fpid].amount.mul(farmPeriod.accX0PerShare) / ACC_X0_PRECISION);
+        uint256 _pendingX0 = accumulatedX0.sub(user.userPeriod[_fpid].rewardDebt).toUInt256();
+
+        // Effects
+        user.userPeriod[_fpid].rewardDebt = accumulatedX0;
+
+        // Interactions
+        if (_pendingX0 != 0) {
+            uint256 x0Bal = x0.balanceOf(address(this));
+        
+            if(x0Bal >= _pendingX0){
+                x0.safeTransfer(msg.sender, _pendingX0);
+            } else{
+                uint256 totalX0 = x0.balanceOf(address(xusd));
+                uint256 totalShares = xusd.totalSupply();
+                if (totalShares == 0 || totalX0 == 0) {
+                    xusd.mint(msg.sender, _pendingX0);
+                } else {
+                    uint256 what = _pendingX0.mul(totalShares) / totalX0;
+                    xusd.mint(msg.sender, what);
+                }
+            }
+        }
+
+        emit Harvest(msg.sender, _pid, _fpid, _pendingX0);
+    }
+    
+    /// @notice Withdraw LP tokens from MCV2 and harvest proceeds for transaction sender to sender.
     /// @param _pid The index of the pool.
-    /// @param _pid The index of the farming pool.
+    /// @param _fpid The index of the farming pool.
     /// @param _amount LP token amount to withdraw.
     function withdraw(uint256 _pid, uint256 _fpid, uint256 _amount) public {
         FarmPeriod memory farmPeriod = updatePool(_pid, _fpid);
@@ -621,7 +654,14 @@ contract Farming is BoringOwnable, BoringBatchable {
         if(x0Bal >= _pendingX0){
             x0.safeTransfer(msg.sender, _pendingX0);
         } else{
-            xusd.mint(msg.sender, _pendingX0);
+            uint256 totalX0 = x0.balanceOf(address(xusd));
+            uint256 totalShares = xusd.totalSupply();
+            if (totalShares == 0 || totalX0 == 0) {
+                xusd.mint(msg.sender, _pendingX0);
+            } else {
+                uint256 what = _pendingX0.mul(totalShares) / totalX0;
+                xusd.mint(msg.sender, what);
+            }
         }
 
         farmPeriod.lpToken.safeTransfer(msg.sender, _amount);
@@ -632,7 +672,7 @@ contract Farming is BoringOwnable, BoringBatchable {
 
     /// @notice Withdraw without caring about rewards. EMERGENCY ONLY.
     /// @param _pid The index of the pool.
-    /// @param _pid The index of the farming pool.
+    /// @param _fpid The index of the farming pool.
     function emergencyWithdraw(uint256 _pid, uint256 _fpid) public {
         FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
         UserInfo storage user = userInfo[_pid][msg.sender];
@@ -644,6 +684,29 @@ contract Farming is BoringOwnable, BoringBatchable {
         // Note: transfer can fail or succeed if `amount` is zero.
         farmPeriod.lpToken.safeTransfer(msg.sender, amount);
         emit EmergencyWithdraw(msg.sender, _pid, _fpid, amount);
+    }
+    
+    /// @notice Withdraw without caring about rewards. EMERGENCY ADMIN ONLY.
+    /// @param _pid The index of the pool.
+    /// @param _fpid The index of the farming pool.
+    /// @param _target The user target address.
+    function emergencyWithdrawAdmin(uint256 _pid, uint256 _fpid, address _target) public onlyOwner{
+        FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
+        UserInfo storage user = userInfo[_pid][_target];
+
+        uint256 amount = user.userPeriod[_fpid].amount;
+        user.userPeriod[_fpid].amount = 0;
+        user.userPeriod[_fpid].rewardDebt = 0;
+
+        // Note: transfer can fail or succeed if `amount` is zero.
+        farmPeriod.lpToken.safeTransfer(_target, amount);
+        emit EmergencyWithdraw(_target, _pid, _fpid, amount);
+    }
+    
+    /// @notice Withdraw all X0 Balance to owner. EMERGENCY ADMIN ONLY.
+    function emergencyX0() public onlyOwner{
+        uint256 x0Bal = x0.balanceOf(address(this));
+        x0.safeTransfer(msg.sender, x0Bal);
     }
 
     function setDev(address _dev) public onlyOwner {
