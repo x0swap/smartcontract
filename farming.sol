@@ -538,10 +538,10 @@ contract Farming is BoringOwnable, BoringBatchable {
                     uint256 totalX0 = x0.balanceOf(address(xusd));
                     uint256 totalShares = xusd.totalSupply();
                     if (totalShares == 0 || totalX0 == 0) {
-                        xusd.mint(msg.sender, x0Amount);
+                        xusd.mint(devaddr, x0Amount);
                     } else {
                         uint256 what = x0Amount.mul(totalShares) / totalX0;
-                        xusd.mint(msg.sender, what);
+                        xusd.mint(devaddr, what);
                     }
                 }
 
@@ -703,10 +703,10 @@ contract Farming is BoringOwnable, BoringBatchable {
         emit EmergencyWithdraw(_target, _pid, _fpid, amount);
     }
     
-    /// @notice Withdraw all X0 Balance to owner. EMERGENCY ADMIN ONLY.
-    function emergencyX0() public onlyOwner{
+    /// @notice Transfer all X0 balances to new farming address. EMERGENCY ADMIN ONLY.
+    function emergencyX0(address _newFarming) public onlyOwner{
         uint256 x0Bal = x0.balanceOf(address(this));
-        x0.safeTransfer(msg.sender, x0Bal);
+        x0.safeTransfer(_newFarming, x0Bal);
     }
 
     function setDev(address _dev) public onlyOwner {
