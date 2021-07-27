@@ -45,7 +45,7 @@
 | PairCodeHash | 0xfdb1c36bba7683d13fe7c15116c5d39b04be12d465bba53264212c5dd77f16cc |
 | Factory | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][factory-bsc] |
 | Router | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][router-bsc] |
-| Farming | [0x4a56C1115F65D5501Cc6ae236D0bFF48D492eb71][farming-bsc] |
+| Farming | [0x2220aee6bEB00Eb42411247075919a9B00286B9b][farming-bsc] |
 | DevFundLock | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][devfundlock-bsc] |
 | Timelock | [0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44][timelock-bsc] |
 | GnosisSafeProxy | [0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A][gnosis-bsc] |
@@ -53,7 +53,7 @@
 | X0Bar (proxy to delegate.sol) | [0x988Ca1508277a1b092F8D815652723EE486eb07a][x0bar-bsc] |
 | Delegate | [0x2E1D346B72c2F5b1AAE340ac2b1b023Ca26e1D66][delegate-bsc] |
 | Rebaser | [0xe9663B6b219bDc0A64F120B522BCaC26e5a551EF][rebaser-bsc] |
-| X0Token(bridged) | [0x98DD8638E7AD820f5d9e702cE0caC2961eEa96fb][x0Token-bsc] |
+| X0Token(bridged) | [0x698Ce7460C81f4b898CC11a98c03122245fa5f69][x0Token-bsc] |
 
 
    [x0Token-mainnet]: <https://etherscan.io/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
@@ -82,7 +82,7 @@
    
    [factory-bsc]: <https://bscscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
    [router-bsc]: <https://bscscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
-   [farming-bsc]: <https://bscscan.com/address/0x4a56C1115F65D5501Cc6ae236D0bFF48D492eb71>
+   [farming-bsc]: <https://bscscan.com/address/0x2220aee6bEB00Eb42411247075919a9B00286B9b>
    [timelock-bsc]: <https://bscscan.com/address/0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44>
    [gnosis-bsc]: <https://bscscan.com/address/0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A>
    [x0bar-bsc]: <https://bscscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
@@ -90,4 +90,4 @@
    [rebaser-bsc]: <https://bscscan.com/address/0xe9663B6b219bDc0A64F120B522BCaC26e5a551EF>
    [x0maker-bsc]: <https://bscscan.com/address/0xC4a6f945C3DC9b0cA39e34440ca3d13D80fCf08c>
    [devfundlock-bsc]: <https://bscscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
-   [x0Token-bsc]: <https://bscscan.com/address/0x98DD8638E7AD820f5d9e702cE0caC2961eEa96fb>
+   [x0Token-bsc]: <https://bscscan.com/address/0x698Ce7460C81f4b898CC11a98c03122245fa5f69>
