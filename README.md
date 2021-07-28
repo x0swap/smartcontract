@@ -44,7 +44,7 @@
 | ------ | ------ |
 | PairCodeHash | 0xfdb1c36bba7683d13fe7c15116c5d39b04be12d465bba53264212c5dd77f16cc |
 | Factory | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][factory-bsc] |
-| Router | [0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB][router-bsc] |
+| Router | [0x0c8f65cA17fC3F01B8bE973f26aCd0463A034A99][router-bsc] |
 | Farming | [0x2220aee6bEB00Eb42411247075919a9B00286B9b][farming-bsc] |
 | DevFundLock | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][devfundlock-bsc] |
 | Timelock | [0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44][timelock-bsc] |
@@ -81,7 +81,7 @@
    [devfundlock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
    
    [factory-bsc]: <https://bscscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
-   [router-bsc]: <https://bscscan.com/address/0xFcc6cCaD4EdE5911640f37f0cBb81aa2e906f3dB>
+   [router-bsc]: <https://bscscan.com/address/0x0c8f65cA17fC3F01B8bE973f26aCd0463A034A99>
    [farming-bsc]: <https://bscscan.com/address/0x2220aee6bEB00Eb42411247075919a9B00286B9b>
    [timelock-bsc]: <https://bscscan.com/address/0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44>
    [gnosis-bsc]: <https://bscscan.com/address/0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A>
