@@ -18,7 +18,7 @@
 | X0Maker | [0xada6990A2e5AeddD46138Bb94274c339593Ec6AB][x0maker-matic] |
 | X0Bar (proxy to delegate.sol) | [0x36d932350ae22f26C5BB83aD9EeFed019b546122][x0bar-matic] |
 | Delegate | [0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299][delegate-matic] |
-| Rebaser | [0xf809b4A510558e4219FD318f1eC9CF520fd79bec][rebaser-matic] |
+| Rebaser | [0x6CEaee663635264b079cF34D9eD3726f16f81422][rebaser-matic] |
 | X0Token(bridged) | [0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35][x0Token-matic] |
 
 ## xDai Addresses
@@ -35,7 +35,7 @@
 | X0Maker | [0x26F2CB91fC99e061B2f3F074d108647026011Bf7][x0maker-xdai] |
 | X0Bar (proxy to delegate.sol) | [0xd4e40BB7a81B8B9e41B7C122948fB6444a90c5BA][x0bar-xdai] |
 | Delegate | [0x1e373161381609313d6897df85295C8b946398b8][delegate-xdai] |
-| Rebaser | [0x0800155fA1331B6A5bF6EA5fB28456eF3f4ceAdE][rebaser-xdai] |
+| Rebaser | [0x8bc6CE7e8B24C441f0847826A7ad612659F795ba][rebaser-xdai] |
 | X0Token(bridged) | [0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19][x0Token-xdai] |
 
 ## BSC Addresses
@@ -52,7 +52,7 @@
 | X0Maker | [0xC4a6f945C3DC9b0cA39e34440ca3d13D80fCf08c][x0maker-bsc] |
 | X0Bar (proxy to delegate.sol) | [0x988Ca1508277a1b092F8D815652723EE486eb07a][x0bar-bsc] |
 | Delegate | [0x2E1D346B72c2F5b1AAE340ac2b1b023Ca26e1D66][delegate-bsc] |
-| Rebaser | [0xe9663B6b219bDc0A64F120B522BCaC26e5a551EF][rebaser-bsc] |
+| Rebaser | [0x4234796a8Cd608F20B93C1e98fD67aCC051b4C35][rebaser-bsc] |
 | X0Token(bridged) | [0x698Ce7460C81f4b898CC11a98c03122245fa5f69][x0Token-bsc] |
 
 
@@ -63,7 +63,7 @@
    [farming-matic]: <https://polygonscan.com/address/0x821Ad3B857D35dF93B02612f793DE32885487655>
    [x0bar-matic]: <https://polygonscan.com/address/0x36d932350ae22f26C5BB83aD9EeFed019b546122>
    [delegate-matic]: <https://polygonscan.com/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
-   [rebaser-matic]: <https://polygonscan.com/address/0xf809b4A510558e4219FD318f1eC9CF520fd79bec>
+   [rebaser-matic]: <https://polygonscan.com/address/0x6CEaee663635264b079cF34D9eD3726f16f81422>
    [x0maker-matic]: <https://polygonscan.com/address/0xada6990A2e5AeddD46138Bb94274c339593Ec6AB>
    [x0Token-matic]: <https://polygonscan.com/address/0x4B18430244DdA1f2ACe94f4Aef960A6975ca9e35>
    [devfundlock-matic]: <https://polygonscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
@@ -75,7 +75,7 @@
    [gnosis-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
    [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd4e40BB7a81B8B9e41B7C122948fB6444a90c5BA>
    [delegate-xdai]: <https://blockscout.com/xdai/mainnet/address/0x1e373161381609313d6897df85295C8b946398b8>
-   [rebaser-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0800155fA1331B6A5bF6EA5fB28456eF3f4ceAdE>
+   [rebaser-xdai]: <https://blockscout.com/xdai/mainnet/address/0x8bc6CE7e8B24C441f0847826A7ad612659F795ba>
    [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x26F2CB91fC99e061B2f3F074d108647026011Bf7>
    [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19>
    [devfundlock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
@@ -87,7 +87,7 @@
    [gnosis-bsc]: <https://bscscan.com/address/0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A>
    [x0bar-bsc]: <https://bscscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
    [delegate-bsc]: <https://bscscan.com/address/0x2E1D346B72c2F5b1AAE340ac2b1b023Ca26e1D66>
-   [rebaser-bsc]: <https://bscscan.com/address/0xe9663B6b219bDc0A64F120B522BCaC26e5a551EF>
+   [rebaser-bsc]: <https://bscscan.com/address/0x4234796a8Cd608F20B93C1e98fD67aCC051b4C35>
    [x0maker-bsc]: <https://bscscan.com/address/0xC4a6f945C3DC9b0cA39e34440ca3d13D80fCf08c>
    [devfundlock-bsc]: <https://bscscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
    [x0Token-bsc]: <https://bscscan.com/address/0x698Ce7460C81f4b898CC11a98c03122245fa5f69>
