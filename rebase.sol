@@ -891,18 +891,8 @@ contract XusdRebaser2 {
     // (ie) abs(rate - targetRate) / targetRate < deviationThreshold, then no supply change.
     uint256 public deviationThreshold;
 
-    /// @notice More than this much time must pass between rebase operations.
-    uint256 public minRebaseTimeIntervalSec;
-
     /// @notice Block timestamp of last rebase operation
     uint256 public lastRebaseTimestampSec;
-
-    /// @notice The rebase window begins this many seconds into the minRebaseTimeInterval period.
-    // For example if minRebaseTimeInterval is 24hrs, it represents the time of day in seconds.
-    uint256 public rebaseWindowOffsetSec;
-
-    /// @notice The length of the time window where a rebase operation is allowed to execute, in seconds.
-    uint256 public rebaseWindowLengthSec;
 
     /// @notice The number of rebase cycles since inception
     uint256 public epoch;
@@ -911,9 +901,6 @@ contract XusdRebaser2 {
     // deployment time
     ///@notice boolean showing rebase activation status
     bool public rebasingActive;
-
-    /// @notice delays rebasing activation to facilitate liquidity
-    uint256 public constant rebaseDelay = 12 hours;
 
     /// @notice Time of TWAP initialization
     uint256 public timeOfTWAPInit;
@@ -965,9 +952,6 @@ contract XusdRebaser2 {
     )
         public
     {
-          minRebaseTimeIntervalSec = 12 hours;
-          rebaseWindowOffsetSec = 28800; // 8am/8pm UTC rebases
-
           (address token0, address token1) = sortTokens(xusdAddress_, reserveToken_);
 
           // used for interacting with uniswap
@@ -997,9 +981,6 @@ contract XusdRebaser2 {
 
           // 5%
           deviationThreshold = 5 * 10**16;
-
-          // 60 minutes
-          rebaseWindowLengthSec = 60 * 60;
 
           // Changed in deployment scripts to facilitate protocol initiation
           gov = msg.sender;
@@ -1135,8 +1116,6 @@ contract XusdRebaser2 {
         public
     {
         require(timeOfTWAPInit > 0, "twap wasnt intitiated, call init_twap()");
-        // cannot enable prior to end of rebaseDelay
-        require(now >= timeOfTWAPInit + rebaseDelay, "!end_delay");
 
         rebasingActive = true;
     }
@@ -1154,15 +1133,9 @@ contract XusdRebaser2 {
     {
         // EOA only or gov
         require(msg.sender == tx.origin, "!EOA");
-        // ensure rebasing at correct time
-        _inRebaseWindow();
-
-        // This comparison also ensures there is no reentrancy.
-        require(lastRebaseTimestampSec.add(minRebaseTimeIntervalSec) < now, "Reentrancy");
 
         // Snap the rebase time to the start of this window.
-        lastRebaseTimestampSec = now.sub(
-            now.mod(minRebaseTimeIntervalSec)).add(rebaseWindowOffsetSec);
+        lastRebaseTimestampSec = now;
 
         epoch = epoch.add(1);
 
@@ -1358,53 +1331,6 @@ contract XusdRebaser2 {
     }
 
     /**
-     * @notice Sets the parameters which control the timing and frequency of
-     *         rebase operations.
-     *         a) the minimum time period that must elapse between rebase cycles.
-     *         b) the rebase window offset parameter.
-     *         c) the rebase window length parameter.
-     * @param minRebaseTimeIntervalSec_ More than this much time must pass between rebase
-     *        operations, in seconds.
-     * @param rebaseWindowOffsetSec_ The number of seconds from the beginning of
-              the rebase interval, where the rebase window begins.
-     * @param rebaseWindowLengthSec_ The length of the rebase window in seconds.
-     */
-    function setRebaseTimingParameters(
-        uint256 minRebaseTimeIntervalSec_,
-        uint256 rebaseWindowOffsetSec_,
-        uint256 rebaseWindowLengthSec_)
-        external
-        onlyGov
-    {
-        require(minRebaseTimeIntervalSec_ > 0);
-        require(rebaseWindowOffsetSec_ < minRebaseTimeIntervalSec_);
-        require(rebaseWindowOffsetSec_ + rebaseWindowLengthSec_ < minRebaseTimeIntervalSec_);
-        minRebaseTimeIntervalSec = minRebaseTimeIntervalSec_;
-        rebaseWindowOffsetSec = rebaseWindowOffsetSec_;
-        rebaseWindowLengthSec = rebaseWindowLengthSec_;
-    }
-
-    /**
-     * @return If the latest block timestamp is within the rebase time window it, returns true.
-     *         Otherwise, returns false.
-     */
-    function inRebaseWindow() public view returns (bool) {
-
-        // rebasing is delayed until there is a liquid market
-        _inRebaseWindow();
-        return true;
-    }
-
-    function _inRebaseWindow() internal view {
-
-        // rebasing is delayed until there is a liquid market
-        require(rebasingActive, "rebasing not active");
-
-        require(now.mod(minRebaseTimeIntervalSec) >= rebaseWindowOffsetSec, "too early");
-        require(now.mod(minRebaseTimeIntervalSec) < (rebaseWindowOffsetSec.add(rebaseWindowLengthSec)), "too late");
-    }
-
-    /**
      * @return Computes in % how far off market is from peg
      */
     function computeOffPegPerc(uint256 rate)
@@ -1475,7 +1401,7 @@ contract XusdRebaser2 {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'be5f45c18decae5efcc7ed7cd2084d9ec19d11a86d2566a8ee202504b65b9a64' // init code hash
+                hex'fdb1c36bba7683d13fe7c15116c5d39b04be12d465bba53264212c5dd77f16cc' // init code hash
             ))));
     }
 
@@ -1510,7 +1436,6 @@ contract XusdRebaser2 {
             data: data
         }));
     }
-
 
     /**
      * @param index Index of transaction to remove.
