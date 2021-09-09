@@ -205,7 +205,7 @@ contract X0Maker is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
-    IUniswapV2Factory public factory;
+    IUniswapV2Factory public immutable factory;
     
     address public bar;
     
@@ -236,11 +236,6 @@ contract X0Maker is Ownable {
         bar = _bar;
         x0 = _x0;
         weth = _weth;
-    }
-
-    function setFactory(IUniswapV2Factory _factory) public onlyOwner {
-        require(address(_factory) != address(0), "Can not be address(0)");
-        factory = _factory;
     }
     
     function setX0(address _x0) public onlyOwner {
