@@ -1149,10 +1149,6 @@ contract XusdRebaser2 {
     
         XusdTokenInterface xusd = XusdTokenInterface(xusdAddress);
 
-        if (positive) {
-            require(xusd.xusdScalingFactor().mul(BASE.add(indexDelta)).div(BASE) < xusd.maxScalingFactor(), "new scaling factor will be too big");
-        }
-
         uint256 mintAmount;
         
         // rebase
