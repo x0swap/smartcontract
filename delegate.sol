@@ -1102,7 +1102,7 @@ contract XusdToken is XusdTokenInterface {
             // negative rebase, decrease scaling factor
             xusdScalingFactor = xusdScalingFactor.mul(BASE.sub(indexDelta)).div(BASE);
         } else {
-            // positive reabse, increase scaling factor
+            // positive rebase, increase scaling factor
             uint256 newScalingFactor = xusdScalingFactor.mul(BASE.add(indexDelta)).div(BASE);
             if (newScalingFactor < _maxScalingFactor()) {
                 xusdScalingFactor = newScalingFactor;
