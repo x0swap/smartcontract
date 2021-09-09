@@ -702,6 +702,12 @@ contract Farming is BoringOwnable, BoringBatchable {
     
     // * Additional functions separate from the original MC contract *
     function config(uint256[4] memory _periodInDays,  uint256[4] memory _periodShares) public onlyOwner {
+        uint totalPeriodShares = 0;
+        for(uint256 i=0; i<4; ++i){
+            totalPeriodShares += _periodShares[i];    
+        }
+        require(totalPeriodShares == 100, "Total Period Shares must 100");
+
         massUpdatePools();
         periodInDays = _periodInDays;
         periodShares = _periodShares;
