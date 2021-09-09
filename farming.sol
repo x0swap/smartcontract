@@ -399,6 +399,17 @@ contract Farming is BoringOwnable, BoringBatchable {
         uint256[4] memory _periodInDays,
         uint256[4] memory _periodShares
     ) public {
+        require(address(_x0) != address(0)
+                && address(_xusd) != address(0)
+                && _devaddr != address(0),
+                "Can not be address(0)");
+
+        uint totalPeriodShares = 0;
+        for(uint256 i=0; i<4; ++i){
+            totalPeriodShares += _periodShares[i];    
+        }
+        require(totalPeriodShares == 100, "Total Period Shares must be 100");
+
         x0 = _x0;
         xusd = _xusd;
         devaddr = _devaddr;
@@ -599,7 +610,7 @@ contract Farming is BoringOwnable, BoringBatchable {
 
         farmPeriod.lpToken.safeTransferFrom(msg.sender, address(this), _amount);
         user.userPeriod[_fpid].depositTime = block.timestamp;
-        user.userPeriod[_fpid].withdrawTime = user.userPeriod[_fpid].depositTime + periodInSeconds[_fpid];
+        user.userPeriod[_fpid].withdrawTime = user.userPeriod[_fpid].depositTime.add(periodInSeconds[_fpid]);
 
         emit Deposit(msg.sender, _pid, _fpid, _amount, user.userPeriod[_fpid].depositTime, user.userPeriod[_fpid].withdrawTime);
     }
@@ -707,7 +718,7 @@ contract Farming is BoringOwnable, BoringBatchable {
         for(uint256 i=0; i<4; ++i){
             totalPeriodShares += _periodShares[i];    
         }
-        require(totalPeriodShares == 100, "Total Period Shares must 100");
+        require(totalPeriodShares == 100, "Total Period Shares must be 100");
 
         massUpdatePools();
         periodInDays = _periodInDays;
