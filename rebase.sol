@@ -1049,6 +1049,7 @@ contract XusdRebaser2 {
     }
 
     function setPriceFeed(AggregatorV3Interface priceFeed_) public onlyGov{
+        require(address(priceFeed_) != address(0), "Can not be address(0)");
         priceFeed = priceFeed_;
     }
 
@@ -1075,6 +1076,7 @@ contract XusdRebaser2 {
         external
         onlyGov
     {
+        require(address(pendingGov_) != address(0), "Can not be address(0)");
         address oldPendingGov = pendingGov;
         pendingGov = pendingGov_;
         emit NewPendingGov(oldPendingGov, pendingGov_);
