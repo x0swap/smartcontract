@@ -659,10 +659,12 @@ contract DevFundLock is Ownable {
     }
     
     function setDevAddr(address _devaddr) public onlyOwner {
+        require(_devaddr != address(0), "can not be address(0)");
         devaddr = _devaddr;
     }
     
     function setX0(IERC20 _x0) public onlyOwner {
+        require(address(_x0) != address(0), "can not be address(0)");
         x0 = _x0;
     }
     
