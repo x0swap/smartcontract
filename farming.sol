@@ -535,6 +535,7 @@ contract Farming is BoringOwnable, BoringBatchable {
                 if(x0Bal >= x0Amount){
                     x0.safeTransfer(devaddr, x0Amount);
                 } else{
+                    // formula calculation based on X0Bar contract enter function
                     uint256 totalX0 = x0.balanceOf(address(xusd));
                     uint256 totalShares = xusd.totalSupply();
                     if (totalShares == 0 || totalX0 == 0) {
@@ -616,6 +617,7 @@ contract Farming is BoringOwnable, BoringBatchable {
             if(x0Bal >= _pendingX0){
                 x0.safeTransfer(msg.sender, _pendingX0);
             } else{
+                // formula calculation based on X0Bar contract enter function
                 uint256 totalX0 = x0.balanceOf(address(xusd));
                 uint256 totalShares = xusd.totalSupply();
                 if (totalShares == 0 || totalX0 == 0) {
@@ -654,6 +656,7 @@ contract Farming is BoringOwnable, BoringBatchable {
         if(x0Bal >= _pendingX0){
             x0.safeTransfer(msg.sender, _pendingX0);
         } else{
+            // formula calculation based on X0Bar contract enter function
             uint256 totalX0 = x0.balanceOf(address(xusd));
             uint256 totalShares = xusd.totalSupply();
             if (totalShares == 0 || totalX0 == 0) {
