@@ -1071,7 +1071,7 @@ contract XusdRebaser2 {
     /** @notice sets the pendingGov
      * @param pendingGov_ The address of the rebaser contract to use for authentication.
      */
-    function _setPendingGov(address pendingGov_)
+    function setPendingGov(address pendingGov_)
         external
         onlyGov
     {
@@ -1084,7 +1084,7 @@ contract XusdRebaser2 {
     /** @notice lets msg.sender accept governance
      *
      */
-    function _acceptGov()
+    function acceptGov()
         external
     {
         require(msg.sender == pendingGov, "!pending");
@@ -1097,7 +1097,7 @@ contract XusdRebaser2 {
     /** @notice Initializes TWAP start point, starts countdown to first rebase
     *
     */
-    function init_twap()
+    function initTwap()
         public
     {
         require(timeOfTWAPInit == 0, "already activated");
@@ -1113,7 +1113,7 @@ contract XusdRebaser2 {
     /** @notice Activates rebasing
     *   @dev One way function, cannot be undone, callable by anyone
     */
-    function activate_rebasing()
+    function activateRebasing()
         public
     {
         require(timeOfTWAPInit > 0, "twap wasnt intitiated, call init_twap()");
