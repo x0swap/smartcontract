@@ -685,23 +685,6 @@ contract Farming is BoringOwnable, BoringBatchable {
         farmPeriod.lpToken.safeTransfer(msg.sender, amount);
         emit EmergencyWithdraw(msg.sender, _pid, _fpid, amount);
     }
-    
-    /// @notice Withdraw without caring about rewards. EMERGENCY ADMIN ONLY.
-    /// @param _pid The index of the pool.
-    /// @param _fpid The index of the farming pool.
-    /// @param _target The user target address.
-    function emergencyWithdrawAdmin(uint256 _pid, uint256 _fpid, address _target) public onlyOwner{
-        FarmPeriod memory farmPeriod = getFarmPeriod(_pid,_fpid);
-        UserInfo storage user = userInfo[_pid][_target];
-
-        uint256 amount = user.userPeriod[_fpid].amount;
-        user.userPeriod[_fpid].amount = 0;
-        user.userPeriod[_fpid].rewardDebt = 0;
-
-        // Note: transfer can fail or succeed if `amount` is zero.
-        farmPeriod.lpToken.safeTransfer(_target, amount);
-        emit EmergencyWithdraw(_target, _pid, _fpid, amount);
-    }
 
     function setDev(address _dev) public onlyOwner {
         require(devaddr != address(0), "setDev: invalid address");
