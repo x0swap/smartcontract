@@ -467,8 +467,15 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         if (msg.value > amountETH) TransferHelper.safeTransferETH(msg.sender, msg.value - amountETH);
     }
 
-    function addLiquiditySingleToken(address tokenA, address tokenB, uint amountTokenADesired, address to, uint deadline) external virtual payable ensure(deadline) returns (uint amountA, uint amountB, uint liquidity)
-	{
+    function addLiquiditySingleToken(
+        address tokenA,
+        address tokenB,
+        uint amountTokenADesired,
+        uint amountAMin,
+        uint amountBMin,
+        address to,
+        uint deadline
+    ) external virtual payable ensure(deadline) returns (uint amountA, uint amountB, uint liquidity){
 	    uint amountEthDesired;
 	    if(tokenA == WETH) {
 	        amountTokenADesired = 0;
@@ -501,7 +508,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     	
     	rightAmount = amountsOut[1];
 		
-		(amountA, amountB) = _addLiquidity(_path[0], _path[1], leftAmount, rightAmount, 1, 1);
+		(amountA, amountB) = _addLiquidity(_path[0], _path[1], leftAmount, rightAmount, amountAMin, amountBMin);
 		if(_path[0] == WETH){ IWETH(_path[0]).transfer(UniswapV2Library.pairFor(factory, _path[0], _path[1]), leftAmount);}
 		else{TransferHelper.safeTransfer(_path[0], UniswapV2Library.pairFor(factory, _path[0], _path[1]), leftAmount);}
         TransferHelper.safeTransfer(_path[1], UniswapV2Library.pairFor(factory, _path[0], _path[1]), rightAmount);
