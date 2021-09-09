@@ -702,12 +702,6 @@ contract Farming is BoringOwnable, BoringBatchable {
         farmPeriod.lpToken.safeTransfer(_target, amount);
         emit EmergencyWithdraw(_target, _pid, _fpid, amount);
     }
-    
-    /// @notice Transfer all X0 balances to new farming address. EMERGENCY ADMIN ONLY.
-    function emergencyX0(address _newFarming) public onlyOwner{
-        uint256 x0Bal = x0.balanceOf(address(this));
-        x0.safeTransfer(_newFarming, x0Bal);
-    }
 
     function setDev(address _dev) public onlyOwner {
         require(devaddr != address(0), "setDev: invalid address");
