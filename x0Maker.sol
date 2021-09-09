@@ -182,7 +182,7 @@ contract X0Maker is Ownable {
     
     address private x0;
     
-    address private weth;
+    address private immutable weth;
 
     mapping(address => address) internal _bridges;
 
