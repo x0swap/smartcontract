@@ -1053,7 +1053,6 @@ contract XusdRebaser2 {
         priceFeed = priceFeed_;
     }
 
-
     /**
     @notice Updates slippage factor
     @param maxSlippageFactor_ the new slippage factor
@@ -1063,7 +1062,7 @@ contract XusdRebaser2 {
         public
         onlyGov
     {
-        require(maxSlippageFactor_ < MAX_SLIPPAGE_PARAM);
+        require(maxSlippageFactor_ < MAX_SLIPPAGE_PARAM, "Exceed the max slippage");
         uint256 oldSlippageFactor = maxSlippageFactor;
         maxSlippageFactor = maxSlippageFactor_;
         emit NewMaxSlippageFactor(oldSlippageFactor, maxSlippageFactor_);
