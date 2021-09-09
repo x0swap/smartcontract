@@ -239,14 +239,17 @@ contract X0Maker is Ownable {
     }
 
     function setFactory(IUniswapV2Factory _factory) public onlyOwner {
+        require(address(_factory) != address(0), "Can not be address(0)");
         factory = _factory;
     }
     
     function setX0(address _x0) public onlyOwner {
+        require(address(_x0) != address(0), "Can not be address(0)");
         x0 = _x0;
     }
     
     function setBar(address _bar) public onlyOwner {
+        require(address(_bar) != address(0), "Can not be address(0)");
         bar = _bar;
     }
 
