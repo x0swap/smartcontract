@@ -502,8 +502,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     	
     	uint[] memory amountsOut = UniswapV2Library.getAmountsOut(factory, swapAmount, _path);
         require(amountsOut[amountsOut.length - 1] >= 1, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
-        if(_path[0] == WETH){ IWETH(_path[0]).transfer(UniswapV2Library.pairFor(factory, _path[0], _path[1]), amountsOut[0]);}
-        else{ TransferHelper.safeTransfer(_path[0], UniswapV2Library.pairFor(factory, _path[0], _path[1]), amountsOut[0]);}
+        TransferHelper.safeTransfer(_path[0], UniswapV2Library.pairFor(factory, _path[0], _path[1]), amountsOut[0]);
         _swap(amountsOut, _path, address(this));
     	
     	rightAmount = amountsOut[1];
