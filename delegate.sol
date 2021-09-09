@@ -785,7 +785,6 @@ contract XusdToken is XusdTokenInterface {
         _xusdBalances[to] = _xusdBalances[to].add(amount);
 
         // add delegates to the minter
-        // _moveDelegates(address(0), _delegates[to], amount);
         emit Mint(to, scaledAmount);
         emit Transfer(address(0), to, scaledAmount);
    
@@ -809,7 +808,6 @@ contract XusdToken is XusdTokenInterface {
         _xusdBalances[to] = _xusdBalances[to].add(value);
         emit Transfer(msg.sender, to, _xusdToFragment(value));
 
-        // _moveDelegates(_delegates[msg.sender], _delegates[to], value);
         return true;
     }
     
@@ -841,7 +839,6 @@ contract XusdToken is XusdTokenInterface {
         _xusdBalances[to] = _xusdBalances[to].add(xusdValue);
         emit Transfer(msg.sender, to, value);
 
-        // _moveDelegates(_delegates[msg.sender], _delegates[to], xusdValue);
         return true;
     }
 
