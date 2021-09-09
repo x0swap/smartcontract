@@ -717,7 +717,7 @@ contract Farming is BoringOwnable, BoringBatchable {
     }
 
     function setDevFundDivRate(uint256 _devFundDivRate) public onlyOwner {
-        require(_devFundDivRate > 0, "!devFundDivRate-0");
+        require(_devFundDivRate <= 100, "devFundDivRate must be less or equal to 100");
         devFundDivRate = _devFundDivRate;
     }
 }
