@@ -499,18 +499,19 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     	address[] memory _path = new address[](2);
     	_path[0] = tokenA;
     	_path[1] = tokenB;
-    	
+    	address pair = UniswapV2Library.pairFor(factory, _path[0], _path[1]);
+
     	uint[] memory amountsOut = UniswapV2Library.getAmountsOut(factory, swapAmount, _path);
         require(amountsOut[amountsOut.length - 1] >= 1, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
-        TransferHelper.safeTransfer(_path[0], UniswapV2Library.pairFor(factory, _path[0], _path[1]), amountsOut[0]);
+        TransferHelper.safeTransfer(_path[0], pair, amountsOut[0]);
         _swap(amountsOut, _path, address(this));
     	
     	rightAmount = amountsOut[1];
 		
 		(amountA, amountB) = _addLiquidity(_path[0], _path[1], leftAmount, rightAmount, amountAMin, amountBMin);
-		if(_path[0] == WETH){ IWETH(_path[0]).transfer(UniswapV2Library.pairFor(factory, _path[0], _path[1]), leftAmount);}
-		else{TransferHelper.safeTransfer(_path[0], UniswapV2Library.pairFor(factory, _path[0], _path[1]), leftAmount);}
-        TransferHelper.safeTransfer(_path[1], UniswapV2Library.pairFor(factory, _path[0], _path[1]), rightAmount);
+		if(_path[0] == WETH){ IWETH(_path[0]).transfer(pair, leftAmount);}
+		else{TransferHelper.safeTransfer(_path[0], pair, leftAmount);}
+        TransferHelper.safeTransfer(_path[1], pair, rightAmount);
 		}
 		liquidity = _addLiquiditySingleToken(tokenA, tokenB, to);
 	}
