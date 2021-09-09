@@ -664,25 +664,6 @@ contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
         delegateToViewAndReturn();
     }
 
-
-    /**
-     * @notice Rescues tokens and sends them to the `to` address
-     * @param token The address of the token
-     * @param to The address for which the tokens should be send
-     * @return Success
-     */
-    function rescueTokens(
-        address token,
-        address to,
-        uint256 amount
-    )
-        external
-        returns (bool)
-    {
-        token; to; amount; // Shh
-        delegateAndReturn();
-    }
-
     /**
      * @notice Get the token balance of the `owner`
      * @param owner The address of the account to query

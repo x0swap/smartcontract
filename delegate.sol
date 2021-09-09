@@ -1177,20 +1177,6 @@ contract XusdToken is XusdTokenInterface {
         return value.mul(internalDecimals).div(xusdScalingFactor);
     }
 
-    // Rescue tokens
-    function rescueTokens(
-        address token,
-        address to,
-        uint256 amount
-    )
-        external
-        onlyGov
-        returns (bool)
-    {
-        // transfer to
-        SafeERC20.safeTransfer(IERC20(token), to, amount);
-        return true;
-    }
 }
 
 contract XusdLogic3 is XusdToken {
