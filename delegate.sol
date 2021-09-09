@@ -1117,6 +1117,11 @@ contract XusdToken is XusdTokenInterface {
         // update total supply, correctly
         totalSupply = _xusdToFragment(initSupply);
 
+        if(positive){
+            emit Mint(address(this), xusdScalingFactor.sub(prevXusdScalingFactor));
+        }else{
+            emit Burn(address(0), prevXusdScalingFactor.sub(xusdScalingFactor));
+        }
         emit Rebase(epoch, prevXusdScalingFactor, xusdScalingFactor);
         return totalSupply;
     }
