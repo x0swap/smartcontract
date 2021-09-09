@@ -477,6 +477,7 @@ contract Farming is BoringOwnable, BoringBatchable {
     }
 
     function setXusd(IERC20 _xusd) external onlyOwner{        
+        require(address(_xusd) != address(0), "can not be address(0)");
         xusd = _xusd;
     }
 
