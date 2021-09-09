@@ -425,6 +425,12 @@ contract Farming is BoringOwnable, BoringBatchable {
     /// @param _allocPoint AP of the new pool.
     /// @param _lpToken Address of the LP ERC-20 token.
     function add(uint256 _allocPoint, IERC20 _lpToken) public onlyOwner {
+        uint256 len = poolInfo.length;
+        for (uint256 pid = 0; pid < len; ++pid) {
+            FarmPeriod memory farm = getFarmPeriod(pid, 0);
+            require(address(farm.lpToken) != address(_lpToken), "LP Token has been added");
+        }
+
         totalAllocPoint = totalAllocPoint.add(_allocPoint);
 
         FarmPeriod[4] memory fps;
