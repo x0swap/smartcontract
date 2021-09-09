@@ -288,11 +288,6 @@ contract XusdTokenStorage {
     address public rebaser;
 
     /**
-     * @notice Incentivizer address of Xusd protocol
-     */
-    address public incentivizer;
-
-    /**
      * @notice Total supply of Xusds
      */
     uint256 public totalSupply;
@@ -351,11 +346,6 @@ contract XusdTokenInterface is XusdTokenStorage {
      */
     event NewRebaser(address oldRebaser, address newRebaser);
 
-    /**
-     * @notice Sets the incentivizer contract
-     */
-    event NewIncentivizer(address oldIncentivizer, address newIncentivizer);
-
     /* - ERC20 Events - */
 
     /**
@@ -402,7 +392,6 @@ contract XusdTokenInterface is XusdTokenStorage {
     function _setX0(IERC20 x0_) external;
     function _setFarming(address farming_) external;
     function _setRebaser(address rebaser_) external;
-    function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
     function _acceptGov() external;
 }
@@ -641,7 +630,6 @@ contract XusdToken is XusdTokenInterface {
         require(
             msg.sender == rebaser
             || msg.sender == gov
-            || msg.sender == incentivizer
             || msg.sender == farming,
             "not minter"
         );
@@ -1037,18 +1025,6 @@ contract XusdToken is XusdTokenInterface {
         address oldRebaser = rebaser;
         rebaser = rebaser_;
         emit NewRebaser(oldRebaser, rebaser_);
-    }
-
-    /** @notice sets the incentivizer
-     * @param incentivizer_ The address of the rebaser contract to use for authentication.
-     */
-    function _setIncentivizer(address incentivizer_)
-        external
-        onlyGov
-    {
-        address oldIncentivizer = incentivizer;
-        incentivizer = incentivizer_;
-        emit NewIncentivizer(oldIncentivizer, incentivizer_);
     }
 
     /** @notice sets the pendingGov

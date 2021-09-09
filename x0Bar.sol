@@ -261,11 +261,6 @@ contract XusdTokenStorage {
     address public rebaser;
 
     /**
-     * @notice Incentivizer address of Xusd protocol
-     */
-    address public incentivizer;
-
-    /**
      * @notice Total supply of Xusds
      */
     uint256 public totalSupply;
@@ -336,11 +331,6 @@ contract XusdTokenInterface is XusdTokenStorage {
      */
     event NewRebaser(address oldRebaser, address newRebaser);
 
-    /**
-     * @notice Sets the incentivizer contract
-     */
-    event NewIncentivizer(address oldIncentivizer, address newIncentivizer);
-
     /* - ERC20 Events - */
 
     /**
@@ -386,7 +376,6 @@ contract XusdTokenInterface is XusdTokenStorage {
     function _setX0(IERC20 x0_) external;
     function _setFarming(address farming_) external;
     function _setRebaser(address rebaser_) external;
-    function _setIncentivizer(address incentivizer_) external;
     function _setPendingGov(address pendingGov_) external;
     function _acceptGov() external;
 }
@@ -720,13 +709,6 @@ contract X0Bar is XusdTokenInterface, XusdDelegatorInterface {
         external
     {
         rebaser_; // Shh
-        delegateAndReturn();
-    }
-
-    function _setIncentivizer(address incentivizer_)
-        external
-    {
-        incentivizer_; // Shh
         delegateAndReturn();
     }
 
