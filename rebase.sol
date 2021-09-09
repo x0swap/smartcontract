@@ -844,9 +844,6 @@ contract XusdRebaser2 {
     /// @notice an event emitted when deviationThreshold is changed
     event NewDeviationThreshold(uint256 oldDeviationThreshold, uint256 newDeviationThreshold);
 
-    /// @notice an event emitted during rebase denoting how much is minted
-    event MintAmount(uint256 mintAmount);
-
     /**
      * @notice Sets the treasury mint percentage of rebase
      */
@@ -1150,15 +1147,12 @@ contract XusdRebaser2 {
     
         XusdTokenInterface xusd = XusdTokenInterface(xusdAddress);
 
-        uint256 mintAmount;
         
         // rebase
         // ignore returned var
         xusd.rebase(epoch, indexDelta, positive);
 
         // perform actions after rebase
-        emit MintAmount(mintAmount);
-        // afterRebase(mintAmount, offPegPerc);
         afterRebase();
     }
 
