@@ -1256,16 +1256,19 @@ contract XusdRebaser2 {
 
     function getCurrentPrice()
         public view
-        returns (uint256 currentPrice)
+        returns (uint currentPrice)
     {
        (, , currentPrice) = getCurrentDataPrice();
     }
 
     function getPrice()
         internal
-        returns (uint256 currentPrice)
+        returns (uint currentPrice)
     {
-        (uint priceCumulative, uint32 blockTimestamp, currentPrice) = getCurrentDataPrice();
+        uint priceCumulative;
+        uint32 blockTimestamp;
+
+        (priceCumulative, blockTimestamp, currentPrice) = getCurrentDataPrice();
 
         priceCumulativeLastXusdETH = priceCumulative;
 
