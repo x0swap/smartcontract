@@ -180,15 +180,6 @@ interface IERC20 {
     function balanceOf(address account) external view returns (uint256);
 
     /**
-     * @dev Moves `amount` tokens from the caller's account to `recipient`.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
-     */
-    function transfer(address recipient, uint256 amount) external returns (bool);
-
-    /**
      * @dev Returns the remaining number of tokens that `spender` will be
      * allowed to spend on behalf of `owner` through {transferFrom}. This is
      * zero by default.
@@ -214,17 +205,6 @@ interface IERC20 {
     function approve(address spender, uint256 amount) external returns (bool);
 
     /**
-     * @dev Moves `amount` tokens from `sender` to `recipient` using the
-     * allowance mechanism. `amount` is then deducted from the caller's
-     * allowance.
-     *
-     * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {Transfer} event.
-     */
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-
-    /**
      * @dev Emitted when `value` tokens are moved from one account (`from`) to
      * another (`to`).
      *
@@ -240,10 +220,6 @@ interface IERC20 {
 }
 
 pragma solidity ^0.6.0;
-
-
-
-
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -275,7 +251,7 @@ contract ERC20 is Context, IERC20 {
 
     mapping (address => uint256) private _balances;
 
-    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping (address => mapping (address => uint256)) internal _allowances;
 
     uint256 private _totalSupply;
 
@@ -345,19 +321,6 @@ contract ERC20 is Context, IERC20 {
     }
 
     /**
-     * @dev See {IERC20-transfer}.
-     *
-     * Requirements:
-     *
-     * - `recipient` cannot be the zero address.
-     * - the caller must have a balance of at least `amount`.
-     */
-    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
-        _transfer(_msgSender(), recipient, amount);
-        return true;
-    }
-
-    /**
      * @dev See {IERC20-allowance}.
      */
     function allowance(address owner, address spender) public view virtual override returns (uint256) {
@@ -373,24 +336,6 @@ contract ERC20 is Context, IERC20 {
      */
     function approve(address spender, uint256 amount) public virtual override returns (bool) {
         _approve(_msgSender(), spender, amount);
-        return true;
-    }
-
-    /**
-     * @dev See {IERC20-transferFrom}.
-     *
-     * Emits an {Approval} event indicating the updated allowance. This is not
-     * required by the EIP. See the note at the beginning of {ERC20};
-     *
-     * Requirements:
-     * - `sender` and `recipient` cannot be the zero address.
-     * - `sender` must have a balance of at least `amount`.
-     * - the caller must have allowance for ``sender``'s tokens of at least
-     * `amount`.
-     */
-    function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
-        _transfer(sender, recipient, amount);
-        _approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
         return true;
     }
 
@@ -778,7 +723,23 @@ contract X0Token is ERC20("X0swap Token", "X0"), Ownable {
         require(maxSupply > 0, "X0Token: Max Supply hasn't been set");        
         require(totalSupply() <= maxSupply.sub(_amount), "X0Token: Max Supply has been reached");
         _mint(_to, _amount);
+
         _moveDelegates(address(0), _delegates[_to], _amount);
+    }
+    
+    function transfer(address _to, uint256 _amount) public returns (bool) {
+        _transfer(_msgSender(), _to, _amount);
+
+        _moveDelegates(_delegates[msg.sender], _delegates[_to], _amount);
+        return true;
+    }
+
+    function transferFrom(address _from, address _to, uint256 _amount) public returns (bool) {
+        _transfer(_from, _to, _amount);
+        _approve(_from, _msgSender(), _allowances[_from][_msgSender()].sub(_amount, "ERC20: transfer amount exceeds allowance"));
+        
+        _moveDelegates(_delegates[_from], _delegates[_to], _amount);
+        return true;
     }
 
     // Copied and modified from YAM code:
