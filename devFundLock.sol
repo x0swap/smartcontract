@@ -637,14 +637,16 @@ contract DevFundLock is Ownable {
     // last withdraw block, use x0swap online block as default
     uint public lastWithdrawBlock = block.number;
     // withdraw interval ~2 weeks in blocks
-    uint public WITHDRAW_INTERVAL = 89600;
+    uint public immutable WITHDRAW_INTERVAL;
     // current total amount bigger than the threshold, withdraw half, otherwise withdraw all
-    uint public WITHDRAW_HALF_THRESHOLD = 89600*10**18;
+    uint public immutable WITHDRAW_HALF_THRESHOLD;
 
-    constructor(IERC20 _x0, address _devaddr) public {
+    constructor(IERC20 _x0, address _devaddr, uint _withdraw_interval, uint _withdraw_half_threshold) public {
         require(address(_x0) != address(0) && _devaddr != address(0), "invalid address");
         x0 = _x0;
         devaddr = _devaddr;
+        WITHDRAW_INTERVAL = _withdraw_interval;
+        WITHDRAW_HALF_THRESHOLD = _withdraw_half_threshold;
     }
 
     function withdraw() public {
@@ -667,12 +669,5 @@ contract DevFundLock is Ownable {
         require(address(_x0) != address(0), "can not be address(0)");
         x0 = _x0;
     }
-    
-    function setWithdrawInterval(uint _withdrawInterval) public onlyOwner {
-        WITHDRAW_INTERVAL = _withdrawInterval;
-    }
-    
-    function setWithdrawHalfThreshold(uint _withdrawHalfThreshold) public onlyOwner {
-        WITHDRAW_HALF_THRESHOLD = _withdrawHalfThreshold;
-    }
+
 }
