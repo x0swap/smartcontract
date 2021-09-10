@@ -476,6 +476,15 @@ interface UniswapPair {
     function initialize(address, address) external;
 }
 
+interface BalVault{
+    function getPoolTokens(bytes32 poolId) external view returns (IERC20[] memory tokens, uint256[] memory balances, uint256 lastChangeBlock);
+}
+
+interface WeightedPool2Tokens {
+    function getVault() external view returns (BalVault);
+    function getPoolId() external view returns (bytes32);
+}
+
 // computes square roots using the babylonian method
 // https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method
 library Babylonian {
@@ -1010,10 +1019,13 @@ contract XusdRebaser2 {
         onlyGov
     {
         for (uint256 i = 0; i < uniSyncPairs_.length; i++) {
+            require(UniswapPair(uniSyncPairs_[i]).token0() != address(0) && UniswapPair(uniSyncPairs_[i]).token1() != address(0), "Not a pair");
             uniSyncPairs.push(uniSyncPairs_[i]);
         }
 
         for (uint256 i = 0; i < balGulpPairs_.length; i++) {
+            (IERC20[] memory tokens, , ) = BalVault(address(WeightedPool2Tokens(balGulpPairs_[i]).getVault())).getPoolTokens(WeightedPool2Tokens(balGulpPairs_[i]).getPoolId());
+            require(address(tokens[0]) != address(0) && address(tokens[1]) != address(0), "Not a pair");
             balGulpPairs.push(balGulpPairs_[i]);
         }
     }
@@ -1145,7 +1157,6 @@ contract XusdRebaser2 {
         uint256 indexDelta = offPegPerc;
     
         XusdTokenInterface xusd = XusdTokenInterface(xusdAddress);
-
         
         // rebase
         // ignore returned var
