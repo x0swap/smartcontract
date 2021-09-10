@@ -920,10 +920,10 @@ contract XusdRebaser2 {
     address public trade_pair;
 
     /// @notice list of uniswap pairs to sync
-    address[] public uniSyncPairs;
+    address[3] public uniSyncPairs;
 
     /// @notice list of balancer pairs to gulp
-    address[] public balGulpPairs;
+    address[3] public balGulpPairs;
 
     /// @notice last TWAP update time
     uint32 public blockTimestampLast;
