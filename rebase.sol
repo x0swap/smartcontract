@@ -1221,11 +1221,11 @@ contract XusdRebaser2 {
         return uint256(price);
     }
 
-    function getCurrentPrice()
-        public view
-        returns (uint256)
+    function getCurrentDataPrice()
+        internal view
+        returns (uint priceCumulative, uint32 blockTimestamp, uint currentPrice)
     {
-        (uint priceCumulative, uint32 blockTimestamp) =
+        (priceCumulative, blockTimestamp) =
            UniswapV2OracleLibrary.currentCumulativePrices(trade_pair, isToken0);
 
         uint32 timeElapsed = blockTimestamp - blockTimestampLast; // overflow is desired
@@ -1251,45 +1251,25 @@ contract XusdRebaser2 {
 
        ETHprice = getLatestPrice().div(10**8);
 
-       return XusdETHprice.mul(ETHprice);
+       currentPrice = XusdETHprice.mul(ETHprice);
+    }
+
+    function getCurrentPrice()
+        public view
+        returns (uint256 currentPrice)
+    {
+       (, , currentPrice) = getCurrentDataPrice();
     }
 
     function getPrice()
         internal
-        returns (uint256)
+        returns (uint256 currentPrice)
     {
-        (uint priceCumulative, uint32 blockTimestamp) =
-            UniswapV2OracleLibrary.currentCumulativePrices(trade_pair, isToken0);
-        
-        uint32 timeElapsed = blockTimestamp - blockTimestampLast; // overflow is desired
-
-        // no period check as is done in isRebaseWindow
-
-        // overflow is desired
-        uint256 priceAverageXusdETH = uint256(uint224((priceCumulative - priceCumulativeLastXusdETH) / timeElapsed));
+        (uint priceCumulative, uint32 blockTimestamp, currentPrice) = getCurrentDataPrice();
 
         priceCumulativeLastXusdETH = priceCumulative;
 
         blockTimestampLast = blockTimestamp;
-
-        // BASE is on order of 1e18, which takes 2^60 bits
-        // multiplication will revert if priceAverage > 2^196
-        // (which it can because it overflows intentially)
-        uint256 XusdETHprice;
-        uint256 ETHprice;
-        if (priceAverageXusdETH > uint192(-1)) {
-           // eat loss of precision
-           // effectively: (x / 2**112) * 1e18
-           XusdETHprice = (priceAverageXusdETH >> 112) * BASE;
-        } else {
-            // cant overflow
-            // effectively: (x * 1e18 / 2**112)
-            XusdETHprice = (priceAverageXusdETH * BASE) >> 112;
-        }
-
-        ETHprice = getLatestPrice().div(10**8);
-
-        return XusdETHprice.mul(ETHprice);
     }
 
     /**
