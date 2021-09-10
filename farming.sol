@@ -483,6 +483,7 @@ contract Farming is BoringOwnable, BoringBatchable {
     /// @notice Sets the x0 per second to be distributed. Can only be called by the owner.
     /// @param _x0PerSecond The amount of X0 to be distributed per second.
     function setX0PerSecond(uint256 _x0PerSecond) public onlyOwner {
+        require(_x0PerSecond <= 1e18);
         x0PerSecond = _x0PerSecond;
         emit LogX0PerSecond(_x0PerSecond);
     }
