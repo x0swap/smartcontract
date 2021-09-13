@@ -476,15 +476,6 @@ interface UniswapPair {
     function initialize(address, address) external;
 }
 
-interface BalVault{
-    function getPoolTokens(bytes32 poolId) external view returns (IERC20[] memory tokens, uint256[] memory balances, uint256 lastChangeBlock);
-}
-
-interface WeightedPool2Tokens {
-    function getVault() external view returns (BalVault);
-    function getPoolId() external view returns (bytes32);
-}
-
 // computes square roots using the babylonian method
 // https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method
 library Babylonian {
@@ -788,6 +779,7 @@ contract XusdTokenInterface is XusdTokenStorage {
 }
 interface BAL {
   function gulp(address token) external;
+  function getCurrentTokens() external view returns (address[] memory tokens);
 }
 
 interface AggregatorV3Interface {
@@ -920,10 +912,13 @@ contract XusdRebaser2 {
     address public trade_pair;
 
     /// @notice list of uniswap pairs to sync
-    address[3] public uniSyncPairs;
+    address[] public uniSyncPairs;
 
     /// @notice list of balancer pairs to gulp
-    address[3] public balGulpPairs;
+    address[] public balGulpPairs;
+
+    /// @notice limit of pair given
+    uint limit;
 
     /// @notice last TWAP update time
     uint32 public blockTimestampLast;
@@ -1018,16 +1013,16 @@ contract XusdRebaser2 {
         public
         onlyGov
     {
-        require(uniSyncPairs.length < 3 || balGulpPairs.length < 3, "Pairs are full");
+        require(uniSyncPairs.length.add(uniSyncPairs_.length) <= limit || balGulpPairs.length.add(balGulpPairs_.length) <= limit, "Pairs are full");
 
-        for (uint256 i = 0; i < 3; i++) {
+        for (uint256 i = 0; i < uniSyncPairs_.length; i++) {
             require(UniswapPair(uniSyncPairs_[i]).token0() != address(0) && UniswapPair(uniSyncPairs_[i]).token1() != address(0), "Not a pair");
             uniSyncPairs.push(uniSyncPairs_[i]);
         }
 
-        for (uint256 i = 0; i < 3; i++) {
-            (IERC20[] memory tokens, , ) = BalVault(address(WeightedPool2Tokens(balGulpPairs_[i]).getVault())).getPoolTokens(WeightedPool2Tokens(balGulpPairs_[i]).getPoolId());
-            require(address(tokens[0]) != address(0) && address(tokens[1]) != address(0), "Not a pair");
+        for (uint256 i = 0; i < balGulpPairs_.length; i++) {
+            address[] memory tokens = BAL(balGulpPairs_[i]).getCurrentTokens();
+            require(tokens[0] != address(0) && tokens[1] != address(0));
             balGulpPairs.push(balGulpPairs_[i]);
         }
     }
@@ -1089,6 +1084,14 @@ contract XusdRebaser2 {
         address oldPendingGov = pendingGov;
         pendingGov = pendingGov_;
         emit NewPendingGov(oldPendingGov, pendingGov_);
+    }
+
+    /** @notice sets the pairLimit
+     * @param limit_ The limit of the pair address to add.
+     */
+    function setPairLimit(uint limit_) public onlyGov{
+        require(limit_ != 0, "Can not be 0");
+        limit = limit_;
     }
 
     /** @notice lets msg.sender accept governance
@@ -1490,18 +1493,4 @@ contract XusdRebaser2 {
         return result;
     }
 
-
-    // Rescue tokens
-    function rescueTokens(
-        address token,
-        address to,
-        uint256 amount
-    )
-        external
-        onlyGov
-        returns (bool)
-    {
-        // transfer to
-        SafeERC20.safeTransfer(IERC20(token), to, amount);
-    }
 }
