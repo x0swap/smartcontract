@@ -918,7 +918,7 @@ contract XusdRebaser2 {
     address[] public balGulpPairs;
 
     /// @notice limit of pair given
-    uint limit;
+    uint pairLimit;
 
     /// @notice last TWAP update time
     uint32 public blockTimestampLast;
@@ -948,7 +948,8 @@ contract XusdRebaser2 {
         address xusdAddress_,
         address reserveToken_,
         address factory,
-        AggregatorV3Interface priceFeed_
+        AggregatorV3Interface priceFeed_,
+        uint pairLimit_
     )
         public
     {
@@ -982,6 +983,9 @@ contract XusdRebaser2 {
           // 5%
           deviationThreshold = 5 * 10**16;
 
+          // Pair limit
+          pairLimit = pairLimit_;
+
           // Changed in deployment scripts to facilitate protocol initiation
           gov = msg.sender;
 
@@ -1013,7 +1017,7 @@ contract XusdRebaser2 {
         public
         onlyGov
     {
-        require(uniSyncPairs.length.add(uniSyncPairs_.length) <= limit || balGulpPairs.length.add(balGulpPairs_.length) <= limit, "Pairs are full");
+        require(uniSyncPairs.length.add(uniSyncPairs_.length) <= pairLimit || balGulpPairs.length.add(balGulpPairs_.length) <= pairLimit, "Pairs are full");
 
         for (uint256 i = 0; i < uniSyncPairs_.length; i++) {
             require(UniswapPair(uniSyncPairs_[i]).token0() != address(0) && UniswapPair(uniSyncPairs_[i]).token1() != address(0), "Not a pair");
@@ -1087,11 +1091,11 @@ contract XusdRebaser2 {
     }
 
     /** @notice sets the pairLimit
-     * @param limit_ The limit of the pair address to add.
+     * @param pairLimit_ The limit of the pair address to add.
      */
-    function setPairLimit(uint limit_) public onlyGov{
-        require(limit_ != 0, "Can not be 0");
-        limit = limit_;
+    function setPairLimit(uint pairLimit_) public onlyGov{
+        require(pairLimit_ != 0, "Can not be 0");
+        pairLimit = pairLimit_;
     }
 
     /** @notice lets msg.sender accept governance
