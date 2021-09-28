@@ -315,7 +315,7 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'a772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0' // init code hash
+                hex'fdb1c36bba7683d13fe7c15116c5d39b04be12d465bba53264212c5dd77f16cc' // init code hash
             ))));
     }
 
@@ -484,36 +484,53 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
 	    }else{
 	        TransferHelper.safeTransferFrom(tokenA, msg.sender, address(this), amountTokenADesired);
 	    }
-	    uint swapAmount;
+	    
+	    address pair;
+	    
 	    {
-	    address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
+	    pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
 	    address token0 = IUniswapV2Pair(pair).token0();
 	    address token1 = IUniswapV2Pair(pair).token1();
-	    require(tokenA == token0 || tokenA == token1, "invalid token");
-        swapAmount = amountTokenADesired > 0 ? amountTokenADesired.div(2) : amountEthDesired.div(2);
-	    }
-		uint leftAmount;
-		uint rightAmount;
-		{
-	    leftAmount = amountTokenADesired > 0 ? amountTokenADesired.sub(swapAmount) : amountEthDesired.sub(swapAmount);
-    	address[] memory _path = new address[](2);
-    	_path[0] = tokenA;
-    	_path[1] = tokenB;
-    	address pair = UniswapV2Library.pairFor(factory, _path[0], _path[1]);
 
+	    require(tokenA == token0 || tokenA == token1, "invalid token");
+	    }
+	    
+	    (amountA, amountB) = _singleToken(pair, tokenA, tokenB, amountTokenADesired, amountEthDesired, amountAMin, amountBMin);
+        
+		liquidity = _addLiquiditySingleToken(tokenA, tokenB, to);
+	}
+	
+	
+	function _singleToken(
+	    address pair,
+	    address leftToken,
+	    address rightToken,
+	    uint amountTokenADesired,
+	    uint amountEthDesired,
+	    uint amountLeftMin,
+	    uint amountRightMin
+    ) internal returns(uint amountA, uint amountB){
+        address[] memory _path = new address[](2);
+        _path[0] = leftToken;
+    	_path[1] = rightToken;
+	    
+        uint swapAmount = amountTokenADesired > 0 ? amountTokenADesired.div(2) : amountEthDesired.div(2);
+	    
+		uint leftAmount = amountTokenADesired > 0 ? amountTokenADesired.sub(swapAmount) : amountEthDesired.sub(swapAmount);
+		
+		{
     	uint[] memory amountsOut = UniswapV2Library.getAmountsOut(factory, swapAmount, _path);
         require(amountsOut[amountsOut.length - 1] >= 1, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
         TransferHelper.safeTransfer(_path[0], pair, amountsOut[0]);
         _swap(amountsOut, _path, address(this));
     	
-    	rightAmount = amountsOut[1];
-		
-		(amountA, amountB) = _addLiquidity(_path[0], _path[1], leftAmount, rightAmount, amountAMin, amountBMin);
+    	uint rightAmount = amountsOut[1];
+    	
+    	(amountA, amountB) = _addLiquidity(_path[0], _path[1], leftAmount, rightAmount, amountLeftMin, amountRightMin);
 		if(_path[0] == WETH){ IWETH(_path[0]).transfer(pair, leftAmount);}
 		else{TransferHelper.safeTransfer(_path[0], pair, leftAmount);}
         TransferHelper.safeTransfer(_path[1], pair, rightAmount);
 		}
-		liquidity = _addLiquiditySingleToken(tokenA, tokenB, to);
 	}
 	
 	function _addLiquiditySingleToken(address leftToken, address rightToken, address to) internal returns(uint liquidity){
