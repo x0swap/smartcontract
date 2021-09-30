@@ -44,16 +44,16 @@
 | ------ | ------ |
 | PairCodeHash | 0xfdb1c36bba7683d13fe7c15116c5d39b04be12d465bba53264212c5dd77f16cc |
 | Factory | [0x62825171DAb1275cE8D79728d6F1e508d12185DC][factory-bsc] |
-| Router | [0x0c8f65cA17fC3F01B8bE973f26aCd0463A034A99][router-bsc] |
-| Farming | [0x2220aee6bEB00Eb42411247075919a9B00286B9b][farming-bsc] |
-| DevFundLock | [0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b][devfundlock-bsc] |
+| Router | [0x72326299771BCCc6854f97CcAd54f96691dA1F66][router-bsc] |
+| Farming | [0xbaCE10Fa0da3C531aF87A384e03D7Df34a724619][farming-bsc] |
+| DevFundLock | [0x92f7128E13e7c8631B03800Ed3d465A3Da081bb6][devfundlock-bsc] |
 | Timelock | [0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44][timelock-bsc] |
 | GnosisSafeProxy | [0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A][gnosis-bsc] |
-| X0Maker | [0xC4a6f945C3DC9b0cA39e34440ca3d13D80fCf08c][x0maker-bsc] |
-| X0Bar (proxy to delegate.sol) | [0x988Ca1508277a1b092F8D815652723EE486eb07a][x0bar-bsc] |
-| Delegate | [0x2E1D346B72c2F5b1AAE340ac2b1b023Ca26e1D66][delegate-bsc] |
-| Rebaser | [0x4234796a8Cd608F20B93C1e98fD67aCC051b4C35][rebaser-bsc] |
-| X0Token(bridged) | [0x698Ce7460C81f4b898CC11a98c03122245fa5f69][x0Token-bsc] |
+| X0Maker | [0xD69485FF16D6fef0475544f092D5aaA0605927D9][x0maker-bsc] |
+| X0Bar (proxy to delegate.sol) | [0xB96D05a01dE9A28e6E53170B61C36F1f374DA255][x0bar-bsc] |
+| Delegate | [0xAc0f79F5538759c94D67b5A6aFa15B6Acef4d6A6][delegate-bsc] |
+| Rebaser | [0x69953736AeD6891e55Bd14Bf71E19b56B3A9AD82][rebaser-bsc] |
+| X0Token(bridged) | [0x63A82Eee817d6FfC0900EAA9E2cB4dcdB827635C][x0Token-bsc] |
 
 
    [x0Token-mainnet]: <https://etherscan.io/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
@@ -81,13 +81,13 @@
    [devfundlock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
    
    [factory-bsc]: <https://bscscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
-   [router-bsc]: <https://bscscan.com/address/0x0c8f65cA17fC3F01B8bE973f26aCd0463A034A99>
-   [farming-bsc]: <https://bscscan.com/address/0x2220aee6bEB00Eb42411247075919a9B00286B9b>
+   [router-bsc]: <https://bscscan.com/address/0x72326299771BCCc6854f97CcAd54f96691dA1F66>
+   [farming-bsc]: <https://bscscan.com/address/0xbaCE10Fa0da3C531aF87A384e03D7Df34a724619>
    [timelock-bsc]: <https://bscscan.com/address/0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44>
    [gnosis-bsc]: <https://bscscan.com/address/0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A>
-   [x0bar-bsc]: <https://bscscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
-   [delegate-bsc]: <https://bscscan.com/address/0x2E1D346B72c2F5b1AAE340ac2b1b023Ca26e1D66>
-   [rebaser-bsc]: <https://bscscan.com/address/0x4234796a8Cd608F20B93C1e98fD67aCC051b4C35>
-   [x0maker-bsc]: <https://bscscan.com/address/0xC4a6f945C3DC9b0cA39e34440ca3d13D80fCf08c>
-   [devfundlock-bsc]: <https://bscscan.com/address/0x3Fa6A9B71dD1421dEFC44E2F0b5f9D9bF6034B0b>
-   [x0Token-bsc]: <https://bscscan.com/address/0x698Ce7460C81f4b898CC11a98c03122245fa5f69>
+   [x0bar-bsc]: <https://bscscan.com/address/0xB96D05a01dE9A28e6E53170B61C36F1f374DA255>
+   [delegate-bsc]: <https://bscscan.com/address/0xAc0f79F5538759c94D67b5A6aFa15B6Acef4d6A6>
+   [rebaser-bsc]: <https://bscscan.com/address/0x69953736AeD6891e55Bd14Bf71E19b56B3A9AD82>
+   [x0maker-bsc]: <https://bscscan.com/address/0xD69485FF16D6fef0475544f092D5aaA0605927D9>
+   [devfundlock-bsc]: <https://bscscan.com/address/0x92f7128E13e7c8631B03800Ed3d465A3Da081bb6>
+   [x0Token-bsc]: <https://bscscan.com/address/0x63A82Eee817d6FfC0900EAA9E2cB4dcdB827635C>
