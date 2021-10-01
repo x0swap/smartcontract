@@ -48,7 +48,7 @@
 | Farming | [0xbaCE10Fa0da3C531aF87A384e03D7Df34a724619][farming-bsc] |
 | DevFundLock | [0x92f7128E13e7c8631B03800Ed3d465A3Da081bb6][devfundlock-bsc] |
 | Timelock | [0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44][timelock-bsc] |
-| GnosisSafeProxy | [0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A][gnosis-bsc] |
+| GnosisSafeProxy | [0x935E12641A3BBdCFC50F4D1C531ed20dF83736a7][gnosis-bsc] |
 | X0Maker | [0xD69485FF16D6fef0475544f092D5aaA0605927D9][x0maker-bsc] |
 | X0Bar (proxy to delegate.sol) | [0xB96D05a01dE9A28e6E53170B61C36F1f374DA255][x0bar-bsc] |
 | Delegate | [0xAc0f79F5538759c94D67b5A6aFa15B6Acef4d6A6][delegate-bsc] |
@@ -84,7 +84,7 @@
    [router-bsc]: <https://bscscan.com/address/0x72326299771BCCc6854f97CcAd54f96691dA1F66>
    [farming-bsc]: <https://bscscan.com/address/0xbaCE10Fa0da3C531aF87A384e03D7Df34a724619>
    [timelock-bsc]: <https://bscscan.com/address/0x86e7071F42b3A11aA09738F2dDCa9BFc8787FF44>
-   [gnosis-bsc]: <https://bscscan.com/address/0x9EC1Ea5C6ea7eB008B5154954De41D374e39777A>
+   [gnosis-bsc]: <https://bscscan.com/address/0x935E12641A3BBdCFC50F4D1C531ed20dF83736a7>
    [x0bar-bsc]: <https://bscscan.com/address/0xB96D05a01dE9A28e6E53170B61C36F1f374DA255>
    [delegate-bsc]: <https://bscscan.com/address/0xAc0f79F5538759c94D67b5A6aFa15B6Acef4d6A6>
    [rebaser-bsc]: <https://bscscan.com/address/0x69953736AeD6891e55Bd14Bf71E19b56B3A9AD82>
