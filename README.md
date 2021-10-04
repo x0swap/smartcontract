@@ -27,16 +27,15 @@
 | ------ | ------ |
 | PairCodeHash | 0xa772a016d4e93854b1682ec9e227f29cb17ebf5c014ebfc2c7326b338d8ddbf0 |
 | Factory | [0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c][factory-xdai] |
-| Router | [0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f][router-xdai] |
-| Farming | [0x6CA7DDe21E523FF8E4570D7644695B555729f8bA][farming-xdai] |
-| DevFundLock | [0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299][devfundlock-xdai] |
-| Timelock | [0x2220aee6beb00eb42411247075919a9b00286b9b][timelock-xdai] |
-| GnosisSafeProxy | [0xd2Ac92F4Da2db09c433f114820789456CbB2B185][gnosis-xdai] |
-| X0Maker | [0x26F2CB91fC99e061B2f3F074d108647026011Bf7][x0maker-xdai] |
-| X0Bar (proxy to delegate.sol) | [0xd4e40BB7a81B8B9e41B7C122948fB6444a90c5BA][x0bar-xdai] |
-| Delegate | [0x1e373161381609313d6897df85295C8b946398b8][delegate-xdai] |
-| Rebaser | [0x8bc6CE7e8B24C441f0847826A7ad612659F795ba][rebaser-xdai] |
-| X0Token(bridged) | [0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19][x0Token-xdai] |
+| Router | [0x0c0a09779C8aD4155bc97a42093b81Ac097b26BD][router-xdai] |
+| Farming | [0x7217E11c6258664dFe07762F5A038483F08cBe59][farming-xdai] |
+| Timelock | [0x90fEE514d6c58297559B33E9dEe084777A31118D][timelock-xdai] |
+| GnosisSafeProxy | [0x5D309Cc6B27eB0C60c8E098b730832B0E6dB9ea0][gnosis-xdai] |
+| X0Maker | [0xD531E79e71771695BbE8765293e9e766CE7D39d9][x0maker-xdai] |
+| X0Bar (proxy to delegate.sol) | [0x250619B3386387Dd81b04fc1f3340a8B5FCEA246][x0bar-xdai] |
+| Delegate | [0x40aa9BAA18c4f4C71C059A00c5c07e2F92418451][delegate-xdai] |
+| Rebaser | [0x51849aa8Aae82cC3b1B919f175001FE39c7D420E][rebaser-xdai] |
+| X0Token(bridged) | [0x42d2dB0f2403a1B729817b5B52239461f8b51323][x0Token-xdai] |
 
 ## BSC Addresses
 
@@ -69,16 +68,15 @@
    [devfundlock-matic]: <https://polygonscan.com/address/0x988Ca1508277a1b092F8D815652723EE486eb07a>
    
    [factory-xdai]: <https://blockscout.com/xdai/mainnet/address/0x5620f8ff8ab3658c3ef691cc1d1a8beede31f01c>
-   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x3758Bc0e465cd93a865cDd9C3F66f9B1847C5D3f>
-   [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0x6CA7DDe21E523FF8E4570D7644695B555729f8bA>
-   [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x2220aee6beb00eb42411247075919a9b00286b9b>
-   [gnosis-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd2Ac92F4Da2db09c433f114820789456CbB2B185>
-   [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0xd4e40BB7a81B8B9e41B7C122948fB6444a90c5BA>
-   [delegate-xdai]: <https://blockscout.com/xdai/mainnet/address/0x1e373161381609313d6897df85295C8b946398b8>
-   [rebaser-xdai]: <https://blockscout.com/xdai/mainnet/address/0x8bc6CE7e8B24C441f0847826A7ad612659F795ba>
-   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0x26F2CB91fC99e061B2f3F074d108647026011Bf7>
-   [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0x376BC3D3B9A6Bd71e127ae4E2C80AED5dDe6CF19>
-   [devfundlock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0fDEBdbE935cacEb629fdA28622Fe1E29B8Bf299>
+   [router-xdai]: <https://blockscout.com/xdai/mainnet/address/0x0c0a09779C8aD4155bc97a42093b81Ac097b26BD>
+   [farming-xdai]: <https://blockscout.com/xdai/mainnet/address/0x7217E11c6258664dFe07762F5A038483F08cBe59>
+   [timelock-xdai]: <https://blockscout.com/xdai/mainnet/address/0x90fEE514d6c58297559B33E9dEe084777A31118D>
+   [gnosis-xdai]: <https://blockscout.com/xdai/mainnet/address/0x5D309Cc6B27eB0C60c8E098b730832B0E6dB9ea0>
+   [x0bar-xdai]: <https://blockscout.com/xdai/mainnet/address/0x250619B3386387Dd81b04fc1f3340a8B5FCEA246>
+   [delegate-xdai]: <https://blockscout.com/xdai/mainnet/address/0x40aa9BAA18c4f4C71C059A00c5c07e2F92418451>
+   [rebaser-xdai]: <https://blockscout.com/xdai/mainnet/address/0x51849aa8Aae82cC3b1B919f175001FE39c7D420E>
+   [x0maker-xdai]: <https://blockscout.com/xdai/mainnet/address/0xD531E79e71771695BbE8765293e9e766CE7D39d9>
+   [x0Token-xdai]: <https://blockscout.com/xdai/mainnet/address/0x42d2dB0f2403a1B729817b5B52239461f8b51323>
    
    [factory-bsc]: <https://bscscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
    [router-bsc]: <https://bscscan.com/address/0x72326299771BCCc6854f97CcAd54f96691dA1F66>
