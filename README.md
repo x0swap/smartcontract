@@ -4,7 +4,7 @@
 
 | Contract | Address |
 | ------ | ------ |
-| X0Token | [0x546aAA98627797C04c48Ac716DB36314285b4b5a][x0Token-mainnet] |
+| X0Token | [0x4DFe67781D8b177f5a8536aD817BB9eB2c052F48][x0Token-mainnet] |
 
 ## MATIC/Polygon Mainnet Addresses
 
@@ -55,7 +55,7 @@
 | X0Token(bridged) | [0x63A82Eee817d6FfC0900EAA9E2cB4dcdB827635C][x0Token-bsc] |
 
 
-   [x0Token-mainnet]: <https://etherscan.io/address/0x546aAA98627797C04c48Ac716DB36314285b4b5a>
+   [x0Token-mainnet]: <https://etherscan.io/address/0x4DFe67781D8b177f5a8536aD817BB9eB2c052F48>
 
    [factory-matic]: <https://polygonscan.com/address/0x5620F8ff8AB3658c3Ef691Cc1d1a8BeEdE31F01c>
    [router-matic]: <https://polygonscan.com/address/0x62825171DAb1275cE8D79728d6F1e508d12185DC>
